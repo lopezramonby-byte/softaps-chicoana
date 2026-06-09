@@ -1,0 +1,873 @@
+!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seguimiento Embarazadas — APS Chicoana 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@300;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0d7a6e;--teal-l:#14a898;--teal-bg:#e6f6f5;
+  --pink:#be185d;--pink-bg:#fce7f3;--pink-l:#ec4899;
+  --amber:#d97706;--amber-bg:#fef3c7;
+  --red:#dc2626;--red-bg:#fee2e2;
+  --green:#16a34a;--green-bg:#dcfce7;
+  --blue:#1d4ed8;--blue-bg:#dbeafe;
+  --ink:#1a1a2e;--muted:#64748b;
+  --border:#e2e8f0;--surface:#f8fafc;--white:#fff;
+  --shadow:0 4px 24px rgba(13,122,110,.10);--radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:#f0f6f6;color:var(--ink);}
+
+/* NAV */
+.nav{background:var(--pink);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:58px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(190,24,93,.3);}
+.nav-brand{font-family:'Fraunces',serif;font-weight:700;font-size:17px;color:#fff;}
+.nav-brand span{opacity:.75;font-weight:300;font-size:12px;display:block;}
+.nav-tabs{display:flex;gap:2px;flex-wrap:wrap;}
+.tab-btn{padding:6px 11px;border:none;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:rgba(255,255,255,.75);transition:all .2s;}
+.tab-btn.active,.tab-btn:hover{background:rgba(255,255,255,.2);color:#fff;}
+
+/* LAYOUT */
+.main{max-width:1100px;margin:0 auto;padding:22px 16px 60px;}
+.section{display:none;}.section.active{display:block;}
+.page-header{margin-bottom:20px;}
+.page-header h2{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--ink);}
+.page-header p{color:var(--muted);font-size:13px;margin-top:3px;}
+
+/* CARDS */
+.card{background:var(--white);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--border);}
+.card-title{font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--pink);margin-bottom:14px;}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;}
+.form-group{display:flex;flex-direction:column;gap:4px;}
+.form-group.full{grid-column:1/-1;}
+label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;}
+/* Labels especiales para vacunas */
+.vax-label label{font-size:12px;font-weight:700;color:var(--ink);text-transform:none;letter-spacing:0;padding:3px 0;}
+.vax-label label .vax-sigla{font-size:14px;font-weight:800;color:var(--pink);margin-right:4px;}
+.vax-label label .vax-desc{font-size:11px;color:var(--muted);display:block;margin-top:1px;font-weight:500;text-transform:none;}
+.vax-label input[type=date]{border-color:var(--pink-bg);background:#fff9fb;}
+.vax-label input[type=date]:focus{border-color:var(--pink);}
+input[type="date"],input[type="text"],input[type="number"],select,textarea{width:100%;padding:9px 12px;border:2px solid var(--border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--surface);transition:border-color .2s;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pink-l);background:#fff;}
+textarea{resize:vertical;min-height:55px;}
+.section-sub{font-size:11px;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 8px;border-bottom:2px solid var(--pink-bg);padding-bottom:4px;}
+
+/* BTNS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:none;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-primary{background:var(--pink);color:#fff;width:100%;justify-content:center;margin-top:8px;}
+.btn-primary:hover{background:#9d174d;}
+.btn-secondary{background:var(--surface);color:var(--pink);border:2px solid var(--pink);}
+.btn-secondary:hover{background:var(--pink-bg);}
+.btn-teal{background:var(--teal);color:#fff;}
+.btn-teal:hover{background:#0a6860;}
+.btn-sm{padding:5px 12px;font-size:11px;border-radius:7px;}
+.btn-red{background:var(--red-bg);color:var(--red);border:2px solid #fecaca;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+
+/* SECTORES GRID */
+.sectores-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px;}
+.sector-card{background:var(--white);border-radius:12px;border:2px solid var(--border);padding:14px 16px;cursor:pointer;transition:all .2s;text-align:center;}
+.sector-card:hover{border-color:var(--pink-l);box-shadow:0 4px 14px rgba(190,24,93,.12);transform:translateY(-1px);}
+.sector-card.activo{border-color:var(--pink);background:var(--pink-bg);}
+.sector-num{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--pink);line-height:1;}
+.sector-nombre{font-size:12px;font-weight:600;color:var(--ink);margin-top:4px;}
+.sector-count{font-size:11px;color:var(--muted);margin-top:3px;}
+
+/* TABLA */
+
+table{width:100%;border-collapse:collapse;font-size:12px;background:var(--white);}
+thead th{background:var(--pink);color:#fff;padding:9px 10px;text-align:left;font-weight:600;white-space:nowrap;position:sticky;top:0;z-index:10;}
+.tabla-wrap{overflow-x:auto;overflow-y:auto;max-height:70vh;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);}
+thead th.sub{background:#9d174d;font-size:10px;font-weight:500;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s;}
+tbody tr:hover{background:#fdf2f8;}
+tbody td{padding:8px 10px;vertical-align:middle;white-space:nowrap;}
+.td-nombre{font-weight:600;white-space:normal;min-width:140px;}
+.td-sector{font-size:10px;font-weight:700;color:var(--pink);background:var(--pink-bg);padding:2px 7px;border-radius:99px;display:inline-block;}
+.td-check{text-align:center;font-size:14px;}
+.td-semanas{font-weight:700;}
+.semanas-ok{color:var(--green);}
+.semanas-warn{color:var(--amber);}
+.semanas-vsr{color:var(--red);font-weight:700;}
+
+/* STAT CARDS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:20px;}
+.stat-card{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:14px 16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.stat-num{font-family:'Fraunces',serif;font-size:30px;font-weight:700;line-height:1;}
+.stat-label{font-size:11px;color:var(--muted);margin-top:4px;}
+
+/* ALERTS */
+.alert{border-radius:9px;padding:10px 14px;font-size:13px;margin-bottom:10px;display:flex;gap:8px;align-items:flex-start;line-height:1.5;}
+.alert-warn{background:var(--amber-bg);color:var(--amber);border:1px solid #fde68a;}
+.alert-ok{background:var(--green-bg);color:var(--green);border:1px solid #bbf7d0;}
+.alert-pink{background:var(--pink-bg);color:var(--pink);border:1px solid #fbcfe8;}
+
+/* CHIPS */
+.chips{display:flex;gap:6px;flex-wrap:wrap;}
+.chip{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:600;background:var(--teal-bg);color:var(--teal);}
+.chip-pink{background:var(--pink-bg);color:var(--pink);}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--white);border-radius:var(--radius);width:100%;max-width:640px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.modal-header{background:var(--pink);color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1;border-radius:var(--radius) var(--radius) 0 0;}
+.modal-header h3{font-family:'Fraunces',serif;font-size:16px;font-weight:700;}
+.modal-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.modal-body{padding:18px;}
+.modal-footer{padding:14px 18px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;background:var(--surface);border-radius:0 0 var(--radius) var(--radius);position:sticky;bottom:0;}
+
+/* VSR BADGE */
+.vsr-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:700;}
+.vsr-pendiente{background:var(--blue-bg);color:var(--blue);}
+.vsr-proxima{background:var(--amber-bg);color:var(--amber);}
+.vsr-optima{background:var(--green-bg);color:var(--green);}
+.vsr-tardia{background:var(--red-bg);color:var(--red);}
+
+/* BUSCAR */
+.buscar-row{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap;}
+.buscar-input{flex:1;min-width:180px;padding:9px 13px;border:2px solid var(--border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px;}
+.buscar-input:focus{outline:none;border-color:var(--pink-l);}
+
+/* EMPTY */
+.empty{text-align:center;padding:36px 20px;color:var(--muted);}
+.empty .icon{font-size:44px;margin-bottom:10px;}
+
+/* SAVE BANNER */
+#save-banner{background:#065f46;color:#fff;padding:9px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;font-weight:500;position:sticky;top:58px;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,.18);}
+
+@media(max-width:600px){
+  .form-grid,.form-grid-3{grid-template-columns:1fr;}
+  .sectores-grid{grid-template-columns:repeat(2,1fr);}
+  .nav-tabs .tab-btn{padding:5px 8px;font-size:11px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">🤰 Embarazadas APS
+    <span>Seguimiento · Chicoana · Salta 2026</span>
+  </div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showTab('inicio',this)">🏠 Inicio</button>
+    <button class="tab-btn" onclick="showTab('nueva',this)">➕ Nueva</button>
+    <button class="tab-btn" onclick="showTab('listado',this)">📋 Listado</button>
+    <button class="tab-btn" onclick="showTab('sectores',this)">🗺 Sectores</button>
+    <button class="tab-btn" onclick="showTab('vsr',this)">💉 VSR</button>
+    <button class="tab-btn" onclick="showTab('exportar',this)">📊 Exportar</button>
+  </div>
+</nav>
+
+<div id="save-banner">
+  <span>💾</span>
+  <span id="save-msg" style="flex:1">Datos guardados localmente.</span>
+  <div style="display:flex;gap:7px;flex-wrap:wrap">
+    <button onclick="exportarDatos()" style="padding:5px 13px;background:#fff;color:#065f46;border:none;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer">📤 Exportar datos</button>
+    <button onclick="document.getElementById('import-input').click()" style="padding:5px 13px;background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.4);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer">📥 Importar datos</button>
+    <input type="file" id="import-input" accept=".json" style="display:none" onchange="importarDatos(event)">
+  </div>
+  <span id="save-hora" style="font-size:11px;opacity:.8"></span>
+</div>
+
+<div class="main">
+
+<!-- ══ INICIO ══════════════════════════════════ -->
+<div class="section active" id="tab-inicio">
+  <div class="page-header">
+    <h2>🤰 Seguimiento de Embarazadas 2026</h2>
+    <p>APS Chicoana · Área Operativa XXXIII — Zona Oeste · MSP Salta</p>
+  </div>
+  <div class="stats-row" id="stats-row"></div>
+  <div id="alertas-vsr"></div>
+  <div class="card">
+    <div class="card-title">🗺 Resumen por Sector</div>
+    <div id="resumen-sectores"></div>
+  </div>
+</div>
+
+<!-- ══ NUEVA EMBARAZADA ══════════════════════════════════ -->
+<div class="section" id="tab-nueva">
+  <div class="page-header">
+    <h2>➕ Registrar Embarazada</h2>
+    <p>Completar todos los datos disponibles · Los campos * son obligatorios</p>
+  </div>
+  <div class="card">
+    <div class="card-title">👤 Datos Personales</div>
+    <div class="form-grid">
+      <div class="form-group full"><label>Apellido y Nombre *</label><input type="text" id="n-nombre" placeholder="Apellido, Nombre completo"></div>
+      <div class="form-group"><label>DNI *</label><input type="text" id="n-dni" placeholder="Número de documento"></div>
+      <div class="form-group"><label>Domicilio</label><input type="text" id="n-domicilio" placeholder="Barrio / Localidad"></div>
+      <div class="form-group"><label>Fecha de Nacimiento</label><input type="date" id="n-fnac"></div>
+      <div class="form-group"><label>Sector APS *</label>
+        <select id="n-sector">
+          <option value="">— Seleccionar sector —</option>
+          <option value="1">1 — 20 DE FEBRERO</option>
+          <option value="2">2 — JUAN PABLO</option>
+          <option value="3">3 — LOS LOS</option>
+          <option value="4">4 — LA CANDELARIA</option>
+          <option value="5">5 — PARQUE LA CRUZ</option>
+          <option value="6">6 — LAS MORAS</option>
+          <option value="7">7 — CHIVILME</option>
+          <option value="8">8 — PULARES</option>
+          <option value="9">9 — POTRERO DE DIAZ - LA ROTONDA</option>
+          <option value="10">10 — BELLA VISTA</option>
+          <option value="11">11 — LAS PALTAS</option>
+          <option value="12">12 — LA TRADICION</option>
+          <option value="13">13 — ESCOIPE - LA ROTONDA</option>
+          <option value="14">14 — LA ZANJA - LA ROTONDA</option>
+          <option value="15">15 — SAN CAYETANO</option>
+          <option value="16">16 — CAMINO AL CHURCAL</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section-sub">📅 Datos del Embarazo</div>
+    <div class="form-grid-3">
+      <div class="form-group"><label>FUM *</label><input type="date" id="n-fum" oninput="calcularFPP()"></div>
+      <div class="form-group"><label>FPP (se calcula sola)</label><input type="date" id="n-fpp" readonly style="background:#f1f5f9;color:var(--muted)"></div>
+      <div class="form-group"><label>Fecha de Captación</label><input type="date" id="n-fcap"></div>
+      <div class="form-group"><label>Nº de Gestas</label><input type="number" id="n-gestas" min="0" placeholder="0"></div>
+      <div class="form-group"><label>Obra Social</label><input type="text" id="n-os" placeholder="SOS / IPS / OSPRERA..."></div>
+      <div class="form-group"><label>Embarazo de Riesgo</label>
+        <select id="n-riesgo"><option value="">No</option><option value="si">Sí</option></select>
+      </div>
+    </div>
+
+    <div class="section-sub">💉 Vacunas</div>
+    <div class="form-grid-3">
+      <div class="form-group vax-label"><label><span class="vax-sigla">Hep B 1°</span><span class="vax-desc">Hepatitis B — Primera Dosis</span></label><input type="date" id="n-hepb1"></div>
+      <div class="form-group vax-label"><label><span class="vax-sigla">Hep B 2°</span><span class="vax-desc">Hepatitis B — Segunda Dosis</span></label><input type="date" id="n-hepb2"></div>
+      <div class="form-group vax-label"><label><span class="vax-sigla">Hep B 3°</span><span class="vax-desc">Hepatitis B — Tercera Dosis</span></label><input type="date" id="n-hepb3"></div>
+      <div class="form-group vax-label"><label><span class="vax-sigla">DT</span><span class="vax-desc">Doble Bacteriana · Refuerzo (Rzo)</span></label><input type="date" id="n-dt"></div>
+      <div class="form-group vax-label"><label><span class="vax-sigla">DPTa</span><span class="vax-desc">Triple Bacteriana Acelular · Refuerzo (Rzo)</span></label><input type="date" id="n-dpta"></div>
+      <div class="form-group vax-label"><label><span class="vax-sigla">AG</span><span class="vax-desc">Antigripal · Fecha de aplicación</span></label><input type="date" id="n-ag"></div>
+      <div class="form-group vax-label">
+        <label><span class="vax-sigla">VSR</span><span class="vax-desc">Virus Sincicial Respiratorio · Fecha</span></label>
+        <input type="date" id="n-vsr">
+        <div id="n-vsr-info" style="display:none;margin-top:7px;background:var(--green-bg);border:2px solid var(--green);border-radius:9px;padding:10px 13px;">
+          <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px">💉 Ventana óptima de aplicación VSR</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;">
+            <div style="text-align:center;background:var(--amber-bg);border-radius:7px;padding:7px 4px;">
+              <div style="font-size:10px;color:var(--amber);font-weight:700;margin-bottom:3px">Sem 31 · Inicio</div>
+              <div id="n-vsr-sem31" style="font-size:13px;font-weight:700;color:var(--amber)">—</div>
+            </div>
+            <div style="text-align:center;background:var(--green);border-radius:7px;padding:7px 4px;">
+              <div style="font-size:10px;color:rgba(255,255,255,.85);font-weight:700;margin-bottom:3px">✅ Sem 32 · ÓPTIMA</div>
+              <div id="n-vsr-sem32" style="font-size:13px;font-weight:700;color:#fff">—</div>
+            </div>
+            <div style="text-align:center;background:var(--red-bg);border-radius:7px;padding:7px 4px;">
+              <div style="font-size:10px;color:var(--red);font-weight:700;margin-bottom:3px">Sem 33 · Límite</div>
+              <div id="n-vsr-sem33" style="font-size:13px;font-weight:700;color:var(--red)">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-sub">🔬 Trimestres</div>
+    <div class="form-grid-3">
+      <div class="form-group"><label>1° Trim — MELONS</label><input type="text" id="n-1t-mel" placeholder="MELON / MELONP..."></div>
+      <div class="form-group"><label>1° Trim — F. Captación</label><input type="date" id="n-1t-cap"></div>
+      <div class="form-group"><label>1° Trim — F. Eco</label><input type="date" id="n-1t-eco"></div>
+      <div class="form-group"><label>2° Trim — MELONS</label><input type="text" id="n-2t-mel" placeholder="MELON / MELONP..."></div>
+      <div class="form-group"><label>2° Trim — F. Captación</label><input type="date" id="n-2t-cap"></div>
+      <div class="form-group"><label>2° Trim — F. Eco</label><input type="date" id="n-2t-eco"></div>
+      <div class="form-group"><label>3° Trim — MELONS</label><input type="text" id="n-3t-mel" placeholder="MELON / MELONP..."></div>
+      <div class="form-group"><label>3° Trim — F. Captación</label><input type="date" id="n-3t-cap"></div>
+      <div class="form-group"><label>3° Trim — F. Eco</label><input type="date" id="n-3t-eco"></div>
+    </div>
+
+    <div class="section-sub">🧪 Laboratorio y Parto</div>
+    <div class="form-grid">
+      <div class="form-group"><label>VDRL / HIV / AHB</label><input type="text" id="n-lab" placeholder="SEROLOGIA (-) / resultado..."></div>
+      <div class="form-group"><label>PAP — Fecha</label><input type="date" id="n-pap"></div>
+      <div class="form-group"><label>Fecha de Parto — Institución</label><input type="date" id="n-parto-inst"></div>
+      <div class="form-group"><label>Fecha de Parto — Domicilio</label><input type="date" id="n-parto-dom"></div>
+      <div class="form-group full"><label>Observaciones</label><textarea id="n-obs" placeholder="Notas, riesgo, interconsultas..."></textarea></div>
+    </div>
+    <button class="btn btn-primary" onclick="guardarEmbarazada()">💾 Guardar Embarazada</button>
+  </div>
+</div>
+
+<!-- ══ LISTADO ══════════════════════════════════ -->
+<div class="section" id="tab-listado">
+  <div class="page-header"><h2>📋 Listado General</h2><p>Todas las embarazadas registradas · Buscá, filtrá y editá</p></div>
+  <div class="buscar-row">
+    <input type="text" class="buscar-input" id="buscar-listado" placeholder="🔍  Buscar por nombre, DNI, sector..." oninput="renderListado()">
+    <select onchange="filtroSector=this.value;renderListado()" id="filtro-sector-sel" style="padding:9px 12px;border:2px solid var(--border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px">
+      <option value="">Todos los sectores</option>
+      <option value="1">1 — 20 DE FEBRERO</option><option value="2">2 — JUAN PABLO</option>
+      <option value="3">3 — LOS LOS</option><option value="4">4 — LA CANDELARIA</option>
+      <option value="5">5 — PARQUE LA CRUZ</option><option value="6">6 — LAS MORAS</option>
+      <option value="7">7 — CHIVILME</option><option value="8">8 — PULARES</option>
+      <option value="9">9 — POTRERO DE DIAZ</option><option value="10">10 — BELLA VISTA</option>
+      <option value="11">11 — LAS PALTAS</option><option value="12">12 — LA TRADICION</option>
+      <option value="13">13 — ESCOIPE</option><option value="14">14 — LA ZANJA</option>
+      <option value="15">15 — SAN CAYETANO</option><option value="16">16 — CAMINO AL CHURCAL</option>
+    </select>
+  </div>
+  <div id="tabla-listado"></div>
+</div>
+
+<!-- ══ SECTORES ══════════════════════════════════ -->
+<div class="section" id="tab-sectores">
+  <div class="page-header"><h2>🗺 Por Sector</h2><p>Seleccioná un sector para ver sus embarazadas</p></div>
+  <div class="sectores-grid" id="sectores-grid"></div>
+  <div id="sector-detalle"></div>
+</div>
+
+<!-- ══ VSR ══════════════════════════════════ -->
+<div class="section" id="tab-vsr">
+  <div class="page-header"><h2>💉 Control VSR</h2><p>Embarazadas en ventana de aplicación Virus Sincicial Respiratorio · Semanas 31–32</p></div>
+  <div id="vsr-content"></div>
+</div>
+
+<!-- ══ EXPORTAR ══════════════════════════════════ -->
+<div class="section" id="tab-exportar">
+  <div class="page-header"><h2>📊 Exportar a Excel</h2><p>Genera la planilla oficial con el formato de seguimiento 2026</p></div>
+  <div class="card">
+    <div class="card-title">📋 Opciones de Exportación</div>
+    <div class="form-grid" style="margin-bottom:16px">
+      <div class="form-group">
+        <label>Filtrar por Sector (opcional)</label>
+        <select id="exp-sector">
+          <option value="">Todos los sectores</option>
+          <option value="1">1 — 20 DE FEBRERO</option><option value="2">2 — JUAN PABLO</option>
+          <option value="3">3 — LOS LOS</option><option value="4">4 — LA CANDELARIA</option>
+          <option value="5">5 — PARQUE LA CRUZ</option><option value="6">6 — LAS MORAS</option>
+          <option value="7">7 — CHIVILME</option><option value="8">8 — PULARES</option>
+          <option value="9">9 — POTRERO DE DIAZ</option><option value="10">10 — BELLA VISTA</option>
+          <option value="11">11 — LAS PALTAS</option><option value="12">12 — LA TRADICION</option>
+          <option value="13">13 — ESCOIPE</option><option value="14">14 — LA ZANJA</option>
+          <option value="15">15 — SAN CAYETANO</option><option value="16">16 — CAMINO AL CHURCAL</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Ordenar por</label>
+        <select id="exp-orden">
+          <option value="sector">Sector APS</option>
+          <option value="fpp">FPP (Fecha Probable de Parto)</option>
+          <option value="nombre">Apellido y Nombre</option>
+          <option value="semanas">Semanas de Gestación</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-teal" onclick="exportarExcel()">📊 Exportar Planilla Excel (.csv)</button>
+      <button class="btn btn-secondary" onclick="exportarDatos()">💾 Exportar Respaldo (.json)</button>
+    </div>
+    <div class="alert alert-ok" style="margin-top:14px">
+      ✅ El archivo .csv se abre directamente en Excel con todos los campos de la planilla oficial: Sector, Nombre, DNI, FNac, FCap, FUM, FPP, Edad, Semanas, Gestas, Vacunas (Hep B 1-2-3, Dpta, AG, TaC, VSR), Trimestres (MELONS, Cap, Eco), Laboratorio, Parto, PAP y Observaciones.
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- MODAL EDITAR -->
+<div class="modal-overlay" id="modal-edit" onclick="cerrarModalSiBg(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>✏️ Editar Embarazada</h3>
+      <button class="modal-close" onclick="cerrarModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-edit-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-red btn-sm" onclick="eliminarEmbarazada()">🗑 Eliminar</button>
+      <button class="btn btn-secondary btn-sm" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn btn-primary" style="width:auto;padding:9px 22px" onclick="guardarEdicion()">💾 Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+// SECTORES
+// ════════════════════════════════════════════════
+const SECTORES = {
+  '1':'20 DE FEBRERO','2':'JUAN PABLO','3':'LOS LOS','4':'LA CANDELARIA',
+  '5':'PARQUE LA CRUZ','6':'LAS MORAS','7':'CHIVILME','8':'PULARES',
+  '9':'POTRERO DE DIAZ - LA ROTONDA','10':'BELLA VISTA','11':'LAS PALTAS',
+  '12':'LA TRADICION','13':'ESCOIPE - LA ROTONDA','14':'LA ZANJA - LA ROTONDA',
+  '15':'SAN CAYETANO','16':'CAMINO AL CHURCAL'
+};
+
+// ════════════════════════════════════════════════
+// ESTADO
+// ════════════════════════════════════════════════
+let embarazadas = JSON.parse(localStorage.getItem('emb-data') || '[]');
+let filtroSector = '';
+let editId = null;
+const $ = id => document.getElementById(id);
+
+// ════════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════════
+function uid(){ return Date.now() + Math.random().toString(36).slice(2); }
+function fmtF(d){ return d ? new Date(d+'T00:00:00').toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'}) : '—'; }
+function hoy(){ return new Date(); }
+
+function semanasGest(fum){
+  if(!fum) return null;
+  const f = new Date(fum+'T00:00:00');
+  const dias = Math.floor((hoy()-f)/86400000);
+  return Math.floor(dias/7);
+}
+
+function vsrStatus(fum, vsrAplicada){
+  const sem = semanasGest(fum);
+  if(sem === null) return null;
+  if(vsrAplicada) return {txt:'✅ Aplicada', cls:'vsr-optima'};
+  if(sem < 31)    return {txt:`🔵 Pendiente (sem ${sem})`, cls:'vsr-pendiente'};
+  if(sem === 31)  return {txt:'🟡 ¡Próxima! sem 31', cls:'vsr-proxima'};
+  if(sem === 32)  return {txt:'🟢 ÓPTIMA sem 32', cls:'vsr-optima'};
+  if(sem <= 36)   return {txt:`🔴 Tardía (sem ${sem})`, cls:'vsr-tardia'};
+  return {txt:`⚫ Parto próximo (sem ${sem})`, cls:'vsr-tardia'};
+}
+
+function calcularFPP(){
+  const fum=$('n-fum').value;
+  if(!fum)return;
+  // FPP (semana 40)
+  const fpp=new Date(fum+'T00:00:00');
+  fpp.setDate(fpp.getDate()+280);
+  $('n-fpp').value=fpp.toISOString().slice(0,10);
+  // Fechas óptimas VSR (semanas 31, 32 y 33)
+  const base=new Date(fum+'T00:00:00');
+  const s31=new Date(base);s31.setDate(s31.getDate()+217);
+  const s32=new Date(base);s32.setDate(s32.getDate()+224);
+  const s33=new Date(base);s33.setDate(s33.getDate()+231);
+  const fmt=d=>d.toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const info=$('n-vsr-info');if(info)info.style.display='block';
+  const e31=$('n-vsr-sem31');if(e31)e31.textContent=fmt(s31);
+  const e32=$('n-vsr-sem32');if(e32)e32.textContent=fmt(s32);
+  const e33=$('n-vsr-sem33');if(e33)e33.textContent=fmt(s33);
+}
+
+function fppDesde(fum){
+  if(!fum) return '';
+  const d = new Date(fum+'T00:00:00');
+  d.setDate(d.getDate()+280);
+  return d.toISOString().slice(0,10);
+}
+
+function edadAnios(fnac){
+  if(!fnac) return '';
+  const f=new Date(fnac+'T00:00:00'), h=hoy();
+  let a=h.getFullYear()-f.getFullYear();
+  if(h.getMonth()<f.getMonth()||(h.getMonth()===f.getMonth()&&h.getDate()<f.getDate()))a--;
+  return a;
+}
+
+// ════════════════════════════════════════════════
+// SAVE / EXPORT / IMPORT
+// ════════════════════════════════════════════════
+function saveAll(){
+  localStorage.setItem('emb-data', JSON.stringify(embarazadas));
+  const el=$('save-hora');
+  if(el) el.textContent = 'Guardado: '+new Date().toLocaleTimeString('es-AR');
+}
+
+function exportarDatos(){
+  const blob=new Blob([JSON.stringify({version:1,app:'EmbarazadasAPS',exportado:new Date().toISOString(),emb:embarazadas},null,2)],{type:'application/json;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='datos-embarazadas-'+new Date().toISOString().slice(0,10)+'.json';a.click();
+}
+
+function importarDatos(event){
+  const file=event.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    try{
+      const d=JSON.parse(e.target.result);
+      if(!Array.isArray(d.emb)){alert('Archivo no válido.');return;}
+      const ids=new Set(embarazadas.map(x=>x.id));
+      let nuevas=0;
+      d.emb.forEach(x=>{if(!ids.has(x.id)){embarazadas.push(x);nuevas++;}});
+      saveAll();renderTodo();
+      alert(nuevas?`✅ ${nuevas} embarazada${nuevas!==1?'s':''} importadas.`:'ℹ️ Todo ya estaba al día.');
+    }catch(e){alert('Error: '+e.message);}
+    event.target.value='';
+  };
+  r.readAsText(file,'utf-8');
+}
+
+// ════════════════════════════════════════════════
+// TABS
+// ════════════════════════════════════════════════
+function showTab(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  $('tab-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(id==='listado')renderListado();
+  if(id==='sectores')renderSectores();
+  if(id==='inicio')renderInicio();
+  if(id==='vsr')renderVSR();
+}
+
+// ════════════════════════════════════════════════
+// GUARDAR NUEVA EMBARAZADA
+// ════════════════════════════════════════════════
+function guardarEmbarazada(){
+  const nombre=$('n-nombre').value.trim();
+  const dni=$('n-dni').value.trim();
+  const sector=$('n-sector').value;
+  if(!nombre||!dni||!sector){alert('Nombre, DNI y Sector son obligatorios.');return;}
+  const fum=$('n-fum').value;
+  const emb={
+    id:uid(),
+    nombre, dni, sector,
+    domicilio:$('n-domicilio').value.trim(),
+    fnac:$('n-fnac').value,
+    fcap:$('n-fcap').value,
+    fum, fpp:fum?fppDesde(fum):$('n-fpp').value,
+    gestas:$('n-gestas').value,
+    os:$('n-os').value.trim(),
+    riesgo:$('n-riesgo').value,
+    hepb1:$('n-hepb1').value,hepb2:$('n-hepb2').value,hepb3:$('n-hepb3').value,
+    dt:$('n-dt').value,dpta:$('n-dpta').value,ag:$('n-ag').value,vsr:$('n-vsr').value,
+    t1mel:$('n-1t-mel').value,t1cap:$('n-1t-cap').value,t1eco:$('n-1t-eco').value,
+    t2mel:$('n-2t-mel').value,t2cap:$('n-2t-cap').value,t2eco:$('n-2t-eco').value,
+    t3mel:$('n-3t-mel').value,t3cap:$('n-3t-cap').value,t3eco:$('n-3t-eco').value,
+    lab:$('n-lab').value.trim(),
+    papFecha:$('n-pap').value,
+    partoInst:$('n-parto-inst').value,partoDom:$('n-parto-dom').value,
+    obs:$('n-obs').value.trim(),
+    creadoEn:new Date().toISOString()
+  };
+  embarazadas.push(emb);
+  saveAll();
+  // Limpiar
+  ['n-nombre','n-dni','n-domicilio','n-fnac','n-fcap','n-fum','n-fpp','n-gestas','n-os',
+   'n-hepb1','n-hepb2','n-hepb3','n-vsr','n-1t-mel','n-1t-cap','n-1t-eco',
+   'n-2t-mel','n-2t-cap','n-2t-eco','n-3t-mel','n-3t-cap','n-3t-eco',
+   'n-lab','n-pap','n-parto-inst','n-parto-dom','n-obs'].forEach(id=>{const el=$(id);if(el)el.value='';});
+  ['n-sector','n-riesgo'].forEach(id=>{const el=$(id);if(el)el.value='';});
+  ['n-dt','n-dpta','n-ag','n-vsr'].forEach(id=>{const el=$(id);if(el)el.value='';});
+  alert('✅ Embarazada registrada correctamente.');
+  showTab('listado',null);
+  document.querySelectorAll('.tab-btn')[2].classList.add('active');
+}
+
+// ════════════════════════════════════════════════
+// RENDER LISTADO
+// ════════════════════════════════════════════════
+function renderListado(){
+  const q=($('buscar-listado')?$('buscar-listado').value:'').toLowerCase();
+  let lista=[...embarazadas];
+  if(q) lista=lista.filter(e=>e.nombre.toLowerCase().includes(q)||e.dni.includes(q)||(SECTORES[e.sector]||'').toLowerCase().includes(q));
+  if(filtroSector) lista=lista.filter(e=>e.sector===filtroSector);
+  lista.sort((a,b)=>(parseInt(a.sector)||99)-(parseInt(b.sector)||99)||a.nombre.localeCompare(b.nombre));
+
+  const el=$('tabla-listado');
+  if(!lista.length){el.innerHTML=`<div class="empty"><div class="icon">🤰</div><p>${q||filtroSector?'Sin resultados para esa búsqueda':'Sin embarazadas registradas aún'}</p></div>`;return;}
+
+  el.innerHTML=`<div class="tabla-wrap"><table>
+    <thead>
+      <tr>
+        <th>Sector</th><th>Apellido y Nombre</th><th>DNI</th>
+        <th>FUM</th><th>FPP</th><th>Sem.</th>
+        <th>Edad</th><th>Gestas</th>
+        <th>Hep B</th><th>DT</th><th>DPTa</th><th>AG</th><th>VSR</th>
+        <th>Estado VSR</th><th>Riesgo</th><th>Obs.</th><th></th>
+      </tr>
+    </thead>
+    <tbody>${lista.map(e=>{
+      const sem=semanasGest(e.fum);
+      const vsr=vsrStatus(e.fum,e.vsr);
+      const semClass=sem===null?'':sem>=31&&sem<=32?'semanas-vsr':sem>=28?'semanas-warn':'semanas-ok';
+      return `<tr>
+        <td><span class="td-sector">${e.sector} — ${SECTORES[e.sector]||''}</span></td>
+        <td class="td-nombre">${e.nombre}${e.riesgo==='si'?'<br><span style="font-size:10px;color:var(--red);font-weight:700">⚠️ RIESGO</span>':''}</td>
+        <td>${e.dni}</td>
+        <td>${fmtF(e.fum)}</td>
+        <td>${fmtF(e.fpp)}</td>
+        <td class="td-semanas ${semClass}">${sem!==null?sem+'s':'—'}</td>
+        <td>${edadAnios(e.fnac)||'—'}</td>
+        <td style="text-align:center">${e.gestas||'—'}</td>
+        <td style="text-align:center;font-size:11px">${[e.hepb1,e.hepb2,e.hepb3].filter(Boolean).length?'<span style="color:var(--green);font-weight:700">✅ '+[e.hepb1,e.hepb2,e.hepb3].filter(Boolean).length+'/3</span>':'<span style="color:var(--muted)">—</span>'}</td>
+        <td style="text-align:center;font-size:11px">${e.dt?'<span style="color:var(--green)">✅</span>':'<span style="color:var(--muted)">—</span>'}</td>
+        <td style="text-align:center;font-size:11px">${e.dpta?'<span style="color:var(--green)">✅</span>':'<span style="color:var(--muted)">—</span>'}</td>
+        <td style="text-align:center;font-size:11px">${e.ag?'<span style="color:var(--green)">✅</span>':'<span style="color:var(--muted)">—</span>'}</td>
+        <td style="text-align:center;font-size:11px">${e.vsr?'<span style="color:var(--green)">✅</span>':'<span style="color:var(--muted)">—</span>'}</td>
+        <td>${vsr?`<span class="vsr-badge ${vsr.cls}">${vsr.txt}</span>`:'—'}</td>
+        <td style="text-align:center">${e.riesgo==='si'?'⚠️':'—'}</td>
+        <td style="max-width:120px;white-space:normal;font-size:11px;color:var(--muted)">${e.obs||''}</td>
+        <td><button class="btn btn-secondary btn-sm" onclick="abrirEdicion('${e.id}')">✏️</button></td>
+      </tr>`;
+    }).join('')}
+    </tbody></table></div>
+  <div style="font-size:12px;color:var(--muted);margin-top:8px;text-align:right">${lista.length} embarazada${lista.length!==1?'s':''}</div>`;
+}
+
+// ════════════════════════════════════════════════
+// RENDER SECTORES
+// ════════════════════════════════════════════════
+function renderSectores(){
+  const grid=$('sectores-grid');
+  grid.innerHTML=Object.entries(SECTORES).map(([num,nombre])=>{
+    const cnt=embarazadas.filter(e=>e.sector===num).length;
+    return `<div class="sector-card" onclick="verSector('${num}')">
+      <div class="sector-num">${num}</div>
+      <div class="sector-nombre">${nombre}</div>
+      <div class="sector-count">${cnt} embarazada${cnt!==1?'s':''}</div>
+    </div>`;
+  }).join('');
+}
+
+function verSector(num){
+  document.querySelectorAll('.sector-card').forEach(c=>c.classList.remove('activo'));
+  const card=document.querySelectorAll('.sector-card')[parseInt(num)-1];
+  if(card)card.classList.add('activo');
+  const lista=embarazadas.filter(e=>e.sector===num).sort((a,b)=>a.nombre.localeCompare(b.nombre));
+  const det=$('sector-detalle');
+  if(!lista.length){det.innerHTML=`<div class="alert alert-warn">ℹ️ No hay embarazadas registradas en el Sector ${num} — ${SECTORES[num]}.</div>`;return;}
+  det.innerHTML=`<div class="card"><div class="card-title">📍 Sector ${num} — ${SECTORES[num]}</div>
+    <div class="tabla-wrap"><table>
+      <thead><tr><th>Apellido y Nombre</th><th>DNI</th><th>FUM</th><th>FPP</th><th>Sem.</th><th>Estado VSR</th><th>Riesgo</th><th>Obs.</th><th></th></tr></thead>
+      <tbody>${lista.map(e=>{
+        const sem=semanasGest(e.fum);
+        const vsr=vsrStatus(e.fum,e.vsr);
+        return `<tr>
+          <td class="td-nombre">${e.nombre}</td><td>${e.dni}</td>
+          <td>${fmtF(e.fum)}</td><td>${fmtF(e.fpp)}</td>
+          <td class="td-semanas ${sem>=31&&sem<=32?'semanas-vsr':sem>=28?'semanas-warn':'semanas-ok'}">${sem!==null?sem+'s':'—'}</td>
+          <td>${vsr?`<span class="vsr-badge ${vsr.cls}">${vsr.txt}</span>`:'—'}</td>
+          <td>${e.riesgo==='si'?'⚠️ Riesgo':'—'}</td>
+          <td style="font-size:11px;color:var(--muted);max-width:120px;white-space:normal">${e.obs||''}</td>
+          <td><button class="btn btn-secondary btn-sm" onclick="abrirEdicion('${e.id}')">✏️</button></td>
+        </tr>`;
+      }).join('')}
+      </tbody></table></div></div>`;
+}
+
+// ════════════════════════════════════════════════
+// RENDER INICIO (dashboard)
+// ════════════════════════════════════════════════
+function renderInicio(){
+  const total=embarazadas.length;
+  const conVSR=embarazadas.filter(e=>e.vsr).length;
+  const riesgo=embarazadas.filter(e=>e.riesgo==='si').length;
+  const enVentana=embarazadas.filter(e=>{const s=semanasGest(e.fum);return s>=31&&s<=32&&!e.vsr;}).length;
+  const proxVSR=embarazadas.filter(e=>{const s=semanasGest(e.fum);return s>=28&&s<31&&!e.vsr;}).length;
+
+  $('stats-row').innerHTML=[
+    {n:total,l:'Total embarazadas',c:'var(--pink)'},
+    {n:conVSR,l:'Con VSR aplicada',c:'var(--green)'},
+    {n:enVentana,l:'En ventana VSR',c:'var(--red)'},
+    {n:proxVSR,l:'Próximas a VSR',c:'var(--amber)'},
+    {n:riesgo,l:'Embarazo de riesgo',c:'var(--red)'},
+    {n:Object.keys(SECTORES).filter(s=>embarazadas.some(e=>e.sector===s)).length,l:'Sectores activos',c:'var(--teal)'},
+  ].map(s=>`<div class="stat-card"><div class="stat-num" style="color:${s.c}">${s.n}</div><div class="stat-label">${s.l}</div></div>`).join('');
+
+  const alertas=[];
+  if(enVentana>0) alertas.push(`<div class="alert alert-warn">🔴 <strong>${enVentana} embarazada${enVentana!==1?'s':''}</strong> en ventana óptima de VSR (sem 31–32) sin vacuna aplicada.</div>`);
+  if(proxVSR>0)   alertas.push(`<div class="alert alert-pink">🟡 <strong>${proxVSR} embarazada${proxVSR!==1?'s':''}</strong> próximas a la ventana VSR (sem 28–30).</div>`);
+  $('alertas-vsr').innerHTML=alertas.join('');
+
+  const resumen=Object.entries(SECTORES).map(([num,nombre])=>{
+    const lista=embarazadas.filter(e=>e.sector===num);
+    if(!lista.length)return `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);opacity:.5"><span style="font-size:13px"><strong>${num}</strong> — ${nombre}</span><span class="chip" style="background:var(--surface);color:var(--muted)">0</span></div>`;
+    const vsr=lista.filter(e=>vsrStatus(e.fum,e.vsr)&&vsrStatus(e.fum,e.vsr).cls==='vsr-optima'||vsrStatus(e.fum,e.vsr)&&vsrStatus(e.fum,e.vsr).cls==='vsr-proxima').length;
+    return `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="showTab('sectores',null);document.querySelectorAll('.tab-btn')[3].classList.add('active');setTimeout(()=>verSector('${num}'),50)">
+      <span style="font-size:13px"><strong>${num}</strong> — ${nombre}</span>
+      <div style="display:flex;gap:5px;align-items:center">
+        <span class="chip chip-pink">${lista.length}</span>
+        ${vsr?`<span class="vsr-badge vsr-proxima">VSR ${vsr}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  $('resumen-sectores').innerHTML=resumen;
+}
+
+// ════════════════════════════════════════════════
+// RENDER VSR
+// ════════════════════════════════════════════════
+function renderVSR(){
+  const grupos=[
+    {titulo:'🔴 En ventana óptima (sem 31–32) — Aplicar AHORA',cls:'vsr-tardia',filter:e=>{const s=semanasGest(e.fum);return s>=31&&s<=32&&!e.vsr;}},
+    {titulo:'🟡 Próximas (sem 28–30) — Programar',cls:'vsr-proxima',filter:e=>{const s=semanasGest(e.fum);return s>=28&&s<31&&!e.vsr;}},
+    {titulo:'✅ VSR ya aplicada',cls:'vsr-optima',filter:e=>!!e.vsr},
+    {titulo:'🔵 Pendientes (sem < 28)',cls:'vsr-pendiente',filter:e=>{const s=semanasGest(e.fum);return s!==null&&s<28&&!e.vsr;}},
+  ];
+  $('vsr-content').innerHTML=grupos.map(g=>{
+    const lista=embarazadas.filter(g.filter).sort((a,b)=>(semanasGest(b.fum)||0)-(semanasGest(a.fum)||0));
+    if(!lista.length)return `<div class="card"><div class="card-title">${g.titulo}</div><div style="color:var(--muted);font-size:13px">Sin embarazadas en este estado</div></div>`;
+    return `<div class="card"><div class="card-title">${g.titulo} <span style="font-size:13px;font-weight:400;color:var(--muted)">(${lista.length})</span></div>
+      <div class="tabla-wrap"><table>
+        <thead><tr><th>Sector</th><th>Apellido y Nombre</th><th>DNI</th><th>FUM</th><th>FPP</th><th>Semanas</th><th>VSR aplicada</th><th>Obs.</th></tr></thead>
+        <tbody>${lista.map(e=>{
+          const sem=semanasGest(e.fum);
+          return `<tr><td><span class="td-sector">${e.sector}</span></td><td class="td-nombre">${e.nombre}</td><td>${e.dni}</td><td>${fmtF(e.fum)}</td><td>${fmtF(e.fpp)}</td>
+          <td class="td-semanas semanas-vsr">${sem!==null?sem+'s':'—'}</td><td>${e.vsr?fmtF(e.vsr):'Pendiente'}</td>
+          <td style="font-size:11px;color:var(--muted)">${e.obs||''}</td></tr>`;
+        }).join('')}</tbody></table></div></div>`;
+  }).join('');
+}
+
+// ════════════════════════════════════════════════
+// EDICIÓN
+// ════════════════════════════════════════════════
+function abrirEdicion(id){
+  const e=embarazadas.find(x=>x.id===id);
+  if(!e)return;
+  editId=id;
+  const sectorOpts=Object.entries(SECTORES).map(([n,nom])=>`<option value="${n}"${e.sector===n?' selected':''}>${n} — ${nom}</option>`).join('');
+  $('modal-edit-body').innerHTML=`
+    <div class="section-sub">👤 Datos Personales</div>
+    <div class="form-grid">
+      <div class="form-group full"><label>Apellido y Nombre</label><input type="text" id="e-nombre" value="${e.nombre}"></div>
+      <div class="form-group"><label>DNI</label><input type="text" id="e-dni" value="${e.dni}"></div>
+      <div class="form-group"><label>Domicilio</label><input type="text" id="e-domicilio" value="${e.domicilio||''}"></div>
+      <div class="form-group"><label>Fecha de Nacimiento</label><input type="date" id="e-fnac" value="${e.fnac||''}"></div>
+      <div class="form-group"><label>Sector APS</label><select id="e-sector">${sectorOpts}</select></div>
+      <div class="form-group"><label>Obra Social</label><input type="text" id="e-os" value="${e.os||''}"></div>
+      <div class="form-group"><label>Riesgo</label><select id="e-riesgo"><option value="">No</option><option value="si"${e.riesgo==='si'?' selected':''}>Sí</option></select></div>
+    </div>
+    <div class="section-sub">📅 Embarazo</div>
+    <div class="form-grid-3">
+      <div class="form-group"><label>FUM</label><input type="date" id="e-fum" value="${e.fum||''}"></div>
+      <div class="form-group"><label>FPP</label><input type="date" id="e-fpp" value="${e.fpp||''}"></div>
+      <div class="form-group"><label>F. Captación</label><input type="date" id="e-fcap" value="${e.fcap||''}"></div>
+      <div class="form-group"><label>Gestas</label><input type="number" id="e-gestas" value="${e.gestas||''}"></div>
+    </div>
+    <div class="section-sub">💉 Vacunas</div>
+    <div class="form-grid-3">
+      <div class="form-group"><label>Hep B — 1°</label><input type="date" id="e-hepb1" value="${e.hepb1||''}"></div>
+      <div class="form-group"><label>Hep B — 2°</label><input type="date" id="e-hepb2" value="${e.hepb2||''}"></div>
+      <div class="form-group"><label>Hep B — 3°</label><input type="date" id="e-hepb3" value="${e.hepb3||''}"></div>
+      <div class="form-group"><label>Dpta — Rzo · Fecha</label><input type="date" id="e-dpta" value="${e.dpta&&e.dpta.match(/\d{4}-\d{2}-\d{2}/)?e.dpta:e.dpta&&e.dpta.length===10?e.dpta:''}"></div>
+      <div class="form-group"><label>Antigripal (A.G.) · Fecha</label><input type="date" id="e-ag" value="${e.ag&&e.ag.match(/\d{4}-\d{2}-\d{2}/)?e.ag:e.ag&&e.ag.length===10?e.ag:''}"></div>
+      <div class="form-group"><label>DT — Doble Bacteriana · Rzo · Fecha</label><input type="date" id="e-dt" value="${e.dt||''}"></div>
+      <div class="form-group"><label>VSR / Nirsevimab · Fecha</label><input type="date" id="e-vsr" value="${e.vsr||''}"></div>
+    </div>
+    <div class="section-sub">🔬 Trimestres</div>
+    <div class="form-grid-3">
+      <div class="form-group"><label>1° Trim MELONS</label><input type="text" id="e-1t-mel" value="${e.t1mel||''}"></div>
+      <div class="form-group"><label>1° Trim Cap</label><input type="date" id="e-1t-cap" value="${e.t1cap||''}"></div>
+      <div class="form-group"><label>1° Trim Eco</label><input type="date" id="e-1t-eco" value="${e.t1eco||''}"></div>
+      <div class="form-group"><label>2° Trim MELONS</label><input type="text" id="e-2t-mel" value="${e.t2mel||''}"></div>
+      <div class="form-group"><label>2° Trim Cap</label><input type="date" id="e-2t-cap" value="${e.t2cap||''}"></div>
+      <div class="form-group"><label>2° Trim Eco</label><input type="date" id="e-2t-eco" value="${e.t2eco||''}"></div>
+      <div class="form-group"><label>3° Trim MELONS</label><input type="text" id="e-3t-mel" value="${e.t3mel||''}"></div>
+      <div class="form-group"><label>3° Trim Cap</label><input type="date" id="e-3t-cap" value="${e.t3cap||''}"></div>
+      <div class="form-group"><label>3° Trim Eco</label><input type="date" id="e-3t-eco" value="${e.t3eco||''}"></div>
+    </div>
+    <div class="section-sub">🧪 Lab / Parto / PAP</div>
+    <div class="form-grid">
+      <div class="form-group"><label>Laboratorio</label><input type="text" id="e-lab" value="${e.lab||''}"></div>
+      <div class="form-group"><label>PAP — Fecha</label><input type="date" id="e-pap" value="${e.papFecha||''}"></div>
+      <div class="form-group"><label>Parto — Institución</label><input type="date" id="e-parto-inst" value="${e.partoInst||''}"></div>
+      <div class="form-group"><label>Parto — Domicilio</label><input type="date" id="e-parto-dom" value="${e.partoDom||''}"></div>
+      <div class="form-group full"><label>Observaciones</label><textarea id="e-obs">${e.obs||''}</textarea></div>
+    </div>`;
+  $('modal-edit').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function guardarEdicion(){
+  const idx=embarazadas.findIndex(x=>x.id===editId);
+  if(idx===-1)return;
+  const e=embarazadas[idx];
+  const fum=$('e-fum').value;
+  e.nombre=$('e-nombre').value.trim();e.dni=$('e-dni').value.trim();
+  e.domicilio=$('e-domicilio').value.trim();e.fnac=$('e-fnac').value;
+  e.sector=$('e-sector').value;e.os=$('e-os').value.trim();e.riesgo=$('e-riesgo').value;
+  e.fum=fum;e.fpp=fum?fppDesde(fum):$('e-fpp').value;e.fcap=$('e-fcap').value;e.gestas=$('e-gestas').value;
+  e.hepb1=$('e-hepb1').value;e.hepb2=$('e-hepb2').value;e.hepb3=$('e-hepb3').value;
+  e.dt=$('e-dt').value||e.dt||'';
+  e.dpta=$('e-dpta').value||e.dpta||'';
+  e.ag=$('e-ag').value||e.ag||'';
+  e.vsr=$('e-vsr').value||e.vsr||'';
+  e.t1mel=$('e-1t-mel').value;e.t1cap=$('e-1t-cap').value;e.t1eco=$('e-1t-eco').value;
+  e.t2mel=$('e-2t-mel').value;e.t2cap=$('e-2t-cap').value;e.t2eco=$('e-2t-eco').value;
+  e.t3mel=$('e-3t-mel').value;e.t3cap=$('e-3t-cap').value;e.t3eco=$('e-3t-eco').value;
+  e.lab=$('e-lab').value.trim();e.papFecha=$('e-pap').value;
+  e.partoInst=$('e-parto-inst').value;e.partoDom=$('e-parto-dom').value;
+  e.obs=$('e-obs').value.trim();
+  saveAll();cerrarModal();renderListado();
+}
+
+function eliminarEmbarazada(){
+  if(!confirm('¿Eliminar este registro definitivamente?'))return;
+  embarazadas=embarazadas.filter(x=>x.id!==editId);
+  saveAll();cerrarModal();renderListado();
+}
+
+function cerrarModal(){$('modal-edit').classList.remove('open');document.body.style.overflow='';editId=null;}
+function cerrarModalSiBg(e){if(e.target===$('modal-edit'))cerrarModal();}
+
+// ════════════════════════════════════════════════
+// EXPORTAR EXCEL (CSV formato planilla oficial)
+// ════════════════════════════════════════════════
+function exportarExcel(){
+  const secFiltro=$('exp-sector').value;
+  const orden=$('exp-orden').value;
+  let lista=[...embarazadas];
+  if(secFiltro)lista=lista.filter(e=>e.sector===secFiltro);
+  if(orden==='sector')lista.sort((a,b)=>(parseInt(a.sector)||99)-(parseInt(b.sector)||99)||a.nombre.localeCompare(b.nombre));
+  else if(orden==='fpp')lista.sort((a,b)=>(a.fpp||'').localeCompare(b.fpp||''));
+  else if(orden==='nombre')lista.sort((a,b)=>a.nombre.localeCompare(b.nombre));
+  else if(orden==='semanas')lista.sort((a,b)=>(semanasGest(b.fum)||0)-(semanasGest(a.fum)||0));
+
+  if(!lista.length){alert('No hay embarazadas para exportar.');return;}
+
+  const bom='\uFEFF';
+  const sep=';';
+  const cabecera=[
+    'SECTOR APS','APELLIDO Y NOMBRE','DOMICILIO','DNI',
+    'F.NAC','F.CAP','FUM','FPP','EDAD','EDAD GEST (sem)','N° GESTAS',
+    'HEP B 1°','HEP B 2°','HEP B 3°','DT (Doble Bact. Rzo)','DPTa (Triple Bact. Acel. Rzo)','AG (Antigripal)','VSR (Virus Sincicial Resp.)',
+    '1°TRIM MELONS','1°TRIM F.Cap','1°TRIM F.Eco',
+    '2°TRIM MELONS','2°TRIM F.Cap','2°TRIM F.Eco',
+    '3°TRIM MELONS','3°TRIM F.Cap','3°TRIM F.Eco',
+    'O.S.','LABORATORIO','PARTO INST.','PARTO DOM.','PAP','OBSERVACIONES'
+  ];
+
+  const filas=lista.map(e=>{
+    const sem=semanasGest(e.fum);
+    const edad=edadAnios(e.fnac);
+    const esc=v=>`"${(v||'').toString().replace(/"/g,'""')}"`;
+    return [
+      esc(e.sector+' — '+(SECTORES[e.sector]||'')),
+      esc(e.nombre),esc(e.domicilio),esc(e.dni),
+      esc(fmtF(e.fnac)),esc(fmtF(e.fcap)),esc(fmtF(e.fum)),esc(fmtF(e.fpp)),
+      esc(edad),esc(sem!==null?sem:''),esc(e.gestas),
+      esc(fmtF(e.hepb1)),esc(fmtF(e.hepb2)),esc(fmtF(e.hepb3)),
+      esc(fmtF(e.dt)),esc(fmtF(e.dpta)),esc(fmtF(e.ag)),esc(fmtF(e.vsr)),
+      esc(e.t1mel),esc(fmtF(e.t1cap)),esc(fmtF(e.t1eco)),
+      esc(e.t2mel),esc(fmtF(e.t2cap)),esc(fmtF(e.t2eco)),
+      esc(e.t3mel),esc(fmtF(e.t3cap)),esc(fmtF(e.t3eco)),
+      esc(e.os),esc(e.lab),esc(fmtF(e.partoInst)),esc(fmtF(e.partoDom)),esc(fmtF(e.papFecha)),esc(e.obs)
+    ].join(sep);
+  });
+
+  const csv=bom+cabecera.map(h=>`"${h}"`).join(sep)+'\n'+filas.join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  const suf=secFiltro?`_sector${secFiltro}`:'_todos';
+  a.download=`planilla_embarazadas_2026${suf}_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();URL.revokeObjectURL(a.href);
+}
+
+// ════════════════════════════════════════════════
+// RENDER TODO
+// ════════════════════════════════════════════════
+function renderTodo(){renderInicio();renderListado();renderSectores();}
+
+// ════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════
+renderInicio();
+const el=$('save-hora');
+if(el&&embarazadas.length)el.textContent='Datos cargados: '+embarazadas.length+' registros';
+</script>
+</body>
+</html>
