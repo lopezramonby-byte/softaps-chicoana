@@ -1,0 +1,1132 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>APS Biológicos · Chicoana 2026</title><style>
+:root{--ink:#243244;--bg:#f3f5f8;--line:#dfe5eb;--blue:#2473d4;--green:#249d72;--orange:#e99b27;--red:#d95b62;--violet:#8360bc}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Segoe UI,Arial,sans-serif;color:var(--ink)}header{background:#fff;border-bottom:1px solid var(--line);padding:15px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}header strong{font-size:21px}small,.muted{color:#68778b}main{max-width:1100px;margin:22px auto;padding:0 16px}.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:19px}.nav button{border:1px solid #dce2e8;background:#fff;color:#3b5069;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:600}.nav button.active{background:#246bc5;color:white}.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px;margin-bottom:16px;box-shadow:0 3px 12px #26384d0b}.hidden{display:none!important}h1{font-size:25px;margin:0 0 6px}h2{font-size:19px;margin:0 0 15px}p{line-height:1.5}.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:13px}.tile{border:0;border-radius:14px;padding:25px 10px;min-height:135px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:white;font-weight:700;font-size:17px;cursor:pointer;box-shadow:0 4px 10px #00000012}.tile span{font-size:37px}.blue{background:var(--blue)}.green{background:var(--green)}.orange{background:var(--orange)}.red{background:var(--red)}.violet{background:var(--violet)}.slate{background:#566c84}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0}.stat{padding:15px;border:1px solid var(--line);border-radius:12px;background:#fff}.stat b{font-size:26px;display:block}.stat small{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12px;font-weight:700;color:#52637a}.field input,.field select,.field textarea{border:1px solid #cbd5df;border-radius:9px;padding:12px;font-size:15px;width:100%;background:white}.field textarea{min-height:78px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}button.action{border:0;border-radius:9px;background:var(--blue);color:white;padding:12px 18px;cursor:pointer;font-weight:700}button.secondary{background:#e9eef5;color:#33465e}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}th{text-align:left;background:#f0f4f8;color:#50617a}td,th{padding:12px;border-bottom:1px solid var(--line)}.tag{display:inline-block;border-radius:99px;padding:4px 9px;font-size:12px;background:#e8f4ec;color:#23774b}.warn{background:#fff3dd;color:#966000}.danger{background:#fce7e7;color:#b52d3d}.notice{padding:12px;border:1px solid #b9d8f9;border-radius:10px;background:#edf6ff;font-size:13px}.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px}.filters input,.filters select{padding:10px;border:1px solid #ccd5df;border-radius:8px;min-width:180px}.empty{padding:25px;text-align:center;color:#69778b}.topline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.footer{font-size:12px;color:#6d7887;margin:22px 0;text-align:center}@media(max-width:550px){header strong{font-size:18px}.tile{min-height:110px}.panel{padding:14px}.nav button{flex:1}}
+
+:root{color-scheme:light;--surface:#fff;--soft:#f0f4f8;--subtext:#68778b;--field:#fff;--fieldborder:#cbd5df;--navtext:#3b5069;--shadow:#26384d0b}
+html[data-theme="dark"]{color-scheme:dark;--ink:#eef3fa;--bg:#101821;--line:#334355;--surface:#1b2836;--soft:#263648;--subtext:#b3c1d2;--field:#182431;--fieldborder:#52647a;--navtext:#e7eef7;--shadow:#00000035}
+html[data-theme="dark"] header,html[data-theme="dark"] .panel,html[data-theme="dark"] .stat,html[data-theme="dark"] .nav button{background:var(--surface);color:var(--ink)}
+html[data-theme="dark"] .nav button.active{background:#356fc3;color:#fff}
+html[data-theme="dark"] th{background:var(--soft);color:var(--ink)}
+html[data-theme="dark"] .field label,html[data-theme="dark"] small,html[data-theme="dark"] .muted,html[data-theme="dark"] .footer,html[data-theme="dark"] .empty{color:var(--subtext)}
+html[data-theme="dark"] .field input,html[data-theme="dark"] .field select,html[data-theme="dark"] .field textarea,html[data-theme="dark"] .filters input,html[data-theme="dark"] .filters select{background:var(--field);color:var(--ink);border-color:var(--fieldborder)}
+html[data-theme="dark"] button.secondary{background:#33475b;color:#fff}
+html[data-theme="dark"] .notice{background:#1b354b;color:#e4f3ff;border-color:#3b6484}
+html[data-theme="dark"] .tag{background:#214839;color:#b9f5d2}html[data-theme="dark"] .tag.warn{background:#56451e;color:#ffe5a3}
+html[data-theme="dark"] .tag.danger{background:#552c37;color:#ffbdc7}
+html[data-theme="dark"] .nav button{border-color:var(--line);color:var(--navtext)}
+html[data-theme="dark"] .tile{box-shadow:0 4px 12px #0005}
+html[data-theme="dark"] .panel{box-shadow:0 3px 12px var(--shadow)}
+.theme-toggle{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:700;cursor:pointer;min-height:44px}
+.theme-tools{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+@media(max-width:650px){header{padding:12px 14px;align-items:flex-start}header strong{font-size:19px}main{margin:12px auto;padding:0 11px}.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.nav button{min-height:45px;padding:10px 7px;font-size:13px}.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile{min-height:112px;padding:13px 6px;font-size:14px}.tile span{font-size:29px}.grid{grid-template-columns:minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.panel{padding:15px}.field input,.field select,.field textarea{font-size:16px;min-height:46px}button.action{min-height:46px}.actions button{flex:1}.theme-tools{width:100%;justify-content:space-between}}
+
+body{background:#171717;color:#fff;font-family:Roboto,'Segoe UI',Arial,sans-serif}header{background:#1a1a1a;color:#fff;border:0;border-bottom:1px solid #2e2e2e;padding:10px 13px;display:flex;align-items:center;gap:12px;flex-wrap:nowrap}header strong{font-size:22px;font-weight:400;letter-spacing:-.2px}header small{color:#c0c0c0;font-size:12px}main{margin:0 auto;max-width:560px;padding:0 14px 30px}.nav{display:none}.panel{background:#232323;color:#fff;border:1px solid #393939}.home-shell{max-width:560px;margin:auto}.home-top{display:flex;align-items:center;gap:12px;min-width:0}.home-menu{border:0;border-radius:17px;background:#343434;color:#fff;width:59px;height:59px;display:grid;place-items:center;font-size:31px;cursor:pointer;flex-shrink:0}.home-title{font-size:27px;line-height:1.15}.home-effector{display:block;margin-top:4px;max-width:100%;border:0;border-radius:20px;background:#383838;color:#e0e0e0;padding:5px 12px;font-size:13px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.home-settings{margin-left:auto;background:transparent;border:0;color:#fff;font-size:27px;padding:10px;cursor:pointer}.home-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:19px}.home-tile{border:0;border-radius:20px;color:#fff;min-height:140px;padding:14px 8px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;cursor:pointer;box-shadow:inset 0 1px 1px #ffffff22, inset 0 -14px 24px #00000028;transition:transform .12s}.home-tile:active{transform:scale(.96)}.home-tile .tile-icon{font-size:38px;line-height:1}.home-tile .tile-label{font-size:20px;font-weight:400;line-height:1.15;text-align:center}.home-tile .tile-count{color:#9ffff8;font-size:20px;line-height:1}.t-blue{background:linear-gradient(#207ed7,#18518a)}.t-gold{background:linear-gradient(#ffc22d,#a57d23)}.t-teal{background:linear-gradient(#009ca8,#04636b)}.t-black{background:linear-gradient(#0b0b0b,#050505)}.t-lime{background:linear-gradient(#b6bb24,#6b7519)}.t-orange{background:linear-gradient(#f05020,#a62f17)}.t-grey{background:linear-gradient(#505050,#242424)}.home-smalltiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:15px}.home-small{min-height:68px;border:0;border-radius:16px;background:linear-gradient(#424242,#222222);color:#fff;font-size:26px;cursor:pointer;transition:transform .12s}.home-small:active{transform:scale(.94)}.home-note{text-align:center;color:#999;font-size:11px;margin:22px 0}.sub-head{display:flex;align-items:center;gap:10px;margin:10px 0 12px;padding:0 2px}.back{border:0;background:#2a2a2a;color:#fff;border-radius:10px;min-height:38px;min-width:42px;font-size:20px;cursor:pointer;flex-shrink:0}.sub-head h1{margin:0;color:#fff;font-size:20px;font-weight:500}.page-container{padding-top:4px}.page-container .panel{background:#242424;color:#fff;border-color:#454545}.page-container h1,.page-container h2{color:#fff}.page-container .muted,.page-container small{color:#c1c1c1}.page-container .stat{background:#343434;color:#fff;border-color:#555}.page-container th{background:#383838;color:#fff}.page-container td{color:#eee}.page-container .field label{color:#dedede}.page-container .field input,.page-container .field select,.page-container .field textarea,.page-container .filters input{background:#343434;color:#fff;border-color:#656565}.page-container .notice{background:#18364b;color:#fff}.page-container .action{background:#1978c7}.page-container .secondary{background:#444;color:#fff}.page-container .tag{color:#bfffd7;background:#205541}.page-container .empty{color:#bbb}.settings-list{display:grid;gap:12px}.settings-button{width:100%;min-height:60px;border-radius:14px;border:1px solid #555;background:#343434;color:#fff;font-size:17px;text-align:left;padding:12px 17px;cursor:pointer}.settings-label{color:#aaa;font-size:12px;margin-bottom:10px}.role-picker{display:flex;gap:8px}.role-picker button{flex:1;border:1px solid #777;border-radius:10px;background:#333;color:#fff;padding:13px 5px;font-weight:600}.role-picker button.selected{background:#1c75bf;border-color:#5aa6e8}html[data-theme="light"] body{background:#f2f5f8;color:#172b3a}html[data-theme="light"] header{background:#fff;color:#1e293b}html[data-theme="light"] header small{color:#65758a}html[data-theme="light"] .home-menu,html[data-theme="light"] .home-effector{background:#e5e9ef;color:#263547}html[data-theme="light"] .home-settings{color:#263547}html[data-theme="light"] .home-small{background:linear-gradient(#64758a,#35455a)}html[data-theme="light"] .home-note{color:#6b7280}html[data-theme="light"] .sub-head h1{color:#1e293b}html[data-theme="light"] .page-container .panel{background:#fff;color:#243244;border-color:#dfe5eb}html[data-theme="light"] .page-container h1,html[data-theme="light"] .page-container h2{color:#243244}html[data-theme="light"] .page-container .muted,html[data-theme="light"] .page-container small{color:#65758a}html[data-theme="light"] .page-container .stat{background:#fff;color:#243244;border-color:#dfe5eb}html[data-theme="light"] .page-container th{background:#f0f4f8;color:#34465a}html[data-theme="light"] .page-container td{color:#243244}html[data-theme="light"] .page-container .field label{color:#52637a}html[data-theme="light"] .page-container .field input,html[data-theme="light"] .page-container .field select,html[data-theme="light"] .page-container .field textarea,html[data-theme="light"] .page-container .filters input{background:#fff;color:#243244;border-color:#cbd5df}html[data-theme="light"] .settings-button{background:#fff;color:#243244;border-color:#dfe5eb}html[data-theme="light"] .settings-label{color:#52637a}html[data-theme="light"] .role-picker button{background:#fff;color:#243244;border-color:#ccd5df}html[data-theme="light"] .role-picker button.selected{background:#2473d4;color:#fff}html[data-theme="light"] .page-container .empty{color:#65758a}
+@media(max-width:400px){.home-tiles{gap:11px}.home-tile{min-height:143px;border-radius:20px}.home-tile .tile-label{font-size:21px}.home-tile .tile-icon{font-size:39px}.home-title{font-size:23px}.home-smalltiles{gap:8px}.home-small{min-height:65px}}
+
+.stock-list{display:grid;gap:10px}.stock-row{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#333;border:1px solid #505050;border-radius:14px;padding:15px}.stock-row strong{font-size:17px}.stock-row small{display:block;margin-top:5px}.stock-qty{font-size:24px;font-weight:700;white-space:nowrap}.stock-qty em{font-size:11px;font-style:normal;display:block;text-align:right;font-weight:400;color:#bbb}.stock-zero{color:#ff9a9a}.stock-low{color:#ffdf84}.quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}.quick-actions button{border:0;border-radius:12px;padding:14px 8px;background:#1978c7;color:white;font-size:15px;font-weight:700;min-height:52px}.quick-actions button:last-child{background:#819127}.daily-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.daily-metric{border-radius:14px;background:#343434;padding:16px;border:1px solid #555}.daily-metric b{font-size:28px;display:block}.daily-metric small{font-size:12px}.admin-guide{border-left:4px solid #f0b444;background:#35312a;padding:12px;border-radius:9px;margin:12px 0}.page-container .field input[readonly]{opacity:.8}.stock-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.stock-actions button{border:1px solid #555;background:#393939;color:white;padding:10px 13px;border-radius:10px;min-height:43px;font-weight:600}
+.req-suggestion{padding:13px 16px;cursor:pointer;border-bottom:1px solid #444;font-size:15px;display:flex;align-items:center;gap:8px}
+.req-suggestion:last-child{border-bottom:none}
+.req-suggestion:hover,.req-suggestion:active{background:var(--accent,#1978c7)22}
+.req-no-match{padding:12px 16px;color:#999;font-size:14px}
+[data-theme=light] .req-suggestion:hover{background:#1978c711}
+@media(max-width:600px){
+  .page-container .tablewrap{font-size:13px}
+  .page-container .stock-row{padding:10px 12px}
+  .page-container .stock-row strong{font-size:15px}
+  /* Campos más compactos en celular */
+  .page-container .field input,.page-container .field select,.page-container .field textarea{padding:9px 11px;font-size:15px;min-height:42px}
+  /* Panel menos espacioso */
+  .page-container .panel{padding:14px 13px;margin-bottom:11px;border-radius:14px}
+  /* H1 interno del primer panel — oculto en mobile porque lo repite sub-head */
+  .page-container .panel:first-child h1{display:none}
+  .page-container h1{font-size:18px;margin-bottom:4px;font-weight:600}
+  .page-container h2{font-size:15px;margin-bottom:10px}
+  /* Labels más livianas */
+  .page-container .field label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:#a0aab5}
+  /* Botones de acción más compactos */
+  .page-container .action{min-height:44px;font-size:15px;padding:10px 15px;border-radius:10px}
+  /* Muted/descripción más chica */
+  .page-container .muted{font-size:13px;line-height:1.45}
+  /* Tag de estado más pequeño */
+  .page-container .tag{font-size:11px;padding:3px 8px}
+  /* Acciones apiladas en columna si son muchas */
+  .page-container .actions{flex-direction:column;gap:8px}
+  .page-container .actions button{width:100%}
+  /* Main menos padding lateral */
+  main{padding:0 10px 24px}
+}
+
+.choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}.choice-card{border:0;border-radius:16px;min-height:170px;color:#fff;font-weight:750;font-size:17px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer}.choice-card span{font-size:42px}.choice-bio{background:#176ca8}.choice-dis{background:#168477}@media(max-width:400px){.choice-card{min-height:150px;font-size:15px}}.choice-card:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
+
+.access-card{max-width:480px;margin:25px auto;padding:22px;background:#242424;border:1px solid #444;border-radius:20px;color:#fff}
+.access-card h1{font-size:26px}.access-card .field{margin:14px 0}
+.access-card .action{width:100%;font-size:17px;min-height:52px}.account-chip{font-size:12px;color:#b4e5fa;background:#254253;padding:8px 12px;border-radius:12px;display:inline-block;margin:10px 0}
+@media(max-width:550px){.access-card{margin:12px auto;padding:17px}}
+.facility-checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;max-height:350px;overflow:auto;padding:7px;border:1px solid #555;border-radius:13px}.facility-choice{display:flex;align-items:center;gap:11px;background:#333;border:1px solid #555;padding:11px;border-radius:11px;cursor:pointer}.facility-choice input{width:21px;height:21px;flex-shrink:0;accent-color:#299be2}.facility-choice span{display:flex;flex-direction:column;gap:3px}.facility-choice small{font-size:11px;color:#bbb}@media(max-width:500px){.facility-checks{grid-template-columns:1fr;max-height:290px}}
+
+/* Spinner de carga Firebase */
+#fb-loading{position:fixed;inset:0;background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:9999;color:#fff;font-size:17px}
+.spinner{width:46px;height:46px;border:5px solid #333;border-top-color:#3a9bdc;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style></head>
+<body>
+<div id="fb-loading"><div class="spinner"></div><span>Conectando con Firebase…</span></div>
+<header style="display:none"><div class="home-top" style="width:100%"><button class="home-menu" onclick="go('Configuración')" aria-label="Menú">☰</button><div style="min-width:0;flex:1"><div class="home-title">APS Biológicos</div><button class="home-effector" onclick="go('Establecimiento de trabajo')" id="effectorLabel">Cargando ▾</button></div><button class="home-settings" onclick="go('Configuración')" aria-label="Configuración">⚙</button></div></header>
+<main><div id="content"></div></main>
+
+<!-- Firebase SDK -->
+<script type="module">
+import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import{getFirestore,doc,getDoc,setDoc,updateDoc,deleteDoc,collection,getDocs,addDoc,query,orderBy,where,onSnapshot,writeBatch,serverTimestamp}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+const FB={
+  apiKey:"AIzaSyC54FoT4a3EwdcuhsdImyQBo2i9ca7jvqM",
+  authDomain:"softaps-chicoana.firebaseapp.com",
+  projectId:"softaps-chicoana"
+};
+const app=initializeApp(FB);
+const db=getFirestore(app);
+
+// ── Colecciones ──────────────────────────────────────────────
+const COL_USERS   ='bio_usuarios';
+const COL_ITEMS   ='bio_lotes';
+const COL_DOCS    ='bio_movimientos';
+const COL_DEST    ='bio_destinos';
+const COL_CATALOG ='bio_catalogo';
+const COL_DISPOS  ='bio_descartables';
+const COL_DESCAT  ='bio_catalogo_des';// catálogo de referencia de descartables
+const COL_REQ     ='bio_pedidos';
+const COL_CFG     ='bio_config';
+
+// ── Hash simple para contraseñas (SHA-256 via crypto) ────────
+async function hashPass(plain){
+  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(plain));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+// ── Estado global ────────────────────────────────────────────
+const sectors=['20 DE FEBRERO','JUAN PABLO','LOS LOS','LA CANDELARIA','PARQUE LA CRUZ','LAS MORAS','CHIVILME','PULARES','POTRERO DE DIAZ - LA ROTONDA','BELLA VISTA','LAS PALTAS','LA TRADICION','ESCOIPE - LA ROTONDA','LA ZANJA - LA ROTONDA','SAN CAYETANO','CAMINO AL CHURCAL'];
+const defaultKinds=['Sector APS','Centro Materno','Puesto Sanitario','Centro de Salud','Otro efector'];
+
+let users=[],docs=[],items=[],disposables=[],bioCatalog=[],desCatalog=[],customDestinations=[],kinds=[...defaultKinds];
+let page='Acceso',role='vacunador',sessionAccount=null,activeFacilityId='aps:1',activeSector=1,moveCategory='',movementFilter='Todos';
+let nextDoc=1,monthlyRequests={};
+let requestMonth=(()=>{let d=new Date();return new Date(d.getFullYear(),d.getMonth()+1,1).toISOString().slice(0,7)})();
+let fbReady=false;
+
+// ── Helpers UI ───────────────────────────────────────────────
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const opts=sectors.map((s,i)=>`<option value="${i+1}">${i+1} — ${esc(s)}</option>`).join('');
+const selectSector=(id,blank='Seleccionar sector')=>`<select id="${id}"><option value="">${blank}</option>${opts}</select>`;
+
+// ── Tema ── variable global, no depende de localStorage para funcionar
+let currentTheme='dark';
+function applyTheme(theme){
+  currentTheme=theme;
+  let resolved=theme;
+  if(theme==='auto') resolved=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  document.documentElement.dataset.theme=resolved;
+  // intentar persistir, pero no es crítico
+  try{localStorage.setItem('aps-biologicos-theme',theme)}catch(e){}
+  // actualizar botón de tema si existe
+  const btn=document.getElementById('themeCycleBtn');
+  if(btn){const labels={dark:'🌙 Oscuro — tocar para cambiar',light:'☀️ Claro — tocar para cambiar',auto:'⚙️ Sistema — tocar para cambiar'};btn.textContent=labels[theme]||labels.dark;}
+}
+function toggleTheme(){
+  const next=currentTheme==='dark'?'light':currentTheme==='light'?'auto':'dark';
+  applyTheme(next);
+}
+window.toggleTheme=toggleTheme;
+window.applyTheme=applyTheme;
+// arrancar con el tema guardado o dark por defecto
+try{applyTheme(localStorage.getItem('aps-biologicos-theme')||'dark')}catch(e){applyTheme('dark')}
+
+// ── Carga inicial desde Firestore ────────────────────────────
+async function cargarTodo(){
+  try{
+    // Usuarios
+    const uSnap=await getDocs(collection(db,COL_USERS));
+    users=uSnap.docs.map(d=>({id:d.id,...d.data()}));
+
+    // Items (lotes biológicos) — sin datos demo; el stock real se carga desde Recepción OCASA
+    const iSnap=await getDocs(collection(db,COL_ITEMS));
+    items=iSnap.docs.map(d=>({_id:d.id,...d.data()}));
+
+    // Movimientos
+    const mSnap=await getDocs(query(collection(db,COL_DOCS),orderBy('createdAt','desc')));
+    docs=mSnap.docs.map(d=>({_id:d.id,...d.data()}));
+
+    // Destinos personalizados
+    const dSnap=await getDocs(collection(db,COL_DEST));
+    customDestinations=dSnap.docs.map(d=>({id:d.id,...d.data()}));
+
+    // Catálogo biológicos
+    const cSnap=await getDocs(collection(db,COL_CATALOG));
+    bioCatalog=cSnap.docs.map(d=>({_id:d.id,...d.data()}));
+    if(!bioCatalog.length)bioCatalog=[...new Set(items.map(x=>x.name))].map(name=>({name,active:true}));
+
+    // Descartables (stock)
+    const disSnap=await getDocs(collection(db,COL_DISPOS));
+    disposables=disSnap.docs.map(d=>({_id:d.id,...d.data()}));
+
+    // Catálogo de descartables (referencia, sin stock)
+    const desCatSnap=await getDocs(collection(db,COL_DESCAT));
+    desCatalog=desCatSnap.docs.map(d=>({_id:d.id,...d.data()}));
+    // Si el catálogo está vacío, lo pre-poblamos con los descartables ya en stock
+    if(!desCatalog.length&&disposables.length){
+      for(const d of disposables){
+        const ref=doc(collection(db,COL_DESCAT));
+        desCatalog.push({_id:ref.id,name:d.name,active:true});
+        await setDoc(ref,{name:d.name,active:true});
+      }
+    }
+
+    // Tipos de destino
+    const cfgSnap=await getDoc(doc(db,COL_CFG,'destino-kinds'));
+    if(cfgSnap.exists())kinds=cfgSnap.data().kinds||[...defaultKinds];
+
+    // Contador docs
+    const cntSnap=await getDoc(doc(db,COL_CFG,'next-doc'));
+    if(cntSnap.exists())nextDoc=cntSnap.data().value||1;
+
+    // Pedidos mensuales
+    const rSnap=await getDocs(collection(db,COL_REQ));
+    rSnap.docs.forEach(d=>{monthlyRequests[d.id]={id:d.id,...d.data()}});
+
+    fbReady=true;
+    $('fb-loading').style.display='none';
+    document.querySelector('header').style.display='none';
+    render();
+
+    // Crear admin por defecto si no existe
+    if(!users.find(u=>u.email==='ramon')){
+      const h=await hashPass('aps2026');
+      await setDoc(doc(db,COL_USERS,'admin-ramon'),{name:'Ramón López',email:'ramon',passHash:h,role:'Administrador',facilityIds:['aps:1'],active:true,createdAt:new Date().toISOString()});
+      users.push({id:'admin-ramon',name:'Ramón López',email:'ramon',passHash:h,role:'Administrador',facilityIds:['aps:1'],active:true});
+    }
+  }catch(e){
+    console.error(e);
+    $('fb-loading').innerHTML=`<div style="color:#f87171;text-align:center;padding:20px"><b>⚠ Error de conexión Firebase</b><br><small>${e.message}</small><br><br><button onclick="location.reload()" style="border:0;border-radius:10px;background:#1978c7;color:#fff;padding:12px 24px;font-size:16px;cursor:pointer;margin-top:12px">Reintentar</button></div>`;
+  }
+}
+
+// ── Persistencia Firestore ───────────────────────────────────
+async function persistItem(item){
+  if(item._id){
+    await setDoc(doc(db,COL_ITEMS,item._id),itemData(item));
+  }else{
+    const ref=await addDoc(collection(db,COL_ITEMS),itemData(item));
+    item._id=ref.id;
+  }
+}
+function itemData(x){return{name:x.name,lot:x.lot||'',exp:x.exp||'',qty:Number(x.qty)||0,presentation:x.presentation||''}}
+
+async function persistDoc(d){
+  const ref=await addDoc(collection(db,COL_DOCS),{...d,createdAt:serverTimestamp()});
+  d._id=ref.id;
+  // Actualizar contador
+  await setDoc(doc(db,COL_CFG,'next-doc'),{value:nextDoc});
+}
+
+async function persistUsers(){
+  const batch=writeBatch(db);
+  users.forEach(u=>{
+    const {id,...data}=u;
+    if(id)batch.set(doc(db,COL_USERS,id),data);
+  });
+  await batch.commit();
+}
+
+async function persistDestCatalog(){
+  const batch=writeBatch(db);
+  customDestinations.forEach(d=>{const{id,...data}=d;if(id)batch.set(doc(db,COL_DEST,id),data);});
+  await setDoc(doc(db,COL_CFG,'destino-kinds'),{kinds});
+  await batch.commit();
+}
+
+async function persistCatalog(){
+  const batch=writeBatch(db);
+  bioCatalog.forEach(b=>{
+    if(b._id)batch.set(doc(db,COL_CATALOG,b._id),{name:b.name,active:b.active!==false});
+    else{const ref=doc(collection(db,COL_CATALOG));b._id=ref.id;batch.set(ref,{name:b.name,active:true});}
+  });
+  await batch.commit();
+}
+
+async function persistDisposables(){
+  const batch=writeBatch(db);
+  disposables.forEach(d=>{
+    if(d._id)batch.set(doc(db,COL_DISPOS,d._id),{name:d.name,qty:d.qty,unit:d.unit||'unidades'});
+    else{const ref=doc(collection(db,COL_DISPOS));d._id=ref.id;batch.set(ref,{name:d.name,qty:d.qty,unit:d.unit||'unidades'});}
+  });
+  await batch.commit();
+}
+
+// ── Destinos ─────────────────────────────────────────────────
+const kindOptions=()=>kinds.map(k=>`<option value="${esc(k)}">${esc(k)}</option>`).join('');
+const destinationFields=(prefix)=>`<div class="field"><label>Tipo de destino</label><select id="${prefix}kind" onchange="toggleDestination('${prefix}')">${kindOptions()}</select></div><div class="field" id="${prefix}sectorwrap"><label>Sector APS</label>${selectSector(prefix+'sector')}</div><div class="field hidden" id="${prefix}otherwrap"><label>Destino / establecimiento</label><select id="${prefix}saved" onchange="destinationSelection('${prefix}')"></select><input id="${prefix}other" placeholder="Nombre del establecimiento" class="hidden" style="margin-top:8px"><small>Los destinos se administran desde Configuración → Destinos.</small></div>`;
+window.toggleDestination=function(prefix){let sector=$(prefix+'sectorwrap'),other=$(prefix+'otherwrap');if(!sector||!other)return;let kind=$(prefix+'kind').value,isSector=kind==='Sector APS';sector.classList.toggle('hidden',!isSector);other.classList.toggle('hidden',isSector);if(!isSector){let matches=customDestinations.filter(d=>d.kind===kind&&d.active!==false);$(prefix+'saved').innerHTML='<option value="">Seleccionar destino</option>'+matches.map(d=>`<option value="${esc(d.name)}">${esc(d.name)}</option>`).join('')+(role==='administrador'?'<option value="__other__">+ Destino no registrado</option>':'');destinationSelection(prefix)}};
+window.destinationSelection=function(prefix){let s=$(prefix+'saved'),input=$(prefix+'other');if(!s||!input)return;input.classList.toggle('hidden',s.value!=='__other__')};
+function destinationValue(prefix){let kind=$(prefix+'kind').value;if(kind==='Sector APS'){let n=$(prefix+'sector').value;return n?{kind,place:n+' — '+sectors[Number(n)-1],sector:n}:null}let sel=$(prefix+'saved').value,name=sel==='__other__'?$(prefix+'other').value.trim():sel;return name?{kind,place:name,sector:''}:null}
+window.addDestinationType=async function(){if(role!=='administrador')return;let name=$('newkind').value.trim();if(!name)return alert('Ingresá el tipo de destino.');if(kinds.some(k=>k.toLowerCase()===name.toLowerCase()))return alert('Ese tipo ya existe.');kinds.push(name);await persistDestCatalog();render()};
+window.addDestination=async function(){if(role!=='administrador')return;let kind=$('destkind').value,name=$('destname').value.trim();if(!name)return alert('Ingresá el nombre del destino.');if(customDestinations.some(d=>d.kind===kind&&d.name.toLowerCase()===name.toLowerCase()))return alert('Ese destino ya está registrado.');const ref=doc(collection(db,COL_DEST));const newD={id:ref.id,kind,name,active:true};customDestinations.push(newD);await setDoc(ref,{kind,name,active:true});render()};
+window.renameDestinationType=async function(index){if(role!=='administrador')return;let old=kinds[index];if(old==='Sector APS')return alert('Sector APS es un tipo estructural.');let name=prompt('Nuevo nombre del tipo',old)?.trim();if(!name||name===old)return;if(kinds.some(k=>k.toLowerCase()===name.toLowerCase()))return alert('Ese tipo ya existe.');kinds[index]=name;customDestinations.forEach(d=>{if(d.kind===old)d.kind=name});await persistDestCatalog();render()};
+window.renameDestination=async function(index){if(role!=='administrador')return;let d=customDestinations[index],name=prompt('Editar nombre',d.name)?.trim();if(!name||name===d.name)return;d.name=name;await setDoc(doc(db,COL_DEST,d.id),{kind:d.kind,name:d.name,active:d.active!==false});render()};
+window.deleteDestination=async function(index){if(role!=='administrador')return;const d=customDestinations[index];if(!d)return;const affected=users.filter(u=>userFacilityIds(u).includes(d.id));if(affected.length)return alert('Este establecimiento tiene '+affected.length+' usuario(s). Revisá sus asignaciones primero.');if(!confirm('¿Desactivar este establecimiento?'))return;d.active=false;await setDoc(doc(db,COL_DEST,d.id),{kind:d.kind,name:d.name,active:false});render()};
+window.reactivateDestination=async function(index){if(role!=='administrador')return;customDestinations[index].active=true;const d=customDestinations[index];await setDoc(doc(db,COL_DEST,d.id),{kind:d.kind,name:d.name,active:true});render()};
+window.editFacilityById=async function(id){const i=customDestinations.findIndex(d=>d.id===id);if(i<0)return;const d=customDestinations[i];const name=prompt('Nombre del establecimiento',d.name);if(name===null)return;const value=name.trim();if(!value)return alert('El nombre no puede quedar vacío.');d.name=value;await setDoc(doc(db,COL_DEST,d.id),{kind:d.kind,name:d.name,active:d.active!==false});render()};
+function destinationsAdmin(){return `<div class="panel"><h1>Catálogo único de establecimientos</h1><p class="muted">Los 16 sectores APS y todos los centros, puestos y vacunatorios forman parte del mismo catálogo.</p><h2>Crear establecimiento</h2><div class="grid"><div class="field"><label>Tipo</label><select id="destkind">${kinds.filter(k=>k!=='Sector APS').map(k=>`<option value="${esc(k)}">${esc(k)}</option>`).join('')}</select></div><div class="field"><label>Nombre</label><input id="destname" placeholder="Ej. Centro Materno Infantil"></div></div><button class="action" onclick="addDestination()">+ Guardar establecimiento</button><h2 style="margin-top:24px">Establecimientos disponibles</h2><div class="tablewrap"><table><thead><tr><th>Nombre</th><th>Tipo</th><th>Acción</th></tr></thead><tbody>${facilityList().map(f=>`<tr><td>${esc(f.name)}</td><td>${esc(f.kind)}</td><td>${f.sector?'Sector APS original':`<button class="action secondary" onclick="editFacilityById('${esc(f.id)}')">Editar</button>`}</td></tr>`).join('')}</tbody></table></div><h2 style="margin-top:22px">Establecimientos desactivados</h2>${customDestinations.filter(d=>d.active===false).map((d,i)=>`<div class="actions"><span>${esc(d.name)} (${esc(d.kind)})</span><button class="action secondary" onclick="reactivateDestination(${customDestinations.indexOf(d)})">Reactivar</button></div>`).join('')||'<p class="muted">No hay establecimientos desactivados.</p>'}<h2 style="margin-top:22px">Tipos de establecimiento</h2><div class="grid"><div class="field"><label>Nuevo tipo</label><input id="newkind" placeholder="Ej. Vacunatorio"></div><div class="field"><label>Acción</label><button class="action secondary" onclick="addDestinationType()">Agregar tipo</button></div></div><div class="tablewrap"><table><tbody>${kinds.map((k,i)=>`<tr><td>${esc(k)}</td><td>${k==='Sector APS'?'Tipo original':`<button class="action secondary" onclick="renameDestinationType(${i})">Renombrar tipo</button>`}</td></tr>`).join('')}</tbody></table></div></div>`}
+
+// ── Facilidades ───────────────────────────────────────────────
+function facilityList(){return [...sectors.map((name,i)=>({id:'aps:'+(i+1),kind:'Sector APS',name:(i+1)+' — '+name,sector:i+1})),...customDestinations.filter(d=>d.active!==false).map(d=>({id:d.id,kind:d.kind,name:d.name,sector:null}))]}
+function userFacilityIds(u){if(Array.isArray(u.facilityIds))return u.facilityIds;if(u.sectorNumber)return['aps:'+u.sectorNumber];const d=facilityList().find(f=>f.name===u.sector||f.name===u.effector);return d?[d.id]:[]}
+function activeFacility(){return permittedFacilities().find(f=>f.id===activeFacilityId)||null}
+function permittedFacilities(){let all=facilityList();if(role==='administrador')return all;if(!sessionAccount)return[];let ids=userFacilityIds(sessionAccount);return all.filter(f=>ids.includes(f.id))}
+function activePlace(){return activeFacility()?.name||'Sin establecimiento asignado'}
+window.setActiveFacility=function(id){const f=permittedFacilities().find(x=>x.id===id);if(!f)return alert('No tenés autorización para operar en ese establecimiento.');activeFacilityId=f.id;if(f.sector)activeSector=f.sector;render()};
+function facilityPicker(){const list=permittedFacilities();return`<div class="panel"><h2>Establecimiento de trabajo</h2><p class="muted">Cada movimiento se asigna al establecimiento seleccionado. Solo podés elegir los autorizados para tu cuenta.</p>${list.length?`<div class="field"><label>Trabajando en</label><select id="activeFacility" onchange="setActiveFacility(this.value)">${list.map(f=>`<option value="${esc(f.id)}" ${f.id===activeFacilityId?'selected':''}>${esc(f.kind)} · ${esc(f.name)}</option>`).join('')}</select></div>`:'<div class="notice">No tenés establecimientos asignados. Solicitá al administrador que te habilite uno.</div>'}<div class="actions"><button class="action secondary" onclick="go('Inicio')">Volver al inicio</button></div></div>`}
+function facilityChecklist(selected=[]){const all=facilityList();return`<div class="field"><label>Buscar por nombre o tipo</label><input id="facilitySearch" placeholder="Ej. materno, puesto, CHIVILME..." oninput="filterFacilityChoices(this.value)"></div><div class="facility-checks" id="facilityChecks">${all.map(f=>`<label class="facility-choice" data-search="${esc((f.name+' '+f.kind).toLocaleLowerCase('es'))}"><input type="checkbox" name="facilityAssignment" value="${esc(f.id)}" ${selected.includes(f.id)?'checked':''}><span><b>${esc(f.name)}</b><small>${esc(f.kind)}</small></span></label>`).join('')}</div><small id="facilityCount">${all.length} establecimientos disponibles</small>`}
+window.filterFacilityChoices=function(q){let n=0;document.querySelectorAll('.facility-choice').forEach(el=>{const match=el.dataset.search.includes(q.trim().toLocaleLowerCase('es'));el.style.display=match?'':'none';if(match)n++});if($('facilityCount'))$('facilityCount').textContent=n+' establecimientos encontrados'};
+
+// ── Catálogo biológicos ───────────────────────────────────────
+function catalogOptions(){return bioCatalog.filter(x=>x.active!==false).map(x=>`<option value="${esc(x.name)}">${esc(x.name)}</option>`).join('')}
+function desCatalogOptions(){return desCatalog.filter(x=>x.active!==false).map(x=>`<option value="${esc(x.name)}">${esc(x.name)}</option>`).join('')}
+async function persistDesCatalog(){const batch=writeBatch(db);desCatalog.forEach(d=>{const ref=d._id?doc(db,COL_DESCAT,d._id):doc(collection(db,COL_DESCAT));if(!d._id){d._id=ref.id;}batch.set(ref,{name:d.name,active:d.active!==false});});await batch.commit();}
+window.createBio=async function(){if(role!=='administrador')return;let name=$('bioNewName').value.trim();if(!name)return alert('Ingresá el nombre del biológico.');if(bioCatalog.some(x=>x.name.toLowerCase()===name.toLowerCase()))return alert('El biológico ya está en el catálogo.');const ref=doc(collection(db,COL_CATALOG));bioCatalog.push({_id:ref.id,name,active:true});await setDoc(ref,{name,active:true});render();alert('Biológico agregado.')};
+window.editBio=async function(i){if(role!=='administrador')return;let b=bioCatalog[i];let name=prompt('Nuevo nombre',b.name)?.trim();if(!name||name===b.name)return;if(bioCatalog.some((x,j)=>j!==i&&x.name.toLowerCase()===name.toLowerCase()))return alert('Ese nombre ya existe.');let old=b.name;b.name=name;items.forEach(x=>{if(x.name===old)x.name=name});await persistCatalog();for(const it of items)await persistItem(it);render()};
+window.toggleBio=async function(i){if(role!=='administrador')return;bioCatalog[i].active=bioCatalog[i].active===false;await persistCatalog();render()};
+window.createLot=async function(){
+  if(role!=='administrador')return;
+  let name=$('lotBio').value,lot=$('lotCode').value.trim(),exp=$('lotExpiry').value,unit=$('lotPresentation').value.trim();
+  if(!name||!lot||!exp)return alert('Seleccioná biológico, lote y vencimiento.');
+  if(exp<new Date().toLocaleDateString('en-CA'))return alert('No se puede incorporar un lote vencido.');
+  if(items.some(x=>x.name.toLowerCase()===name.toLowerCase()&&x.lot.toLowerCase()===lot.toLowerCase()))return alert('Este lote ya está registrado. Usá Recepción OCASA.');
+  const initQtyRaw=Number($('lotInitQty')?.value||0);
+  const initQty=Number.isInteger(initQtyRaw)&&initQtyRaw>0?initQtyRaw:0;
+  const newItem={name,lot,exp,qty:initQty,presentation:unit};
+  const ref=doc(collection(db,COL_ITEMS));newItem._id=ref.id;
+  await setDoc(ref,itemData(newItem));
+  items.push(newItem);
+  if(initQty>0){
+    const movDoc={type:'Comprobación',date:new Date().toLocaleDateString('en-CA'),category:'Biológicos',itemRef:newItem._id,qty:initQty,place:'Carga inicial de existencias',person:role,comment:'Stock inicial al registrar el lote'};
+    await persistDoc(movDoc);
+    docs.unshift(movDoc);
+  }
+  render();
+  alert(initQty>0?`Lote creado con ${initQty} dosis en existencia.`:'Lote creado sin existencias. Para cargar dosis usá Recepción OCASA.');
+};
+window.editLot=async function(i){
+  if(role!=='administrador')return;
+  let x=items[i];
+  let lot=prompt('Número de lote',x.lot)?.trim();
+  if(!lot)return;
+  let exp=prompt('Vencimiento (AAAA-MM-DD)',x.exp)?.trim();
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(exp)||!Number.isFinite(Date.parse(exp)))return alert('Fecha inválida.');
+  if(items.some((v,j)=>i!==j&&v.name.toLowerCase()===x.name.toLowerCase()&&v.lot.toLowerCase()===lot.toLowerCase()))return alert('Ese lote ya existe.');
+  let qtyStr=prompt('Existencias actuales (dosis)',String(x.qty));
+  if(qtyStr===null)return;
+  let newQty=Number(qtyStr);
+  if(!Number.isInteger(newQty)||newQty<0)return alert('Cantidad inválida.');
+  if(!confirm('Modificar la ficha del lote requiere verificar la documentación original. ¿Continuar?'))return;
+  x.lot=lot;x.exp=exp;x.qty=newQty;
+  await persistItem(x);
+  render();
+};
+function archivedLotCount(){return items.filter(x=>Number(x.qty)===0).length}
+window.toggleArchiveView=function(){window.showArchived=!window.showArchived;render()};
+window.lotHistory=function(i){const x=items[i];if(!x)return;const history=docs.filter(d=>d.category==='Biológicos'&&d.itemRef===x._id);const rows=history.map(d=>`<tr><td>${esc(d.date)}</td><td>${esc(d.type)}</td><td>${esc(d.qty)}</td><td>${esc(d.place)}</td></tr>`).join('');$('lot-history').innerHTML=`<div class="panel"><h2>Historial · ${esc(x.name)} · ${esc(x.lot)}</h2><div class="tablewrap"><table><thead><tr><th>Fecha</th><th>Operación</th><th>Dosis</th><th>Origen / Efector</th></tr></thead><tbody>${rows||'<tr><td colspan="4">Sin movimientos registrados.</td></tr>'}</tbody></table></div></div>`;$('lot-history').scrollIntoView({behavior:'smooth'})};
+window.createDes=async function(){if(role!=='administrador')return;let name=($('desNewName')?.value||'').trim();if(!name)return alert('Ingresá el nombre del insumo.');if(desCatalog.some(x=>x.name.toLowerCase()===name.toLowerCase()))return alert('El insumo ya está en el catálogo.');const ref=doc(collection(db,COL_DESCAT));desCatalog.push({_id:ref.id,name,active:true});await setDoc(ref,{name,active:true});render();alert('Insumo agregado al catálogo.')};
+window.toggleDes=async function(i){if(role!=='administrador')return;desCatalog[i].active=desCatalog[i].active===false;await persistDesCatalog();render()};
+function bioManagement(){if(role!=='administrador')return'<div class="panel">Función exclusiva del administrador.</div>';return`<div class="panel"><h1>Gestión de biológicos</h1><p class="muted">Primero registrá el nombre en el catálogo, después el lote con su vencimiento y stock inicial. Los remitos OCASA siguientes suman a ese stock.</p><div class="admin-guide">Los datos se guardan en Firebase Firestore y se sincronizan en todos los dispositivos.</div><h2>1. Catálogo de biológicos</h2><div class="grid"><div class="field"><label>Nombre del biológico</label><input id="bioNewName" placeholder="Ej. Quíntuple"></div></div><button class="action" onclick="createBio()">+ Agregar biológico</button> <button class="action secondary" id="bioCatBtn" onclick="var t=$('bioCatTable'),b=$('bioCatBtn'),open=t.style.display!=='none';t.style.display=open?'none':'';b.textContent=open?'Ver catálogo (${bioCatalog.length})':'Ocultar catálogo';">Ver catálogo (${bioCatalog.length})</button><div class="tablewrap" id="bioCatTable" style="margin-top:14px;display:none"><table><thead><tr><th>Biológico</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>${bioCatalog.map((b,i)=>`<tr><td>${esc(b.name)}</td><td>${b.active===false?'Inactivo':'Activo'}</td><td><button class="action secondary" onclick="editBio(${i})">Editar</button> <button class="action secondary" onclick="toggleBio(${i})">${b.active===false?'Activar':'Desactivar'}</button></td></tr>`).join('')}</tbody></table></div></div><div class="panel"><h2>2. Catálogo de descartables</h2><p class="muted">Los insumos registrados acá aparecen como opciones en Recepción OCASA. El stock se actualiza al confirmar el remito.</p><div class="grid"><div class="field"><label>Nombre del insumo</label><input id="desNewName" placeholder="Ej. Jeringa 0,5 ml"></div></div><button class="action" onclick="createDes()">+ Agregar insumo</button> <button class="action secondary" id="desCatBtn" onclick="var t=$('desCatTable'),b=$('desCatBtn'),open=t.style.display!=='none';t.style.display=open?'none':'';b.textContent=open?'Ver catálogo (${desCatalog.length})':'Ocultar catálogo';">Ver catálogo (${desCatalog.length})</button><div class="tablewrap" id="desCatTable" style="margin-top:14px;display:none"><table><thead><tr><th>Insumo</th><th>Estado</th><th></th></tr></thead><tbody>${desCatalog.map((d,i)=>`<tr><td>${esc(d.name)}</td><td>${d.active===false?'Inactivo':'Activo'}</td><td><button class="action secondary" onclick="toggleDes(${i})">${d.active===false?'Activar':'Desactivar'}</button></td></tr>`).join('')||'<tr><td colspan="3" class="empty">Sin insumos. Agregá el primero arriba.</td></tr>'}</tbody></table></div></div><div class="panel"><h2>3. Registrar un lote de biológico</h2><div class="grid"><div class="field"><label>Biológico</label><select id="lotBio"><option value="">Seleccionar</option>${catalogOptions()}</select></div><div class="field"><label>Número de lote</label><input id="lotCode" placeholder="Lote impreso en el envase"></div><div class="field"><label>Fecha de vencimiento</label><input id="lotExpiry" type="date"></div><div class="field"><label>Presentación (opcional)</label><input id="lotPresentation" placeholder="Ej. Monodosis"></div><div class="field"><label>Existencias iniciales (opcional)</label><input id="lotInitQty" type="number" inputmode="numeric" min="0" step="1" placeholder="0 — dejá vacío si no tenés stock aún"></div></div><button class="action" onclick="createLot()">Guardar lote</button><h2 style="margin-top:20px">Lotes registrados</h2><p class="muted">Los lotes con stock cero se archivan automáticamente en la vista operativa; permanecen en el historial.</p><button class="action secondary" onclick="toggleArchiveView()">${window.showArchived?'Ocultar lotes agotados':'Ver lotes agotados ('+archivedLotCount()+')'}</button><div class="tablewrap"><table><thead><tr><th>Biológico</th><th>Lote</th><th>Vencimiento</th><th>Dosis</th><th>Acción</th></tr></thead><tbody>${items.map((x,i)=>({x,i})).filter(({x})=>window.showArchived||x.qty>0).map(({x,i})=>`<tr><td>${esc(x.name)}</td><td>${esc(x.lot)}</td><td>${esc(x.exp)}</td><td>${x.qty===0?'Archivado (0)':x.qty}</td><td><button class="action secondary" onclick="editLot(${i})">Editar ficha</button> <button class="action secondary" onclick="lotHistory(${i})">Historial</button></td></tr>`).join('')}</tbody></table></div><div id="lot-history"></div><div class="actions"><button class="action" onclick="go('Recepción OCASA')">🚚 Ingresar provisión OCASA</button><button class="action secondary" onclick="go('Biológicos')">Ver existencias</button></div></div>`}
+
+// ── Solicitudes mensuales ─────────────────────────────────────
+// Los ítems del pedido se guardan como {bioId, bioName, qty, type}
+// type: 'bio' | 'des'
+// NO hay lista hardcodeada: siempre viene de catalog / desCatalog (Firebase)
+
+function monthLabel(m){let[y,n]=m.split('-').map(Number);return new Date(y,n-1,1).toLocaleDateString('es-AR',{month:'long',year:'numeric'})}
+function requestKey(){return requestMonth+'|'+(activeFacilityId||('aps:'+activeSector))}
+function currentRequest(){
+  let r=monthlyRequests[requestKey()];
+  if(!r) r={items:[],desItems:[],status:'Borrador'};
+  if(!r.items) r.items=[];
+  if(!r.desItems) r.desItems=[];
+  return r;
+}
+window.setRequestMonth=function(v){if(!/^\d{4}-\d{2}$/.test(v))return;requestMonth=v;render()};
+
+// Buscador biológicos
+window.reqBioSearch=function(){
+  const q=($('reqBioInput')||{value:''}).value.trim().toLowerCase();
+  const box=$('reqBioResults');
+  if(!box)return;
+  if(!q){box.innerHTML='';return;}
+  const r=currentRequest();
+  const usedIds=new Set((r.items||[]).map(x=>x.bioId));
+  const matches=(bioCatalog||[]).filter(b=>b.active!==false&&b.name.toLowerCase().includes(q)&&!usedIds.has(b._id)).slice(0,8);
+  box.innerHTML=matches.length
+    ?matches.map(b=>`<div class="req-suggestion" onclick="reqBioAdd('${esc(b._id)}','${esc(b.name).replace(/'/g,"\\'")}')"><span>💉</span> ${esc(b.name)}</div>`).join('')
+    :'<div class="req-no-match">Sin coincidencias en el catálogo</div>';
+};
+window.reqBioAdd=function(id,name){
+  if(role==='consulta')return;
+  let r=currentRequest();
+  if(r.status==='Enviada')return;
+  if((r.items||[]).find(x=>x.bioId===id))return;
+  r.items=[...(r.items||[]),{bioId:id||name,bioName:name,qty:1}];
+  monthlyRequests[requestKey()]=r;
+  const inp=$('reqBioInput');if(inp)inp.value='';
+  const box=$('reqBioResults');if(box)box.innerHTML='';
+  _renderReqBioList(r);
+  _renderReqTotals(r);
+};
+window.reqBioQty=function(id,v){
+  if(role==='consulta')return;
+  let r=currentRequest();
+  if(r.status==='Enviada')return;
+  let n=Number(v);if(!Number.isInteger(n)||n<0||n>99999)return;
+  let item=(r.items||[]).find(x=>x.bioId===id);
+  if(item)item.qty=n;
+  monthlyRequests[requestKey()]=r;
+  _renderReqTotals(r);
+};
+window.reqBioRemove=function(id){
+  if(role==='consulta')return;
+  let r=currentRequest();
+  if(r.status==='Enviada')return;
+  r.items=(r.items||[]).filter(x=>x.bioId!==id);
+  monthlyRequests[requestKey()]=r;
+  _renderReqBioList(r);
+  _renderReqTotals(r);
+};
+
+// Buscador descartables
+window.reqDesSearch=function(){
+  const q=($('reqDesInput')||{value:''}).value.trim().toLowerCase();
+  const box=$('reqDesResults');
+  if(!box)return;
+  if(!q){box.innerHTML='';return;}
+  const r=currentRequest();
+  const usedIds=new Set((r.desItems||[]).map(x=>x.bioId));
+  const matches=(desCatalog||[]).filter(d=>d.active!==false&&d.name.toLowerCase().includes(q)&&!usedIds.has(d._id)).slice(0,8);
+  box.innerHTML=matches.length
+    ?matches.map(d=>`<div class="req-suggestion" onclick="reqDesAdd('${esc(d._id)}','${esc(d.name).replace(/'/g,"\\'")}')"><span>🩺</span> ${esc(d.name)}</div>`).join('')
+    :'<div class="req-no-match">Sin coincidencias en el catálogo</div>';
+};
+window.reqDesAdd=function(id,name){
+  if(role==='consulta')return;
+  let r=currentRequest();
+  if(r.status==='Enviada')return;
+  if((r.desItems||[]).find(x=>x.bioId===id))return;
+  r.desItems=[...(r.desItems||[]),{bioId:id||name,bioName:name,qty:1}];
+  monthlyRequests[requestKey()]=r;
+  const inp=$('reqDesInput');if(inp)inp.value='';
+  const box=$('reqDesResults');if(box)box.innerHTML='';
+  _renderReqDesList(r);
+  _renderReqTotals(r);
+};
+window.reqDesQty=function(id,v){
+  if(role==='consulta')return;
+  let r=currentRequest();
+  if(r.status==='Enviada')return;
+  let n=Number(v);if(!Number.isInteger(n)||n<0||n>99999)return;
+  let item=(r.desItems||[]).find(x=>x.bioId===id);
+  if(item)item.qty=n;
+  monthlyRequests[requestKey()]=r;
+  _renderReqTotals(r);
+};
+window.reqDesRemove=function(id){
+  if(role==='consulta')return;
+  let r=currentRequest();
+  if(r.status==='Enviada')return;
+  r.desItems=(r.desItems||[]).filter(x=>x.bioId!==id);
+  monthlyRequests[requestKey()]=r;
+  _renderReqDesList(r);
+  _renderReqTotals(r);
+};
+
+function _reqItemRow(item,removeFn,qtyFn,disabled){
+  const id=item.bioId;
+  const safeId=id.replace(/'/g,"\\'");
+  return`<div class="stock-row" id="reqrow-${esc(id)}" style="gap:10px;padding:12px 14px">
+    <div style="flex:1;min-width:0"><strong style="font-size:15px;line-height:1.3">${esc(item.bioName)}</strong></div>
+    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+      <input type="number" inputmode="numeric" min="0" step="1" value="${item.qty}"
+        ${disabled?'disabled':''}
+        onchange="${qtyFn}('${safeId}',this.value)"
+        style="width:72px;padding:9px 8px;border-radius:10px;border:1px solid #888;background:var(--field);color:var(--ink);font-size:17px;font-weight:700;text-align:center">
+      ${disabled?'':`<button style="background:#c0392b22;color:#e74c3c;border:1px solid #c0392b44;border-radius:10px;padding:9px 13px;font-size:17px;cursor:pointer;min-height:42px;font-weight:700" onclick="${removeFn}('${safeId}')">✕</button>`}
+    </div>
+  </div>`;
+}
+
+function _renderReqBioList(r){
+  const el=$('reqBioList');if(!el)return;
+  const locked=r.status==='Enviada'||role==='consulta';
+  el.innerHTML=(r.items||[]).length
+    ?(r.items||[]).map(item=>_reqItemRow(item,'reqBioRemove','reqBioQty',locked)).join('')
+    :'<p class="muted" style="padding:10px 0">Buscá un biológico arriba para agregarlo.</p>';
+}
+function _renderReqDesList(r){
+  const el=$('reqDesList');if(!el)return;
+  const locked=r.status==='Enviada'||role==='consulta';
+  el.innerHTML=(r.desItems||[]).length
+    ?(r.desItems||[]).map(item=>_reqItemRow(item,'reqDesRemove','reqDesQty',locked)).join('')
+    :'<p class="muted" style="padding:10px 0">Buscá un insumo arriba para agregarlo.</p>';
+}
+function _renderReqTotals(r){
+  const totalBio=(r.items||[]).reduce((a,x)=>a+Number(x.qty||0),0);
+  const totalDes=(r.desItems||[]).reduce((a,x)=>a+Number(x.qty||0),0);
+  const el=$('requestTotal');if(el)el.textContent=(totalBio+totalDes)+' unidades';
+}
+
+window.sendRequest=async function(){
+  if(role==='administrador'||role==='consulta')return;
+  let r=currentRequest();
+  if(r.status==='Enviada')return;
+  const items=(r.items||[]).map(x=>({bioId:x.bioId,bioName:x.bioName,qty:Number($('reqrow-'+x.bioId)?.querySelector('input')?.value??x.qty)}));
+  const desItems=(r.desItems||[]).map(x=>({bioId:x.bioId,bioName:x.bioName,qty:Number($('reqrow-'+x.bioId)?.querySelector('input')?.value??x.qty)}));
+  if(!items.length&&!desItems.length)return alert('Agregá al menos un biológico o insumo para enviar el pedido.');
+  if([...items,...desItems].some(x=>x.qty<0))return alert('Las cantidades no pueden ser negativas.');
+  const key=requestKey();
+  const data={items,desItems,status:'Enviada',sector:activeSector,facilityId:activeFacilityId,facilityName:activePlace(),month:requestMonth,updated:new Date().toISOString()};
+  monthlyRequests[key]={...data,id:key};
+  await setDoc(doc(db,COL_REQ,key),data);
+  render();
+  alert('Solicitud enviada y guardada en Firebase.');
+};
+
+window.reopenRequest=async function(){
+  if(role!=='administrador')return;
+  let n=$('reopenSector').value;
+  let key=requestMonth+'|'+n;
+  if(!monthlyRequests[key])return alert('No hay solicitud de ese sector.');
+  monthlyRequests[key].status='Borrador';
+  await setDoc(doc(db,COL_REQ,key),{...monthlyRequests[key]});
+  render();
+};
+
+window.exportMonthly=function(){
+  if(role!=='administrador')return;
+  let req=Object.values(monthlyRequests).filter(r=>r.month===requestMonth&&r.status==='Enviada');
+  // Recopilar todos los biológicos únicos pedidos
+  const allBioIds=[...new Set(req.flatMap(r=>(r.items||[]).map(x=>x.bioId)))];
+  const allDesIds=[...new Set(req.flatMap(r=>(r.desItems||[]).map(x=>x.bioId)))];
+  const getBioName=id=>{for(const r of req){const f=(r.items||[]).find(x=>x.bioId===id);if(f)return f.bioName;}return id;};
+  const getDesName=id=>{for(const r of req){const f=(r.desItems||[]).find(x=>x.bioId===id);if(f)return f.bioName;}return id;};
+  const cols=req.map(r=>r.facilityName||sectors[(r.sector||1)-1]);
+  let rows=[['','Tipo',...cols,'Total']];
+  for(const bid of allBioIds){
+    const qtys=req.map(r=>{const f=(r.items||[]).find(x=>x.bioId===bid);return f?Number(f.qty||0):0;});
+    rows.push([getBioName(bid),'Biológico',...qtys,qtys.reduce((a,b)=>a+b,0)]);
+  }
+  for(const did of allDesIds){
+    const qtys=req.map(r=>{const f=(r.desItems||[]).find(x=>x.bioId===did);return f?Number(f.qty||0):0;});
+    rows.push([getDesName(did),'Insumo',...qtys,qtys.reduce((a,b)=>a+b,0)]);
+  }
+  let csv='﻿'+rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(';')).join('\r\n');
+  let a=document.createElement('a'),url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.href=url;a.download='Solicitud_mensual_'+requestMonth+'.csv';a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+
+function monthlyPage(){
+  const monthField=`<div class="field"><label>Mes solicitado</label><input type="month" value="${requestMonth}" onchange="setRequestMonth(this.value)"></div>`;
+  if(role!=='administrador'){
+    let r=currentRequest(),locked=r.status==='Enviada'||role==='consulta';
+    const bioListHtml=(r.items||[]).length
+      ?(r.items||[]).map(item=>_reqItemRow(item,'reqBioRemove','reqBioQty',locked)).join('')
+      :'<p class="muted" style="padding:10px 0">Buscá un biológico arriba para agregarlo.</p>';
+    const desListHtml=(r.desItems||[]).length
+      ?(r.desItems||[]).map(item=>_reqItemRow(item,'reqDesRemove','reqDesQty',locked)).join('')
+      :'<p class="muted" style="padding:10px 0">Buscá un insumo arriba para agregarlo.</p>';
+    const totalBio=(r.items||[]).reduce((a,x)=>a+Number(x.qty||0),0);
+    const totalDes=(r.desItems||[]).reduce((a,x)=>a+Number(x.qty||0),0);
+    return`<div class="panel">
+      <h1>Solicitud mensual</h1>
+      <p class="muted">Pedido previsto para el mes siguiente. No descuenta existencias.</p>
+      <div class="grid">
+        ${monthField}
+        <div class="field"><label>Efector asignado</label><input value="${esc(activePlace())}" disabled></div>
+      </div>
+      <p><span class="tag ${locked?'warn':''}">${r.status}</span></p>
+
+      <h2 style="margin-top:18px">💉 Biológicos</h2>
+      ${locked?'':'<div class="field" style="position:relative"><label>Buscar biológico del catálogo</label><input id="reqBioInput" placeholder="Escribí el nombre..." oninput="reqBioSearch()" autocomplete="off" style="font-size:16px"><div id="reqBioResults" style="position:absolute;top:100%;left:0;right:0;background:var(--surface);border:1px solid #555;border-radius:10px;z-index:99;max-height:220px;overflow-y:auto"></div></div>'}
+      <div id="reqBioList" style="margin-top:8px">${bioListHtml}</div>
+
+      <h2 style="margin-top:22px">🩺 Descartables</h2>
+      ${locked?'':'<div class="field" style="position:relative"><label>Buscar insumo del catálogo</label><input id="reqDesInput" placeholder="Escribí el nombre..." oninput="reqDesSearch()" autocomplete="off" style="font-size:16px"><div id="reqDesResults" style="position:absolute;top:100%;left:0;right:0;background:var(--surface);border:1px solid #555;border-radius:10px;z-index:98;max-height:220px;overflow-y:auto"></div></div>'}
+      <div id="reqDesList" style="margin-top:8px">${desListHtml}</div>
+
+      <div class="topline" style="margin-top:15px">
+        <strong>Total solicitado</strong>
+        <strong id="requestTotal">${totalBio+totalDes} unidades</strong>
+      </div>
+      <div class="actions">
+        ${role==='consulta'
+          ?'<div class="notice">Perfil Consulta: solo lectura.</div>'
+          :locked
+            ?'<div class="notice">Solicitud enviada. Solo el administrador puede reabrirla.</div>'
+            :'<button class="action" onclick="sendRequest()">Enviar solicitud mensual</button>'}
+      </div>
+    </div>`;
+  }
+  // Vista administrador
+  let req=Object.values(monthlyRequests).filter(r=>r.month===requestMonth&&r.status==='Enviada');
+  let all=Object.values(monthlyRequests).filter(r=>r.month===requestMonth);
+  const allBioIds=[...new Set(req.flatMap(r=>(r.items||[]).map(x=>x.bioId)))];
+  const allDesIds=[...new Set(req.flatMap(r=>(r.desItems||[]).map(x=>x.bioId)))];
+  const getBioName=id=>{for(const r of req){const f=(r.items||[]).find(x=>x.bioId===id);if(f)return f.bioName;}return id;};
+  const getDesName=id=>{for(const r of req){const f=(r.desItems||[]).find(x=>x.bioId===id);if(f)return f.bioName;}return id;};
+  const totalDoses=req.reduce((a,r)=>{
+    const b=(r.items||[]).reduce((x,y)=>x+Number(y.qty||0),0);
+    const d=(r.desItems||[]).reduce((x,y)=>x+Number(y.qty||0),0);
+    return a+b+d;
+  },0);
+  return`<div class="panel">
+    <h1>Consolidado mensual</h1>
+    <p class="muted">Solicitudes recibidas de los efectores.</p>
+    ${monthField}
+    <div class="stats">
+      <div class="stat"><b>${req.length}</b><small>Solicitudes enviadas</small></div>
+      <div class="stat"><b>${totalDoses}</b><small>Unidades solicitadas</small></div>
+    </div>
+
+    <h2>Biológicos · ${monthLabel(requestMonth)}</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Biológico</th><th>Total</th></tr></thead>
+      <tbody>${allBioIds.length
+        ?allBioIds.map(bid=>`<tr><td>${esc(getBioName(bid))}</td><td><b>${req.reduce((a,r)=>{const f=(r.items||[]).find(x=>x.bioId===bid);return a+Number(f?.qty||0);},0)}</b></td></tr>`).join('')
+        :'<tr><td colspan="2">Sin biológicos solicitados.</td></tr>'
+      }</tbody>
+    </table></div>
+
+    <h2 style="margin-top:18px">Descartables · ${monthLabel(requestMonth)}</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Insumo</th><th>Total</th></tr></thead>
+      <tbody>${allDesIds.length
+        ?allDesIds.map(did=>`<tr><td>${esc(getDesName(did))}</td><td><b>${req.reduce((a,r)=>{const f=(r.desItems||[]).find(x=>x.bioId===did);return a+Number(f?.qty||0);},0)}</b></td></tr>`).join('')
+        :'<tr><td colspan="2">Sin descartables solicitados.</td></tr>'
+      }</tbody>
+    </table></div>
+
+    <h2 style="margin-top:20px">Detalle por efector</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Sector</th><th>Estado</th><th>Biológicos</th><th>Descartables</th></tr></thead>
+      <tbody>${all.map(r=>`<tr>
+        <td>${esc(r.facilityName||sectors[(r.sector||1)-1])}</td>
+        <td>${r.status}</td>
+        <td>${(r.items||[]).reduce((a,x)=>a+Number(x.qty||0),0)}</td>
+        <td>${(r.desItems||[]).reduce((a,x)=>a+Number(x.qty||0),0)}</td>
+      </tr>`).join('')||'<tr><td colspan="4">Aún no hay solicitudes.</td></tr>'}
+      </tbody>
+    </table></div>
+
+    <div class="actions">
+      <button class="action" onclick="exportMonthly()">Exportar consolidado CSV</button>
+    </div>
+    <h2 style="margin-top:20px">Reabrir solicitud</h2>
+    <div class="grid"><div class="field"><label>Sector</label>
+      <select id="reopenSector">${facilityList().map(f=>`<option value="${esc(f.id)}">${esc(f.name)}</option>`).join('')}</select>
+    </div></div>
+    <button class="action secondary" onclick="reopenRequest()">Permitir corrección</button>
+  </div>`;
+}
+
+// ── LOGIN REAL CON CONTRASEÑA ─────────────────────────────────
+function accessPage(){return`<div class="access-card"><h1>🔐 APS Biológicos</h1><p style="color:#ccc">Ingresá con tu usuario y contraseña</p><div class="field" style="margin:14px 0"><label>Usuario (correo o alias)</label><input id="loginEmail" placeholder="Ej: ramon o usuario@aps.com" autocomplete="username" autocapitalize="off"></div><div class="field" style="margin:14px 0"><label>Contraseña</label><input id="loginPass" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div><button class="action" style="width:100%;font-size:17px;min-height:52px;margin-top:8px" onclick="doLogin()">Entrar →</button><p id="loginErr" style="color:#f87171;display:none;margin-top:10px">Usuario o contraseña incorrectos.</p><p style="font-size:12px;color:#bbb;margin-top:18px">APS Chicoana · Área Operativa XXXIII · Zona Oeste</p></div>`}
+window.doLogin=async function(){
+  const email=($('loginEmail').value||'').trim().toLowerCase();
+  const pass=($('loginPass').value||'').trim();
+  if(!email||!pass){$('loginErr').style.display='block';return}
+  const h=await hashPass(pass);
+  // Admin hardcodeado de respaldo
+  if(email==='ramon'&&h===await hashPass('aps2026')&&!users.find(u=>u.email==='ramon')){
+    role='administrador';sessionAccount={name:'Ramón López',email:'ramon',role:'Administrador'};activeFacilityId='aps:1';page='Inicio';render();return;
+  }
+  const found=users.find(u=>(u.email||'').toLowerCase()===email&&u.active!==false&&u.passHash===h);
+  if(!found){$('loginErr').style.display='block';return}
+  role=found.role==='Administrador'?'administrador':found.role==='Consulta'?'consulta':'vacunador';
+  sessionAccount=found;
+  const assigned=userFacilityIds(found);
+  activeFacilityId=assigned[0]||'';
+  const f=facilityList().find(x=>x.id===activeFacilityId);
+  if(f?.sector)activeSector=f.sector;
+  page='Inicio';render();
+};
+window.logoutDemo=function(){sessionAccount=null;page='Acceso';render()};
+
+// ── Usuarios (CRUD Firebase) ──────────────────────────────────
+function normalizeRole(r){return r==='Administrador'?'Administrador':r==='Consulta'?'Consulta':'Usuario'}
+window.addUser=async function(){
+  if(role!=='administrador')return alert('Solo administrador.');
+  const name=($('uname').value||'').trim();
+  const email=($('uemail').value||'').trim().toLowerCase();
+  const pass=($('upass').value||'').trim();
+  const userRole=$('urole').value;
+  const ids=[...document.querySelectorAll('input[name="facilityAssignment"]:checked')].map(x=>x.value);
+  if(!name||!email||!pass)return alert('Completá nombre, identificador y contraseña.');
+  if(pass.length<4)return alert('La contraseña debe tener al menos 4 caracteres.');
+  if(userRole==='Usuario'&&!ids.length)return alert('Seleccioná al menos un establecimiento autorizado.');
+  if(users.some(u=>(u.email||'').toLowerCase()===email))return alert('Ese usuario ya existe.');
+  const h=await hashPass(pass);
+  const ref=doc(collection(db,COL_USERS));
+  const newU={id:ref.id,name,email,passHash:h,role:userRole,facilityIds:ids,active:true,createdAt:new Date().toISOString()};
+  users.push(newU);
+  await setDoc(ref,{name,email,passHash:h,role:userRole,facilityIds:ids,active:true,createdAt:newU.createdAt});
+  page='Acceso';render();alert('Usuario creado. Ya puede ingresar con su contraseña.');
+};
+window.toggleAccount=async function(i){
+  if(role!=='administrador')return;
+  users[i].active=users[i].active===false?true:false;
+  const{id,...data}=users[i];
+  if(id)await setDoc(doc(db,COL_USERS,id),data);
+  render();
+};
+window.showUserEdit=function(i){
+  if(role!=='administrador')return;
+  const u=users[i];if(!u)return;
+  const panel=$('userEditor');if(!panel)return;
+  panel.classList.remove('hidden');
+  panel.innerHTML=`<h2>Editar usuario: ${esc(u.name)}</h2><div class="grid"><div class="field"><label>Nombre</label><input id="editName" value="${esc(u.name)}"></div><div class="field"><label>Identificador</label><input id="editEmail" value="${esc(u.email)}"></div><div class="field"><label>Nueva contraseña (dejar vacío para no cambiar)</label><input id="editPass" type="password" placeholder="Nueva contraseña"></div><div class="field"><label>Perfil</label><select id="editRole">${['Administrador','Usuario','Consulta'].map(r=>`<option ${normalizeRole(u.role)===r?'selected':''}>${r}</option>`).join('')}</select></div></div><h3>Establecimientos autorizados</h3>${facilityChecklist(userFacilityIds(u))}<div class="actions"><button class="action" onclick="saveUserEdit(${i})">Guardar cambios</button><button class="action secondary" onclick="document.getElementById('userEditor').classList.add('hidden')">Cancelar</button></div>`;
+  panel.scrollIntoView({behavior:'smooth',block:'start'});
+};
+window.saveUserEdit=async function(i){
+  if(role!=='administrador')return;
+  const u=users[i];
+  const name=($('editName').value||'').trim();
+  const email=($('editEmail').value||'').trim().toLowerCase();
+  const pass=($('editPass').value||'').trim();
+  const r=$('editRole').value;
+  const ids=[...document.querySelectorAll('input[name="facilityAssignment"]:checked')].map(x=>x.value);
+  if(!name||!email)return alert('Completá nombre e identificador.');
+  if(r==='Usuario'&&!ids.length)return alert('Asigná al menos un establecimiento.');
+  if(users.some((x,j)=>j!==i&&(x.email||'').toLowerCase()===email))return alert('El identificador ya existe.');
+  u.name=name;u.email=email;u.role=r;u.facilityIds=ids;
+  if(pass){if(pass.length<4)return alert('Contraseña mínimo 4 caracteres.');u.passHash=await hashPass(pass);}
+  const{id,...data}=u;
+  if(id)await setDoc(doc(db,COL_USERS,id),data);
+  render();alert('Usuario actualizado.');
+};
+window.rememberUserDraft=function(){window.draftUserName=$('uname')?.value||'';window.draftUserEmail=$('uemail')?.value||'';window.draftUserRole=$('urole')?.value||'Usuario'};
+window.createFacilityFromUser=async function(){
+  if(role!=='administrador')return;
+  const kind=$('quickkind').value,name=$('quickname').value.trim();
+  if(!name)return alert('Ingresá el nombre del establecimiento.');
+  if(facilityList().some(f=>f.name.toLocaleLowerCase('es')===name.toLocaleLowerCase('es')&&f.kind===kind))return alert('Ya existe ese establecimiento.');
+  const ref=doc(collection(db,COL_DEST));
+  customDestinations.push({id:ref.id,kind,name,active:true});
+  await setDoc(ref,{kind,name,active:true});
+  render();
+  for(const el of document.querySelectorAll('input[name="facilityAssignment"]'))if(el.value===customDestinations.at(-1).id)el.checked=true;
+  document.getElementById('userQuickCreate').open=false;
+  alert('Establecimiento agregado y seleccionado para el usuario.');
+};
+
+// ── Exportar cuentas ──────────────────────────────────────────
+window.exportAccounts=function(){
+  const safe=users.map(({passHash,...rest})=>rest);
+  const payload={format:'aps-biologicos-firebase-v1',users:safe,customDestinations,kinds,exported:new Date().toISOString()};
+  const a=document.createElement('a'),url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));
+  a.href=url;a.download='APS_Biologicos_Usuarios_'+new Date().toLocaleDateString('en-CA')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+
+// ── Navegación ────────────────────────────────────────────────
+window.go=function(p){if(role==='consulta'&&['Nuevo Saliente','Retorno','Nuevo Entrante','Comprobación'].includes(p))return alert('El perfil Consulta solo puede visualizar información.');page=p;if(p==='Nuevo Saliente'||p==='Retorno')moveCategory='';render();window.scrollTo(0,0)};
+window.chooseCategory=function(c){if(role==='consulta')return alert('El perfil Consulta solo puede visualizar información.');moveCategory=c;render();window.scrollTo(0,0)};
+window.setMovementFilter=function(f){movementFilter=f;render()};
+function sectorPlace(){return activeSector+' — '+sectors[activeSector-1]}
+
+// ── Inventario drawItems ──────────────────────────────────────
+let stockSearchTimer;
+window.scheduleStockSearch=function(){clearTimeout(stockSearchTimer);stockSearchTimer=setTimeout(drawItems,90)};
+function drawItems(){let q=($('search')?.value||'').toLowerCase().trim();const active=items.filter(x=>x.qty>0);if(!active.length&&!q){$('itemtable').innerHTML=`<div class="empty" style="padding:24px;text-align:center"><p style="margin-bottom:12px">No hay existencias en el depósito todavía.</p>${role==='administrador'?`<button class="action" onclick="go('Recepción OCASA')">🚚 Registrar primera provisión OCASA</button>`:'<p class="muted">El administrador debe registrar una provisión OCASA para comenzar.</p>'}</div>`;return;}const groups=new Map();for(const x of active){const key=x.name.toLocaleLowerCase('es');if(!groups.has(key))groups.set(key,{name:x.name,lots:[],total:0});const g=groups.get(key);g.lots.push(x);g.total+=x.qty;}const found=[...groups.values()].filter(g=>(g.name+' '+g.lots.map(x=>x.lot).join(' ')).toLowerCase().includes(q)).sort((a,b)=>a.name.localeCompare(b.name,'es'));$('itemtable').innerHTML=`<div class="stock-list">${found.map(g=>`<div class="stock-row" style="display:block"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><strong>${esc(g.name)}</strong><div class="stock-qty">${g.total}<em>dosis en depósito</em></div></div><details style="margin-top:10px"><summary style="cursor:pointer;color:#9fd8ff">Ver ${g.lots.length} lote(s)</summary>${g.lots.map(x=>`<div style="padding:9px 0;border-top:1px solid #555;display:flex;justify-content:space-between;gap:8px"><span>Lote ${esc(x.lot)} · Vto. ${esc(x.exp)}</span><b>${x.qty} dosis</b></div>`).join('')}</details></div>`).join('')||'<div class="empty">No hay biológicos con existencias que coincidan con la búsqueda.</div>'}</div>`}
+
+// ── Movimientos save ──────────────────────────────────────────
+let movementSaving=false;
+window.saveMove=async function(){
+  if(movementSaving)return;
+  if(role==='consulta')return alert('El perfil Consulta no puede registrar movimientos.');
+  const category=(page==='Nuevo Entrante'||page==='Comprobación')?'Biológicos':moveCategory;
+  const stock=category==='Biológicos'?items:disposables;
+  const idx=Number($('mitem')?.value),x=stock[idx],qty=Number($('mqty')?.value),date=$('mdate')?.value,person=$('mperson')?.value.trim();
+  const isExit=page==='Nuevo Saliente',isReturn=page==='Retorno',isEntry=page==='Nuevo Entrante',isAdjust=page==='Comprobación';
+  if((isEntry||isAdjust)&&role!=='administrador')return alert('Operación exclusiva del administrador.');
+  const dest=(isExit||isReturn)?(role==='administrador'?destinationValue('m'):(activeFacility()?{kind:activeFacility().kind,place:activeFacility().name,sector:String(activeFacility().sector||'')}:null)):null;
+  const place=dest?dest.kind+' — '+dest.place:($('mplace')?.value||'').trim();
+  if((isExit||isReturn)&&role!=='administrador'&&!permittedFacilities().some(f=>f.id===activeFacilityId))return alert('No tenés un establecimiento autorizado.');
+  if((isExit||isReturn)&&!dest)return alert('No se identificó el efector del movimiento.');
+  if(!x||!date||!person||!place||!Number.isInteger(qty)||qty===0||(!isAdjust&&qty<1))return alert('Completá los datos y una cantidad válida.');
+  if(isReturn){
+    const balance=docs.filter(d=>d.category===category&&d.itemRef===x._id&&d.place===place).reduce((a,d)=>a+(d.type==='Nuevo Saliente'?d.qty:d.type==='Retorno'?-d.qty:0),0);
+    if(qty>balance)return alert('No se puede retornar más de lo entregado al mismo efector. Saldo pendiente: '+balance);
+  }
+  const delta=isExit?-qty:isReturn?(category==='Biológicos'?0:qty):qty;
+  if(isExit&&category==='Biológicos'&&x.exp&&x.exp<new Date().toLocaleDateString('en-CA'))return alert('Lote vencido: no puede distribuirse.');
+  if(x.qty+delta<0)return alert('No hay existencias suficientes.');
+  movementSaving=true;
+  x.qty+=delta;
+  const number=(category==='Biológicos'?'BIO':'DES')+'-'+String(nextDoc++).padStart(4,'0');
+  const newDoc={number,date,category,type:page,name:x.name+(x.lot?' / '+x.lot:''),itemRef:x._id||null,qty,place,person,comment:($('mcomment')?.value||'').trim(),status:isReturn&&category==='Biológicos'?'Pendiente de verificación':'Registrado',userEmail:sessionAccount?.email||'',userName:sessionAccount?.name||''};
+  docs.unshift(newDoc);
+  await persistItem(x);
+  await persistDoc(newDoc);
+  if(isReturn&&category==='Biológicos')alert('Retorno registrado como pendiente de verificación. No se sumó al stock disponible.');
+  else alert('Comprobante '+number+' registrado y guardado en Firebase.');
+  moveCategory='';go('Movimientos');movementSaving=false;
+};
+
+// ── Recepción OCASA · multi-lote ─────────────────────────────
+// Cada fila tiene: {tipo:'Biológico'|'Descartable', nombre, lote, exp, qty, unidad}
+// Los biológicos van a bio_lotes; los descartables van a bio_descartables
+let ocasaRows=[];
+let ocasaHeader=null; // null = sin confirmar; objeto = cabecera confirmada
+
+// Confirmar cabecera del remito (paso 1)
+window.ocasaConfirmHeader=function(){
+  const date=($('rdate')?.value||'');
+  const ref=($('rref')?.value||'').trim();
+  const person=($('rperson')?.value||'').trim();
+  const notes=($('rnotes')?.value||'').trim();
+  if(!date)return alert('Ingresá la fecha de recepción.');
+  if(!ref)return alert('Ingresá el número de remito OCASA.');
+  if(!person)return alert('Ingresá el nombre del responsable de recepción.');
+  ocasaHeader={date,ref,person,notes};
+  render();
+};
+window.ocasaEditHeader=function(){
+  ocasaHeader=null;
+  render();
+};
+
+// Mostrar/ocultar campos según tipo seleccionado
+window.ocasaTipoChange=function(){
+  const tipo=$('rtipo')?.value||'Biológico';
+  const esBio=tipo==='Biológico';
+  if($('rwrap_bio'))$('rwrap_bio').style.display=esBio?'':'none';
+  if($('rwrap_des'))$('rwrap_des').style.display=esBio?'none':'';
+  if($('rwrap_lote'))$('rwrap_lote').style.display=esBio?'':'none';
+  if($('rwrap_exp'))$('rwrap_exp').style.display=esBio?'':'none';
+  if($('rlabel_qty'))$('rlabel_qty').textContent=esBio?'Cantidad recibida (dosis)':'Cantidad recibida (unidades)';
+};
+window.ocasaAddRow=function(){
+  const tipo=$('rtipo')?.value||'Biológico';
+  const esBio=tipo==='Biológico';
+  const nombre=esBio?($('rname')?.value||'').trim():($('rdes')?.value||'').trim();
+  const lote=esBio?($('rlot')?.value||'').trim():'—';
+  const exp=esBio?($('rexp')?.value||''):'—';
+  const qty=Number($('rqty')?.value);
+  if(!nombre)return alert(esBio?'Seleccioná un biológico.':'Seleccioná un insumo descartable.');
+  if(esBio&&!lote)return alert('Ingresá el número de lote.');
+  if(esBio&&!exp)return alert('Ingresá la fecha de vencimiento.');
+  if(!Number.isInteger(qty)||qty<1)return alert('Ingresá una cantidad válida (mínimo 1).');
+  if(esBio&&!bioCatalog.some(b=>b.name===nombre&&b.active!==false))return alert('Seleccioná un biológico activo del catálogo.');
+  if(!esBio&&!desCatalog.some(d=>d.name===nombre&&d.active!==false))return alert('Seleccioná un insumo activo del catálogo de descartables.');
+  const date=ocasaHeader?.date||new Date().toLocaleDateString('en-CA');
+  if(esBio&&date&&new Date(exp+'T12:00:00')<new Date(date+'T12:00:00'))return alert('No se puede ingresar un lote vencido.');
+  ocasaRows.push({tipo,nombre,lote,exp,qty});
+  // limpiar campos de fila
+  if($('rname'))$('rname').value='';
+  if($('rdes'))$('rdes').value='';
+  if($('rlot'))$('rlot').value='';
+  if($('rexp'))$('rexp').value='';
+  $('rqty').value='1';
+  renderOcasaRows();
+};
+window.ocasaRemoveRow=function(i){
+  ocasaRows.splice(i,1);
+  renderOcasaRows();
+};
+function renderOcasaRows(){
+  const tbody=$('ocasaRowsBody');
+  if(!tbody)return;
+  if(!ocasaRows.length){
+    tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:#888;padding:10px">Aún no se agregaron artículos.</td></tr>';
+    // actualizar contador y botón confirmar
+    const hdr=document.querySelector('[data-ocasa-count]');
+    if(hdr)hdr.textContent='0';
+    return;
+  }
+  tbody.innerHTML=ocasaRows.map((r,i)=>`<tr>
+    <td><span style="font-size:0.75rem;padding:2px 6px;border-radius:3px;background:${r.tipo==='Biológico'?'#1a3a5c':'#2a3a1a'};color:${r.tipo==='Biológico'?'#9fd8ff':'#a8d8a8'}">${r.tipo}</span></td>
+    <td>${esc(r.nombre)}</td>
+    <td>${r.lote!=='—'?esc(r.lote):'<span style="color:#666">—</span>'}</td>
+    <td>${r.exp!=='—'?esc(r.exp):'<span style="color:#666">—</span>'}</td>
+    <td style="text-align:right"><b>${r.qty}</b></td>
+    <td style="text-align:center"><button onclick="ocasaRemoveRow(${i})" style="background:none;border:1px solid #c44;color:#c44;border-radius:4px;padding:2px 8px;cursor:pointer">✕</button></td>
+  </tr>`).join('');
+  // actualizar contador en el h2
+  document.querySelectorAll('[data-ocasa-count]').forEach(el=>el.textContent=ocasaRows.length);
+  // mostrar/ocultar botón confirmar según si hay ítems
+  document.querySelectorAll('[data-ocasa-confirm]').forEach(el=>el.style.display=ocasaRows.length?'':'none');
+}
+window.confirmOcasaRemito=async function(){
+  if(role!=='administrador')return alert('Solo administrador.');
+  if(!ocasaHeader)return alert('Primero confirmá la cabecera del remito.');
+  const date=ocasaHeader.date;
+  const ref=ocasaHeader.ref;
+  const person=ocasaHeader.person;
+  const notes=ocasaHeader.notes||'';
+  if(!ocasaRows.length)return alert('Agregá al menos un ítem al remito antes de confirmar.');
+  const nBio=ocasaRows.filter(r=>r.tipo==='Biológico').length;
+  const nDes=ocasaRows.filter(r=>r.tipo==='Descartable').length;
+  const resumen=[nBio?`${nBio} biológico(s)`:'',nDes?`${nDes} descartable(s)`:''].filter(Boolean).join(' + ');
+  if(!confirm(`Confirmar remito ${ref}\n${resumen} · ${ocasaRows.reduce((a,r)=>a+r.qty,0)} unidades en total\nResponsable: ${person}`))return;
+  let errores=[];
+  for(const r of ocasaRows){
+    if(r.tipo==='Biológico'){
+      let idx=items.findIndex(x=>x.name.toLowerCase()===r.nombre.toLowerCase()&&x.lot.toLowerCase()===r.lote.toLowerCase());
+      if(idx>=0&&items[idx].exp!==r.exp){errores.push(`Lote ${r.lote} de "${r.nombre}" ya existe con otro vencimiento.`);continue;}
+      if(idx>=0)items[idx].qty+=r.qty;
+      else{const newItem={name:r.nombre,lot:r.lote,exp:r.exp,qty:r.qty};const fref=doc(collection(db,COL_ITEMS));newItem._id=fref.id;await setDoc(fref,itemData(newItem));items.push(newItem);idx=items.length-1;}
+      await persistItem(items[idx]);
+      const number='BIO-'+String(nextDoc++).padStart(4,'0');
+      const newDoc={number,date,category:'Biológicos',type:'Recepción OCASA',name:r.nombre+' / '+r.lote,itemRef:items[idx]._id||null,qty:r.qty,place:'Nivel central / OCASA · '+ref,person,comment:notes,status:'Registrado',userEmail:sessionAccount?.email||'',userName:sessionAccount?.name||''};
+      docs.unshift(newDoc);await persistDoc(newDoc);
+    } else {
+      // Descartable: suma al stock existente o crea nuevo
+      let d=disposables.find(x=>x.name.toLowerCase()===r.nombre.toLowerCase());
+      if(d)d.qty+=r.qty;
+      else{disposables.push({name:r.nombre,qty:r.qty,unit:'unidades'});d=disposables.at(-1);}
+      await persistDisposables();
+      const number='DES-'+String(nextDoc++).padStart(4,'0');
+      const newDoc={number,date,category:'Descartables',type:'Recepción OCASA',name:r.nombre,itemRef:null,qty:r.qty,place:'Nivel central / OCASA · '+ref,person,comment:notes,status:'Registrado',userEmail:sessionAccount?.email||'',userName:sessionAccount?.name||''};
+      docs.unshift(newDoc);await persistDoc(newDoc);
+    }
+  }
+  if(errores.length)alert('⚠ Los siguientes lotes se saltaron por conflicto de vencimiento:\n'+errores.join('\n'));
+  else alert(`✓ Remito ${ref} confirmado. ${ocasaRows.length} comprobante(s) generados en Firebase.`);
+  ocasaRows=[];
+  ocasaHeader=null;
+  go('Control diario');
+};
+
+// ── Descartables ──────────────────────────────────────────────
+window.showDisposableForm=function(){if(role!=='administrador')return;$('disposableform')?.classList.remove('hidden')};
+window.saveDisposable=async function(){
+  if(role!=='administrador')return;
+  let name=($('dname').value||'').trim(),qty=Number($('dqty').value);
+  if(!name||!Number.isInteger(qty)||qty<1)return alert('Ingresá un insumo y una cantidad válida.');
+  let d=disposables.find(x=>x.name.toLowerCase()===name.toLowerCase());
+  if(d)d.qty+=qty;else{disposables.push({name,qty,unit:'unidades'});d=disposables.at(-1);}
+  await persistDisposables();go('Descartables');
+};
+
+// ── Exportar CSV ──────────────────────────────────────────────
+window.exportCsv=function(){let rows=[['Biológico','Lote','Vencimiento','Dosis disponibles'],...items.map(x=>[x.name,x.lot,x.exp,x.qty])],csv='﻿'+rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(';')).join('\r\n');let a=document.createElement('a'),url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.href=url;a.download='APS_Biologicos_Inventario_'+new Date().toLocaleDateString('en-CA')+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+
+// ── Informe diario ────────────────────────────────────────────
+window.dailyReport=function(){const date=$('dailyDate')?.value||new Date().toLocaleDateString('en-CA');let result='';for(const[category,stock]of[['Biológicos',items],['Descartables',disposables]]){const movements=docs.filter(d=>d.category===category&&d.date===date);const rows=stock.map((x,i)=>{const relevant=movements.filter(d=>d.itemRef===x._id||(d.name&&(d.name.startsWith(x.name))));let incoming=0,outgoing=0,returns=0,adjust=0;for(const d of relevant){if(d.type==='Recepción OCASA'||d.type==='Nuevo Entrante')incoming+=d.qty;else if(d.type==='Nuevo Saliente')outgoing+=d.qty;else if(d.type==='Retorno')returns+=d.qty;else if(d.type==='Comprobación')adjust+=d.qty;}const eligibleReturns=category==='Descartables'?returns:0;const closing=x.qty;const delta=incoming-outgoing+eligibleReturns+adjust;const opening=closing-delta;return`<tr><td>${esc(x.name)}${x.lot?' · '+esc(x.lot):''}</td><td>${opening}</td><td>${incoming}</td><td>${outgoing}</td><td>${returns}${category==='Biológicos'&&returns?'*':''}</td><td><b>${closing}</b></td></tr>`}).join('');result+=`<h2>${category}</h2><div class="tablewrap"><table><thead><tr><th>Artículo / lote</th><th>Saldo inicial estimado</th><th>Entradas</th><th>Salidas</th><th>Retornos</th><th>Saldo actual</th></tr></thead><tbody>${rows||'<tr><td colspan="6">Sin artículos.</td></tr>'}</tbody></table></div>`;}$('dailyResult').innerHTML=result+`<p class="muted">* Retornos de biológicos pendientes de verificación: no se suman al disponible.</p>`};
+
+// ── Render principal ──────────────────────────────────────────
+window.render=function(){
+  if(!fbReady)return;
+  let h='';
+  if(page==='Acceso'){
+    document.querySelector('header').style.display='none';
+    $('content').innerHTML=accessPage();return;
+  }
+  document.querySelector('header').style.display='flex';
+  $('effectorLabel').textContent=(role==='administrador'?'Depósito central':activePlace())+' ▾';
+
+  if(page==='Inicio'){h=`<div class="home-shell"><div class="home-tiles">
+<button class="home-tile t-blue" onclick="go('Biológicos')"><span class="tile-icon">📦</span><span class="tile-label">Biológicos</span><span class="tile-count">${items.length}</span></button>
+<button class="home-tile t-gold" onclick="go('Movimientos')"><span class="tile-icon">▤</span><span class="tile-label">Movimientos</span><span class="tile-count">${docs.length}</span></button>
+<button class="home-tile t-teal" onclick="go('Informes')"><span class="tile-icon">▥</span><span class="tile-label">Informe</span></button>
+<button class="home-tile t-black" onclick="go('Descartables')"><span class="tile-icon">▣</span><span class="tile-label">Descartables</span></button>
+<button class="home-tile t-lime" onclick="go('Retorno')"><span class="tile-icon">📥</span><span class="tile-label">Retorno</span></button>
+<button class="home-tile t-orange" onclick="go('Nuevo Saliente')"><span class="tile-icon">📤</span><span class="tile-label">Nuevo Saliente</span></button>
+<button class="home-tile t-grey" onclick="go('Solicitud mensual')"><span class="tile-icon">📋</span><span class="tile-label">Pedido mensual</span></button>
+<button class="home-tile t-grey" onclick="go('Escanear código')"><span class="tile-icon">▥</span><span class="tile-label">Escanear código</span></button>
+</div><div class="home-smalltiles"><button class="home-small" onclick="logoutDemo()" title="Cerrar sesión">👤</button><button class="home-small" onclick="go('Biológicos')" title="Biológicos">📦</button><button class="home-small" onclick="go('Configuración')" title="Configuración">⚙</button><button class="home-small" onclick="go('Ayuda')" title="Soporte">☏</button></div><div class="home-note">APS Chicoana · ${sessionAccount?.name||''} · ${normalizeRole(role==='administrador'?'Administrador':role==='consulta'?'Consulta':'Usuario')}</div></div>`}
+
+  if(page==='Configuración'){h=`<div class="panel"><h2>Configuración</h2><div class="settings-list"><div><div class="settings-label">Apariencia</div><button id="themeCycleBtn" class="settings-button" onclick="toggleTheme()"></button></div><button class="settings-button" onclick="logoutDemo()">🔐 Cerrar sesión →</button>${role!=='administrador'?`<button class="settings-button" onclick="go('Establecimiento de trabajo')">🏥 Establecimiento de trabajo →</button>`:''}${role==='administrador'?`<div><div class="settings-label">Administración</div><button class="settings-button" onclick="go('Solicitud mensual')">📋 Consolidado de solicitudes →</button><button class="settings-button" onclick="go('Usuarios y efectores')">👥 Usuarios y efectores →</button><button class="settings-button" onclick="go('Administrar destinos')">📍 Administrar destinos →</button><button class="settings-button" onclick="go('Gestión de biológicos')">💉 Gestión de biológicos →</button><button class="settings-button" onclick="go('Recepción OCASA')">🚚 Recepción OCASA →</button><button class="settings-button" onclick="go('Nuevo Entrante')">📥 Reposición de lote →</button><button class="settings-button" onclick="go('Control diario')">📊 Control diario →</button><button class="settings-button" onclick="go('Descartables')">📦 Descartables →</button><button class="settings-button" onclick="go('Comprobación')">✓ Ajustes de stock →</button></div>`:''}<button class="settings-button" onclick="go('Inicio')">⌂ Volver al inicio</button></div></div>`}
+  if(page==='Establecimiento de trabajo'){h=facilityPicker()}
+  if(page==='Solicitud mensual'){h=monthlyPage()}
+  if(page==='Gestión de biológicos'){h=bioManagement()}
+  if(page==='Descartables'){h=`<div class="panel"><div class="topline"><h1>Descartables</h1>${role==='administrador'?'<button class="action" onclick="showDisposableForm()">+ Cargar insumo</button>':''}</div><p class="muted">Stock central de insumos.</p><div class="tablewrap"><table><thead><tr><th>Insumo</th><th>Stock</th><th>Unidad</th></tr></thead><tbody>${disposables.map(d=>`<tr><td>${esc(d.name)}</td><td><b>${d.qty}</b></td><td>${esc(d.unit)}</td></tr>`).join('')}</tbody></table></div><div class="quick-actions"><button onclick="go('Nuevo Saliente');chooseCategory('Descartables')">📤 Registrar salida</button><button onclick="go('Retorno');chooseCategory('Descartables')">📥 Registrar retorno</button></div></div>${role==='administrador'?`<div class="panel hidden" id="disposableform"><h2>Agregar insumo o reponer existencias</h2><div class="grid"><div class="field"><label>Insumo</label><input id="dname" placeholder="Ej. Jeringa 0,5 ml"></div><div class="field"><label>Cantidad a ingresar</label><input id="dqty" type="number" min="1" value="1"></div></div><div class="actions"><button class="action" onclick="saveDisposable()">Guardar ingreso</button></div></div>`:''}`}
+  if(page==='Escanear código'){h=`<div class="panel"><h2>Escanear código</h2><p class="muted">Función prevista para la aplicación Android. Este archivo HTML no realiza lecturas con la cámara.</p></div>`}
+  if(page==='Ayuda'){h=`<div class="panel"><h2>Ayuda</h2><p class="muted">APS Chicoana · Área Operativa XXXIII · Zona Oeste. Sistema gestionado por Ramón López.</p></div>`}
+
+  if(page==='Control diario'){
+    const today=new Date().toLocaleDateString('en-CA');
+    const todayDocs=docs.filter(d=>d.date===today),exits=todayDocs.filter(d=>d.type==='Nuevo Saliente'),returns=todayDocs.filter(d=>d.type==='Retorno');
+    const pending=docs.filter(d=>d.status==='Pendiente de verificación');
+    h=`<div class="panel"><h2>Control diario del depósito</h2><p class="muted">Resumen operativo de hoy · ${today}.</p><div class="daily-summary"><div class="daily-metric"><b>${exits.length}</b><small>Comprobantes de salida hoy</small></div><div class="daily-metric"><b>${returns.length}</b><small>Comprobantes de retorno hoy</small></div><div class="daily-metric"><b>${items.reduce((n,x)=>n+x.qty,0)}</b><small>Dosis disponibles en depósito</small></div><div class="daily-metric"><b>${pending.length}</b><small>Retornos biológicos por verificar</small></div></div><div class="admin-guide">Los retornos biológicos pendientes NO se suman al stock disponible. Antes de redistribuirlos debe verificarse su aptitud y conservación.</div><div class="quick-actions"><button onclick="go('Recepción OCASA')">🚚 Recibir provisión</button><button onclick="go('Movimientos')">▤ Movimientos</button></div><h2>Alertas de vencimiento</h2><div class="stock-list">${items.filter(x=>x.qty>0).slice().sort((a,b)=>a.exp.localeCompare(b.exp)).map(x=>{let days=Math.ceil((new Date(x.exp+'T12:00:00')-new Date())/86400000);return`<div class="stock-row"><div><strong>${esc(x.name)}</strong><small>Lote ${esc(x.lot)} · vence ${esc(x.exp)}</small></div><div class="stock-qty ${days<=60?'stock-low':''}">${x.qty}<em>${days<0?'VENCIDO':days<=60?'Vence pronto':'dosis'}</em></div></div>`}).join('')}</div><div class="actions"><button class="action" onclick="exportCsv()">Exportar existencias CSV</button></div><h2>Movimientos por fecha</h2><div class="field"><label>Fecha a consultar</label><input id="dailyDate" type="date" value="${today}" onchange="dailyReport()"></div><div id="dailyResult" style="margin-top:14px"></div></div>`;
+  }
+  if(page==='Recepción OCASA'){
+    if(!ocasaHeader){ocasaRows=[];}// limpiar ítems solo si no hay cabecera confirmada
+    if(role!=='administrador'){h='<div class="panel">Función exclusiva del administrador.</div>';}
+    else if(!ocasaHeader){
+      // ── PASO 1: ingresar cabecera ──
+      h=`<div class="panel">
+<h2>Recepción de provisión · OCASA</h2>
+<p class="muted">Paso 1: ingresá los datos del remito. Después vas a poder agregar todos los artículos recibidos.</p>
+<div class="admin-guide">Comprobá número de remito y documentación antes de continuar.</div>
+<div class="grid" style="margin-top:16px">
+  <div class="field"><label>Fecha de recepción</label><input type="date" id="rdate" value="${new Date().toLocaleDateString('en-CA')}"></div>
+  <div class="field"><label>N° de remito OCASA</label><input id="rref" placeholder="Número de remito"></div>
+  <div class="field"><label>Responsable de recepción</label><input id="rperson" placeholder="Nombre y apellido"></div>
+  <div class="field"><label>Observaciones (opcional)</label><input id="rnotes" placeholder="Condición de entrega, frío, etc."></div>
+</div>
+<div class="actions" style="margin-top:18px">
+  <button class="action" onclick="ocasaConfirmHeader()">Continuar → Agregar artículos</button>
+</div>
+</div>`;
+    } else {
+      // ── PASO 2: agregar ítems con cabecera bloqueada ──
+      const rowsHtml=ocasaRows.length
+        ? ocasaRows.map((r,i)=>`<tr>
+            <td><span style="font-size:0.75rem;padding:2px 6px;border-radius:3px;background:${r.tipo==='Biológico'?'#1a3a5c':'#2a3a1a'};color:${r.tipo==='Biológico'?'#9fd8ff':'#a8d8a8'}">${r.tipo}</span></td>
+            <td>${esc(r.nombre)}</td>
+            <td>${r.lote!=='—'?esc(r.lote):'<span style="color:#666">—</span>'}</td>
+            <td>${r.exp!=='—'?esc(r.exp):'<span style="color:#666">—</span>'}</td>
+            <td style="text-align:right"><b>${r.qty}</b></td>
+            <td style="text-align:center"><button onclick="ocasaRemoveRow(${i})" style="background:none;border:1px solid #c44;color:#c44;border-radius:4px;padding:2px 8px;cursor:pointer">✕</button></td>
+          </tr>`).join('')
+        : '<tr><td colspan="6" style="text-align:center;color:#888;padding:10px">Aún no se agregaron artículos.</td></tr>';
+      h=`
+<!-- Cabecera confirmada (solo lectura) -->
+<div class="panel" style="border-left:4px solid #9fd8ff">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap">
+    <div>
+      <div style="font-size:0.75rem;color:#9fd8ff;font-weight:700;margin-bottom:6px">REMITO CONFIRMADO</div>
+      <div style="font-size:1.05rem;font-weight:700">Remito OCASA N° ${esc(ocasaHeader.ref)}</div>
+      <div style="margin-top:5px;color:#bbb;font-size:0.9rem">${esc(ocasaHeader.date)} · Recibe: ${esc(ocasaHeader.person)}${ocasaHeader.notes?` · ${esc(ocasaHeader.notes)}`:''}</div>
+    </div>
+    <button class="action secondary" onclick="ocasaEditHeader()" style="white-space:nowrap;flex-shrink:0">✎ Editar cabecera</button>
+  </div>
+</div>
+
+<!-- Agregar artículo -->
+<div class="panel">
+  <h2 style="margin-bottom:12px">Agregar artículo al remito</h2>
+  <div class="grid">
+    <div class="field"><label>Tipo</label><select id="rtipo" onchange="ocasaTipoChange()"><option value="Biológico">💉 Biológico</option><option value="Descartable">📦 Descartable</option></select></div>
+    <div class="field" id="rwrap_bio"><label>Biológico</label><select id="rname"><option value="">Seleccionar</option>${catalogOptions()}</select><small>Si falta uno, crealo en Gestión de biológicos.</small></div>
+    <div class="field" id="rwrap_des" style="display:none"><label>Descartable</label><select id="rdes"><option value="">Seleccionar</option>${desCatalogOptions()}</select><small>Si falta uno, crealo en Gestión de biológicos → Descartables.</small></div>
+    <div class="field" id="rwrap_lote"><label>Lote</label><input id="rlot" placeholder="Número de lote exacto"></div>
+    <div class="field" id="rwrap_exp"><label>Vencimiento</label><input type="date" id="rexp"></div>
+    <div class="field"><label id="rlabel_qty">Cantidad (dosis)</label><input type="number" id="rqty" min="1" value="1"></div>
+  </div>
+  <div class="actions" style="margin-top:14px;margin-bottom:0">
+    <button class="action" onclick="ocasaAddRow()">+ Agregar al remito</button>
+  </div>
+</div>
+
+<!-- Lista de artículos -->
+<div class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+    <h2 style="margin:0">Artículos en este remito <span style="font-size:0.85rem;color:#bbb" data-ocasa-count>(${ocasaRows.length})</span></h2>
+    <button class="action" data-ocasa-confirm onclick="confirmOcasaRemito()" style="background:#249d72;display:${ocasaRows.length?'':'none'}">✓ Confirmar remito</button>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Tipo</th><th>Artículo</th><th>Lote</th><th>Vto.</th><th style="text-align:right">Cant.</th><th></th></tr></thead>
+      <tbody id="ocasaRowsBody">${rowsHtml}</tbody>
+    </table>
+  </div>
+  <div class="actions" style="margin-top:16px" id="ocasa-confirm-bottom" style="display:${ocasaRows.length?'':'none'}">
+    ${ocasaRows.length?`<button class="action" onclick="confirmOcasaRemito()" style="background:#249d72">✓ Confirmar remito completo (${ocasaRows.length} artículo${ocasaRows.length>1?'s':''})</button>`:'<p class="muted">Usá el formulario de arriba para agregar artículos.</p>'}
+  </div>
+</div>`;
+    }
+  }
+  if(page==='Biológicos'){h=`<div class="panel"><div class="topline"><h1>Biológicos</h1>${role==='administrador'?'<button class="action" onclick="go(&quot;Gestión de biológicos&quot;)">⚙ Gestionar</button>':''}</div><p class="muted">Existencias centrales por lote y vencimiento. Solo el administrador puede gestionar el catálogo.</p><div class="filters"><input id="search" placeholder="Buscar biológico o lote" oninput="scheduleStockSearch()"></div><div class="tablewrap" id="itemtable"></div><div class="quick-actions"><button onclick="go('Nuevo Saliente');chooseCategory('Biológicos')">📤 Registrar salida</button><button onclick="go('Retorno');chooseCategory('Biológicos')">📥 Registrar retorno</button></div></div>`}
+  if(page==='Movimientos'){
+    // ── Tipos de operación ──
+    const ALL_TYPES=['Todos','Entrada','Salida','Retorno','Ajuste'];
+    if(!window.movType)window.movType='Todos';
+    const typeMap={'Entrada':['Recepción OCASA','Nuevo Entrante'],'Salida':['Nuevo Saliente'],'Retorno':['Retorno'],'Ajuste':['Comprobación']};
+    let visible=docs.filter(d=>(movementFilter==='Todos'||d.category===movementFilter));
+    if(window.movType!=='Todos'){const allowed=typeMap[window.movType]||[];visible=visible.filter(d=>allowed.includes(d.type));}
+    // ── Agrupar por fecha ──
+    const groups=new Map();
+    visible.forEach(d=>{const k=d.date||'Sin fecha';if(!groups.has(k))groups.set(k,[]);groups.get(k).push(d);});
+    const sortedDates=[...groups.keys()].sort((a,b)=>b.localeCompare(a));
+    // ── Helpers de estilo por tipo ──
+    function docIcon(type){
+      if(type==='Nuevo Saliente')return{bg:'#4a1515',color:'#ff8080',icon:'↗'};
+      if(type==='Retorno')return{bg:'#15304a',color:'#80c8ff',icon:'↙'};
+      if(type==='Comprobación')return{bg:'#2a2a15',color:'#ffd080',icon:'⊕'};
+      return{bg:'#15401e',color:'#80e8a0',icon:'↙'}; // Entrada OCASA y Nuevo Entrante
+    }
+    function fmtDate(iso){
+      if(!iso)return'Sin fecha';
+      const[y,m,d]=iso.split('-');
+      const months=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+      return`${Number(d)} ${months[Number(m)-1]} ${y}`;
+    }
+    const docRows=sortedDates.map(date=>{
+      const items=groups.get(date);
+      const rows=items.map(d=>{
+        const st=docIcon(d.type);
+        const lugar=d.place||'—';
+        const lugarShort=lugar.length>40?lugar.slice(0,38)+'…':lugar;
+        return`<div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #222">
+          <div style="width:46px;height:46px;border-radius:14px;background:${st.bg};color:${st.color};display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;font-weight:700">${st.icon}</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:800;font-size:1.1rem;letter-spacing:-0.01em;line-height:1.2">${esc(d.number||d.type)}</div>
+            <div style="font-size:0.7rem;color:#777;margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em">${esc(d.type)}</div>
+            <div style="font-size:0.7rem;color:#555;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(lugarShort)} · ${esc(d.person||'—')}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;padding-left:4px">
+            <div style="font-size:1.5rem;font-weight:800;color:${st.color};line-height:1">${d.qty}</div>
+            <div style="font-size:0.62rem;color:#555;margin-top:3px;text-transform:uppercase;letter-spacing:0.05em">${esc(d.category==='Descartables'?'uds.':'dosis')}</div>
+          </div>
+        </div>`;
+      }).join('');
+      return`<div style="margin-bottom:0">
+        <div style="font-size:0.68rem;font-weight:600;color:#555;padding:16px 0 5px;letter-spacing:0.07em;text-transform:uppercase">${fmtDate(date)}</div>
+        ${rows}
+      </div>`;
+    }).join('')||'<div class="empty" style="padding:30px;text-align:center;color:#666">Sin movimientos registrados.</div>';
+    h=`
+<div style="padding-bottom:8px">
+  <!-- Filtro por categoría -->
+  <div style="display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none">
+    ${['Todos','Biológicos','Descartables'].map(f=>`<button onclick="setMovementFilter('${f}')" style="border:0;border-radius:20px;padding:7px 16px;font-size:0.8rem;font-weight:700;white-space:nowrap;cursor:pointer;background:${movementFilter===f?'#1978c7':'#2e2e2e'};color:${movementFilter===f?'#fff':'#aaa'}">${f}</button>`).join('')}
+  </div>
+  <!-- Tabs tipo operación -->
+  <div style="display:flex;gap:0;border-bottom:1px solid #272727;margin-bottom:6px;overflow-x:auto;scrollbar-width:none">
+    ${ALL_TYPES.map(t=>`<button onclick="window.movType='${t}';render()" style="border:0;background:none;color:${window.movType===t?'#fff':'#555'};font-size:0.72rem;font-weight:700;padding:10px 13px;cursor:pointer;border-bottom:2px solid ${window.movType===t?'#ffa040':'transparent'};letter-spacing:0.05em;white-space:nowrap;flex-shrink:0;transition:color .15s">${t.toUpperCase()}</button>`).join('')}
+  </div>
+  <!-- Lista agrupada por fecha -->
+  <div style="padding:0 2px">
+    ${docRows}
+  </div>
+</div>`;
+  }
+  if(['Nuevo Entrante','Nuevo Saliente','Comprobación','Retorno'].includes(page)){
+    const inb=page==='Nuevo Entrante',adj=page==='Comprobación',ret=page==='Retorno',out=page==='Nuevo Saliente';
+    if((inb||adj)&&role!=='administrador'){
+      h='<div class="panel"><p>Esta función corresponde al administrador.</p></div>';
+    }else if((ret||out)&&!moveCategory){
+      h=`<div class="panel"><h1>${page}</h1><p class="muted">Elegí el inventario. Cada opción genera su propio comprobante.</p><div class="choice-grid"><button class="choice-card choice-bio" onclick="chooseCategory('Biológicos')"><span>💉</span>Biológicos</button><button class="choice-card choice-dis" onclick="chooseCategory('Descartables')"><span>📦</span>Descartables</button></div></div>`;
+    }else{
+      const cat=(inb||adj)?'Biológicos':moveCategory;
+      const stock=cat==='Biológicos'?items:disposables;
+      h=`<div class="panel"><h1>${page} · ${cat}</h1><p class="muted">${ret?'Devolución de artículos previamente entregados al mismo efector. Los biológicos retornados quedan pendientes de verificación.':out?'La salida descuenta existencias del inventario central.':'Movimiento exclusivo del administrador.'}</p>${(ret||out)?`<button class="action secondary" onclick="chooseCategory('')">← Cambiar inventario</button>`:''}<div class="grid" style="margin-top:15px"><div class="field"><label>Fecha</label><input type="date" id="mdate" value="${new Date().toLocaleDateString('en-CA')}"></div><div class="field"><label>${cat==='Biológicos'?'Biológico y lote':'Insumo descartable'}</label><select id="mitem">${stock.map((x,i)=>({x,i})).filter(({x})=>ret||adj||inb||(x.qty>0&&(cat!=='Biológicos'||!x.exp||x.exp>=new Date().toLocaleDateString('en-CA')))).map(({x,i})=>`<option value="${i}">${esc(x.name)} ${x.lot?'· '+esc(x.lot):''} · Disponible ${x.qty}</option>`).join('')}</select></div><div class="field"><label>${adj?'Variación de stock (+/-)':'Cantidad de '+(cat==='Biológicos'?'dosis':'unidades')}</label><input type="number" id="mqty" value="1" ${adj?'':'min="1"'}></div>${inb||adj?'<div class="field"><label>'+(inb?'Origen / proveedor':'Motivo de comprobación')+'</label><input id="mplace" placeholder="Indicar origen o motivo"></div>':(role==='administrador'?destinationFields('m'):`<div class="field"><label>Efector asignado</label><input value="${esc(activePlace())}" readonly aria-readonly="true"><small>Asignación automática; no puede cambiarse en el formulario.</small></div>`)}<div class="field"><label>Responsable</label><input id="mperson" placeholder="Nombre del responsable"></div><div class="field"><label>Observaciones</label><input id="mcomment" placeholder="Opcional"></div></div><div class="actions"><button class="action" onclick="saveMove()">Guardar ${ret?'retorno':out?'salida':'movimiento'}</button></div></div>`;
+    }
+  }
+  if(page==='Informes'){let total=items.reduce((a,x)=>a+x.qty,0);h=`<div class="panel"><h1>Informes</h1><div class="stats"><div class="stat"><b>${total}</b><small>Dosis en inventario</small></div><div class="stat"><b>${docs.filter(d=>d.type==='Retorno').length}</b><small>Retornos</small></div><div class="stat"><b>${docs.filter(d=>d.type==='Nuevo Saliente').length}</b><small>Salidas</small></div><div class="stat"><b>${docs.filter(d=>d.type==='Comprobación').length}</b><small>Comprobaciones</small></div></div><button class="action" onclick="exportCsv()">Exportar inventario CSV</button></div>`}
+  if(page==='Administrar destinos'){h=role==='administrador'?destinationsAdmin():'<div class="panel">Función exclusiva del administrador.</div>'}
+
+  if(page==='Usuarios y efectores'&&role!=='administrador'){h='<div class="panel">Función exclusiva del administrador.</div>'}
+  else if(page==='Usuarios y efectores'){
+    h=`<div class="panel"><h1>Gestión de usuarios y establecimientos</h1><p class="muted">Tres perfiles: Administrador, Usuario y Consulta. Los usuarios se guardan en Firebase y pueden ingresar desde cualquier dispositivo con su contraseña.</p><div class="notice">🔒 Las contraseñas se guardan cifradas (SHA-256). No se recuperan: si un usuario olvida su contraseña, el administrador debe asignarle una nueva.</div><h2 style="margin-top:20px">Agregar usuario</h2><div class="grid"><div class="field"><label>Apellido y nombre</label><input id="uname" placeholder="Responsable"></div><div class="field"><label>Usuario (alias o correo)</label><input id="uemail" type="text" placeholder="usuario@aps.com o alias corto" autocapitalize="off"></div><div class="field"><label>Contraseña inicial</label><input id="upass" type="password" placeholder="Mínimo 4 caracteres"></div><div class="field"><label>Perfil</label><select id="urole"><option>Usuario</option><option>Administrador</option><option>Consulta</option></select></div></div><h2 style="margin-top:20px">Establecimientos autorizados</h2><p class="muted">Marcá uno o varios sectores, centros o puestos.</p>${facilityChecklist()}<details id="userQuickCreate" style="margin-top:14px" ontoggle="rememberUserDraft()"><summary class="action secondary" style="cursor:pointer">+ Crear establecimiento sin salir</summary><div class="grid" style="margin-top:14px"><div class="field"><label>Tipo de establecimiento</label><select id="quickkind">${kinds.filter(k=>k!=='Sector APS').map(k=>`<option>${esc(k)}</option>`).join('')}</select></div><div class="field"><label>Nombre</label><input id="quickname" placeholder="Ej. Centro Materno Infantil"></div></div><button class="action secondary" onclick="rememberUserDraft();createFacilityFromUser()">Crear y seleccionar</button></details><div class="actions"><button class="action" onclick="addUser()">Guardar usuario en Firebase</button><button class="action secondary" onclick="exportAccounts()">Exportar lista (sin contraseñas)</button></div></div><div class="panel hidden" id="userEditor"></div><div class="panel"><h2>Usuarios registrados</h2><div class="tablewrap"><table><thead><tr><th>Responsable</th><th>Identificador</th><th>Establecimientos</th><th>Perfil</th><th>Estado</th><th>Editar</th></tr></thead><tbody>${users.map((u,i)=>`<tr><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${userFacilityIds(u).map(id=>facilityList().find(f=>f.id===id)?.name||'—').map(esc).join('<br>')||'Sin asignar'}</td><td>${esc(normalizeRole(u.role))}</td><td><button class="action secondary" onclick="toggleAccount(${i})">${u.active===false?'Inactivo · activar':'Activo · desactivar'}</button></td><td><button class="action secondary" onclick="showUserEdit(${i})">Editar</button></td></tr>`).join('')||'<tr><td colspan="6" class="empty">No hay usuarios registrados</td></tr>'}</tbody></table></div></div>`;
+  }
+
+  $('content').innerHTML=(page==='Inicio'?h:`<div class="sub-head"><button class="back" onclick="go('Inicio')" aria-label="Volver">‹</button><h1>${esc(page)}</h1></div><div class="page-container">${h}</div>`);
+  if(page==='Biológicos')drawItems();
+  if(page==='Control diario')dailyReport();
+  // sincronizar botón de tema si está en pantalla
+  const _btn=document.getElementById('themeCycleBtn');
+  if(_btn){const _labels={dark:'🌙 Oscuro — tocar para cambiar',light:'☀️ Claro — tocar para cambiar',auto:'⚙️ Sistema — tocar para cambiar'};_btn.textContent=_labels[currentTheme]||_labels.dark;}
+};
+
+// ── Arrancar ──────────────────────────────────────────────────
+cargarTodo();
+</script>
+</body></html>
