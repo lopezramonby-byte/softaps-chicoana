@@ -1493,7 +1493,6 @@ window.render=function(){
       }
     }
   }
-  if(page==='Informes'){let total=items.reduce((a,x)=>a+x.qty,0);h=`<div class="panel"><h1>Informes</h1><div class="stats"><div class="stat"><b>${total}</b><small>Dosis en inventario</small></div><div class="stat"><b>${docs.filter(d=>d.type==='Retorno').length}</b><small>Retornos</small></div><div class="stat"><b>${docs.filter(d=>d.type==='Nuevo Saliente').length}</b><small>Salidas</small></div><div class="stat"><b>${docs.filter(d=>d.type==='Comprobación').length}</b><small>Comprobaciones</small></div></div><button class="action" onclick="exportCsv()">Exportar inventario CSV</button></div>`}
   if(page==='Administrar destinos'){h=role==='administrador'?destinationsAdmin():'<div class="panel">Función exclusiva del administrador.</div>'}
 
   if(page==='Usuarios y efectores'&&role!=='administrador'){h='<div class="panel">Función exclusiva del administrador.</div>'}
