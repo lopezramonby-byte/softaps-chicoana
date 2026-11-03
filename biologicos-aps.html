@@ -802,6 +802,22 @@ window.salidasEditHeader=function(){
   salidasRows=[];
   render();
 };
+window.salidasFilterStock=function(q){
+  const dd=$('sitem-dropdown');if(!dd)return;
+  const term=q.trim().toLowerCase();
+  dd.style.display='block';
+  dd.querySelectorAll('.req-suggestion').forEach(el=>{
+    const name=(el.dataset.name||'').toLowerCase();
+    el.style.display=(!term||name.includes(term))?'flex':'none';
+  });
+};
+window.salidasSelectItem=function(idx,label){
+  const si=$('sitem');const ss=$('sitem-search');const dd=$('sitem-dropdown');
+  if(si)si.value=idx;
+  if(ss)ss.value=label;
+  if(dd)dd.style.display='none';
+  const qtyEl=$('sqty');if(qtyEl){qtyEl.focus();qtyEl.select();}
+};
 window.salidasAddRow=function(){
   const cat=moveCategory||'Biológicos';
   const stock=cat==='Biológicos'?items:disposables;
@@ -812,10 +828,12 @@ window.salidasAddRow=function(){
   if(!Number.isInteger(qty)||qty<1)return alert('Ingresá una cantidad válida.');
   const today=new Date().toLocaleDateString('en-CA');
   if(cat==='Biológicos'&&x.exp&&x.exp<today)return alert('Lote vencido: no puede distribuirse.');
-  // stock disponible = qty en array menos lo ya cargado en esta sesión
   const yaAgregado=salidasRows.filter(r=>r.itemId===x._id).reduce((a,r)=>a+r.qty,0);
   if(qty+yaAgregado>x.qty)return alert('Existencias insuficientes. Disponible: '+(x.qty-yaAgregado)+' dosis.');
   salidasRows.push({itemId:x._id,name:x.name,lot:x.lot||'',qty});
+  // Limpiar buscador tras agregar
+  const ss=$('sitem-search');const si=$('sitem');
+  if(ss)ss.value='';if(si)si.value='';
   if($('sqty'))$('sqty').value='1';
   render();
 };
@@ -1527,10 +1545,25 @@ window.render=function(){
           </div>
           <h2 style="margin-bottom:8px">Agregar biológico</h2>
           <div class="grid">
-            <div class="field"><label>Biológico y lote</label>
-              <select id="sitem" style="font-size:15px">
-                ${stockDisp.length?stockDisp.map((x,i)=>`<option value="${stock.indexOf(x)}">${esc(x.name)}${x.lot?' · lote '+esc(x.lot):''}  (${x.qty} disp.)</option>`).join(''):'<option disabled>Sin stock disponible</option>'}
-              </select>
+            <div class="field" style="position:relative">
+              <label>Buscar biológico</label>
+              <input id="sitem-search" placeholder="Escribí el nombre…" autocomplete="off" style="font-size:16px"
+                oninput="salidasFilterStock(this.value)"
+                onfocus="salidasFilterStock(this.value)"
+                onblur="setTimeout(()=>{const d=$('sitem-dropdown');if(d)d.style.display='none'},200)">
+              <input type="hidden" id="sitem" value="">
+              <div id="sitem-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:999;background:#2a2a2a;border:1px solid #555;border-radius:12px;max-height:220px;overflow-y:auto;box-shadow:0 8px 24px #0008;margin-top:4px">
+                ${stockDisp.length
+                  ? stockDisp.map((x)=>{
+                      const idx=stock.indexOf(x);
+                      return`<div class="req-suggestion" data-idx="${idx}" data-name="${esc(x.name)}"
+                        onmousedown="salidasSelectItem(${idx},'${esc(x.name).replace(/'/g,"\\'")} · lote ${esc(x.lot||'')}')">
+                        <span style="flex:1"><b>${esc(x.name)}</b>${x.lot?` <span style="color:#888;font-size:0.85em">· lote ${esc(x.lot)}</span>`:''}</span>
+                        <span style="color:#4db8ff;font-weight:700;white-space:nowrap">${x.qty} disp.</span>
+                      </div>`;
+                    }).join('')
+                  : '<div class="req-no-match">Sin stock disponible</div>'}
+              </div>
             </div>
             <div class="field"><label>Cantidad de dosis</label><input type="number" id="sqty" value="1" min="1" inputmode="numeric"></div>
           </div>
