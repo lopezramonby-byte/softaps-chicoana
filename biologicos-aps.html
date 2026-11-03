@@ -1321,6 +1321,51 @@ window.render=function(){
       const months=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
       return`${Number(d)} ${months[Number(m)-1]} ${y}`;
     }
+    // ── Eliminar comprobante (solo administrador) ──
+    window.deleteMovimiento=async function(docId){
+      if(role!=='administrador')return;
+      const d=docs.find(x=>x._id===docId);
+      if(!d)return alert('Comprobante no encontrado.');
+      const nombre=d.number||d.type||docId;
+      if(!confirm(`¿Eliminar ${nombre}?\n\nSe revertirá el stock automáticamente. Esta acción no se puede deshacer.`))return;
+      try{
+        // Revertir stock según tipo de movimiento
+        const isExit=d.type==='Nuevo Saliente';
+        const isEntry=d.type==='Recepción OCASA'||d.type==='Nuevo Entrante';
+        const isReturn=d.type==='Retorno';
+        const cat=d.category||'Biológicos';
+        const stock=cat==='Descartables'?disposables:items;
+        if(d.items&&d.items.length){
+          // Nuevo formato multi-ítem
+          for(const it of d.items){
+            const x=stock.find(s=>s._id===it.itemRef);
+            if(x){
+              if(isExit)x.qty+=it.qty;           // saliente → devolver
+              else if(isEntry)x.qty-=it.qty;      // entrada → quitar
+              else if(isReturn&&cat!=='Biológicos')x.qty-=it.qty;
+              await persistItem(x);
+            }
+          }
+        } else if(d.itemRef){
+          // Formato legacy ítem único
+          const x=stock.find(s=>s._id===d.itemRef);
+          if(x){
+            if(isExit)x.qty+=d.qty;
+            else if(isEntry)x.qty-=d.qty;
+            else if(isReturn&&cat!=='Biológicos')x.qty-=d.qty;
+            await persistItem(x);
+          }
+        }
+        // Borrar de Firestore
+        await deleteDoc(doc(db,COL_DOCS,docId));
+        // Borrar de la lista local
+        const idx=docs.findIndex(x=>x._id===docId);
+        if(idx>=0)docs.splice(idx,1);
+        render();
+        alert(`${nombre} eliminado y stock revertido correctamente.`);
+      }catch(e){alert('Error al eliminar: '+e.message);}
+    };
+
     // IDs de grupos expandidos
     if(!window._movExpanded)window._movExpanded=new Set();
     window.toggleMovDetail=function(id){
@@ -1398,9 +1443,12 @@ window.render=function(){
               <div style="font-size:0.68rem;color:#aaa;margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em">${esc(first.type)}${isMulti?' · '+itemLines.length+' biológicos':''}</div>
               <div style="font-size:0.68rem;color:#888;margin-top:2px">${esc(numerosStr)} · ${esc(first.person||'—')}</div>
             </div>
-            <div style="text-align:right;flex-shrink:0;padding-left:4px">
-              <div style="font-size:1.5rem;font-weight:800;color:${st.color};line-height:1">${totalQty}</div>
-              <div style="font-size:0.62rem;color:#555;margin-top:3px;text-transform:uppercase;letter-spacing:0.05em">${unitLabel}</div>
+            <div style="text-align:right;flex-shrink:0;padding-left:4px;display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+              <div>
+                <div style="font-size:1.5rem;font-weight:800;color:${st.color};line-height:1">${totalQty}</div>
+                <div style="font-size:0.62rem;color:#555;margin-top:3px;text-transform:uppercase;letter-spacing:0.05em">${unitLabel}</div>
+              </div>
+              ${role==='administrador'&&bucket.length===1&&bucket[0]._id?`<button onclick="event.stopPropagation();deleteMovimiento('${bucket[0]._id}')" style="border:0;background:#3a1515;color:#ff8080;border-radius:8px;padding:5px 10px;font-size:0.72rem;font-weight:700;cursor:pointer;white-space:nowrap">🗑 Eliminar</button>`:''}
             </div>
           </div>
           ${detailHtml}
