@@ -1414,6 +1414,11 @@ window.render=function(){
       if(d.number&&d.number.startsWith('DES-'))return'Descartables';
       return'Biológicos'; // legacy sin category = biológico
     };
+    // DEBUG TEMPORAL — mostrar docs OCASA en consola
+    if(movementFilter==='Descartables'){
+      const ocasaDocs=docs.filter(d=>d.type==='Recepción OCASA');
+      console.log('[DEBUG] Docs OCASA en memoria:',ocasaDocs.map(d=>({number:d.number,category:d.category,name:d.name,inferido:inferCat(d)})));
+    }
     let visible=docs.filter(d=>{
       if(movementFilter==='Todos')return true;
       if(inferCat(d)===movementFilter)return true;
