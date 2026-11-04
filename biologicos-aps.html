@@ -331,6 +331,8 @@ window.createLot=async function(){
 window.editLot=async function(i){
   if(role!=='administrador')return;
   let x=items[i];
+  let name=prompt('Nombre del biológico',x.name)?.trim();
+  if(!name)return;
   let lot=prompt('Número de lote',x.lot)?.trim();
   if(!lot)return;
   let exp=prompt('Vencimiento (AAAA-MM-DD)',x.exp)?.trim();
@@ -341,7 +343,7 @@ window.editLot=async function(i){
   let newQty=Number(qtyStr);
   if(!Number.isInteger(newQty)||newQty<0)return alert('Cantidad inválida.');
   if(!confirm('Modificar la ficha del lote requiere verificar la documentación original. ¿Continuar?'))return;
-  x.lot=lot;x.exp=exp;x.qty=newQty;
+  x.name=name;x.lot=lot;x.exp=exp;x.qty=newQty;
   await persistItem(x);
   render();
 };
