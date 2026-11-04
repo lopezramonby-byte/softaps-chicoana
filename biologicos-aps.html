@@ -1408,16 +1408,22 @@ window.render=function(){
     const ocasaRefs=new Set(
       docs.filter(d=>d.type==='Recepción OCASA'&&d.place).map(d=>{const m=d.place.match(/OCASA\s*·\s*(.+)$/);return m?m[1].trim():null;}).filter(Boolean)
     );
+    // Inferir categoría cuando el campo no está guardado en Firestore
+    const inferCat=function(d){
+      if(d.category)return d.category;
+      if(d.number&&d.number.startsWith('DES-'))return'Descartables';
+      return'Biológicos'; // legacy sin category = biológico
+    };
     let visible=docs.filter(d=>{
       if(movementFilter==='Todos')return true;
-      if(d.category===movementFilter||(d.category===undefined&&movementFilter==='Biológicos'))return true;
+      if(inferCat(d)===movementFilter)return true;
       // Incluir todos los docs de un remito OCASA si alguno es de la categoría filtrada
       if(d.type==='Recepción OCASA'&&d.place){
         const m=d.place.match(/OCASA\s*·\s*(.+)$/);
         if(m){
           const ref=m[1].trim();
           const siblings=docs.filter(x=>x.type==='Recepción OCASA'&&x.place&&x.place.includes(ref));
-          if(siblings.some(x=>x.category===movementFilter))return true;
+          if(siblings.some(x=>inferCat(x)===movementFilter))return true;
         }
       }
       return false;
@@ -1543,7 +1549,7 @@ window.render=function(){
           itemLines=first.items.map(it=>({name:it.name,lot:it.lot||'',qty:it.qty,cat:first.category||'Biológicos'}));
         } else if(bucket.length>1){
           // Legacy o grupo OCASA mixto — cada doc es un ítem
-          itemLines=bucket.map(d=>({name:d.name||'—',lot:d.lot||'',qty:d.qty,cat:d.category||'Biológicos'}));
+          itemLines=bucket.map(d=>({name:d.name||'—',lot:d.lot||'',qty:d.qty,cat:inferCat(d)}));
         }
 
         const totalQty=bucket.reduce((a,d)=>a+d.qty,0);
@@ -1552,8 +1558,8 @@ window.render=function(){
         const numerosStr=numeros.length===1?numeros[0]:numeros.length>1?numeros[0]+' +'+(numeros.length-1):'—';
 
         // Resumen de categorías para el subtítulo
-        const nBioItems=itemLines.filter(x=>x.cat==='Biológicos').length||bucket.filter(d=>d.category==='Biológicos').length;
-        const nDesItems=itemLines.filter(x=>x.cat==='Descartables').length||bucket.filter(d=>d.category==='Descartables').length;
+        const nBioItems=itemLines.filter(x=>x.cat==='Biológicos').length||bucket.filter(d=>inferCat(d)==='Biológicos').length;
+        const nDesItems=itemLines.filter(x=>x.cat==='Descartables').length||bucket.filter(d=>inferCat(d)==='Descartables').length;
         const resumenCat=[nBioItems?`${nBioItems} biológico${nBioItems>1?'s':''}`:''
                          ,nDesItems?`${nDesItems} descartable${nDesItems>1?'s':''}`:'' ].filter(Boolean).join(' · ');
 
