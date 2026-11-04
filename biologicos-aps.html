@@ -1031,12 +1031,14 @@ window.ocasaConfirmHeader=function(){
 };
 window.ocasaEditHeader=function(){
   ocasaHeader=null;
+  window._ocasaTipo='Biológico';
   render();
 };
 
 // Mostrar/ocultar campos según tipo seleccionado
 window.ocasaTipoChange=function(){
   const tipo=$('rtipo')?.value||'Biológico';
+  window._ocasaTipo=tipo;
   const esBio=tipo==='Biológico';
   if($('rwrap_bio'))$('rwrap_bio').style.display=esBio?'':'none';
   if($('rwrap_des'))$('rwrap_des').style.display=esBio?'none':'';
@@ -1351,14 +1353,21 @@ window.render=function(){
 <!-- Agregar artículo -->
 <div class="panel">
   <h2 style="margin-bottom:12px">Agregar artículo al remito</h2>
-  <div class="grid">
-    <div class="field"><label>Tipo</label><select id="rtipo" onchange="ocasaTipoChange()"><option value="Biológico">💉 Biológico</option><option value="Descartable">📦 Descartable</option></select></div>
-    <div class="field" id="rwrap_bio"><label>Biológico</label><select id="rname"><option value="">Seleccionar</option>${catalogOptions()}</select><small>Si falta uno, crealo en Gestión de biológicos.</small></div>
-    <div class="field" id="rwrap_des" style="display:none"><label>Descartable</label><select id="rdes"><option value="">Seleccionar</option>${desCatalogOptions()}</select><small>Si falta uno, crealo en Gestión de biológicos → Descartables.</small></div>
-    <div class="field" id="rwrap_lote"><label>Lote</label><input id="rlot" placeholder="Número de lote exacto"></div>
-    <div class="field" id="rwrap_exp"><label>Vencimiento</label><input type="date" id="rexp"></div>
-    <div class="field"><label id="rlabel_qty">Cantidad (dosis)</label><input type="number" id="rqty" min="1" value="1"></div>
-  </div>
+  ${(()=>{
+    const t=window._ocasaTipo||'Biológico';
+    const esBio=t==='Biológico';
+    return`<div class="grid">
+    <div class="field"><label>Tipo</label><select id="rtipo" onchange="window._ocasaTipo=this.value;ocasaTipoChange()">
+      <option value="Biológico"${esBio?' selected':''}>💉 Biológico</option>
+      <option value="Descartable"${!esBio?' selected':''}>📦 Descartable</option>
+    </select></div>
+    <div class="field" id="rwrap_bio"${esBio?'':' style="display:none"'}><label>Biológico</label><select id="rname"><option value="">Seleccionar</option>${catalogOptions()}</select><small>Si falta uno, crealo en Gestión de biológicos.</small></div>
+    <div class="field" id="rwrap_des"${!esBio?'':' style="display:none"'}><label>Descartable</label><select id="rdes"><option value="">Seleccionar</option>${desCatalogOptions()}</select><small>Si falta uno, crealo en Gestión de biológicos → Descartables.</small></div>
+    <div class="field" id="rwrap_lote"${esBio?'':' style="display:none"'}><label>Lote</label><input id="rlot" placeholder="Número de lote exacto"></div>
+    <div class="field" id="rwrap_exp"${esBio?'':' style="display:none"'}><label>Vencimiento</label><input type="date" id="rexp"></div>
+    <div class="field"><label id="rlabel_qty">Cantidad recibida (${esBio?'dosis':'unidades'})</label><input type="number" id="rqty" min="1" value="1"></div>
+  </div>`;
+  })()}
   <div class="actions" style="margin-top:14px;margin-bottom:0">
     <button class="action" onclick="ocasaAddRow()">+ Agregar al remito</button>
   </div>
