@@ -1590,20 +1590,23 @@ window.render=function(){
         const st=docIcon(first.type);
         const lugar=first.place||'—';
         const lugarShort=lugar.length>40?lugar.slice(0,38)+'…':lugar;
-        const isMulti=bucket.length>1||(first.items&&first.items.length>1);
         // ID estable del grupo para expandir
         const groupId=bucket.length===1?(first._id||first.number):`grp||${first.type}||${first.place||''}||${first.person||''}||${date}`;
         const expanded=window._movExpanded.has(groupId);
 
         // Construir lista de ítems para el detalle — soporta grupos mixtos (bio + descartables)
         let itemLines=[];
-        if(first.items&&first.items.length>1){
-          // Nuevo formato — items[] en el doc
+        if(first.items&&first.items.length>=1){
+          // Nuevo formato — items[] en el doc (uno o más)
           itemLines=first.items.map(it=>({name:it.name,lot:it.lot||'',qty:it.qty,cat:first.category||'Biológicos'}));
         } else if(bucket.length>1){
           // Legacy o grupo OCASA mixto — cada doc es un ítem
           itemLines=bucket.map(d=>({name:d.name||'—',lot:d.lot||'',qty:d.qty,cat:inferCat(d)}));
+        } else if(first.name){
+          // Doc individual legacy con nombre conocido
+          itemLines=[{name:first.name,lot:first.lot||'',qty:first.qty,cat:inferCat(first)}];
         }
+        const isMulti=itemLines.length>0;
 
         const totalQty=bucket.reduce((a,d)=>a+d.qty,0);
         // Números de comprobante para mostrar
