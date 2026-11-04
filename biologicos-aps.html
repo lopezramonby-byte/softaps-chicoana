@@ -91,6 +91,7 @@ const FB={
 };
 const app=initializeApp(FB);
 const db=getFirestore(app);
+window._db=db;window._addDoc=addDoc;window._collection=collection;window._serverTimestamp=serverTimestamp;
 
 // ── Colecciones ──────────────────────────────────────────────
 const COL_USERS   ='bio_usuarios';
