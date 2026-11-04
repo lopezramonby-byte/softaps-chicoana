@@ -1171,6 +1171,7 @@ window.render=function(){
 <button class="home-tile t-lime" onclick="go('Retorno')"><span class="tile-icon">📥</span><span class="tile-label">Retorno</span></button>
 <button class="home-tile t-orange" onclick="go('Nuevo Saliente')"><span class="tile-icon">📤</span><span class="tile-label">Nuevo Saliente</span></button>
 <button class="home-tile t-grey" onclick="go('Solicitud mensual')"><span class="tile-icon">📋</span><span class="tile-label">Pedido mensual</span></button>
+<button class="home-tile t-blue" onclick="go('Control diario')" style="background:linear-gradient(135deg,#1a2a3a,#0d1f30);border-color:#2a5a8a"><span class="tile-icon">🗓</span><span class="tile-label">Control diario</span></button>
 </div><div class="home-smalltiles"><button class="home-small" onclick="logoutDemo()" title="Cerrar sesión">👤</button><button class="home-small" onclick="go('Biológicos')" title="Biológicos">📦</button><button class="home-small" onclick="go('Configuración')" title="Configuración">⚙</button><button class="home-small" onclick="go('Ayuda')" title="Soporte">☏</button></div><div class="home-note">APS Chicoana · ${sessionAccount?.name||''} · ${normalizeRole(role==='administrador'?'Administrador':role==='consulta'?'Consulta':'Usuario')}</div></div>`}
 
   if(page==='Informes'){
