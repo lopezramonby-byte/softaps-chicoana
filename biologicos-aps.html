@@ -1648,7 +1648,14 @@ window.render=function(){
                 <div style="font-size:1.5rem;font-weight:800;color:${st.color};line-height:1">${totalQty}</div>
                 <div style="font-size:0.62rem;color:#555;margin-top:3px;text-transform:uppercase;letter-spacing:0.05em">uds./dosis</div>
               </div>
-              ${role==='administrador'&&bucket.length===1&&bucket[0]._id?`<div style="display:flex;gap:5px"><button onclick="event.stopPropagation();editDoc('${bucket[0]._id}')" style="border:0;background:#1a3a1a;color:#80e8a0;border-radius:8px;padding:5px 10px;font-size:0.72rem;font-weight:700;cursor:pointer;white-space:nowrap">✏ Editar</button><button onclick="event.stopPropagation();deleteMovimiento('${bucket[0]._id}')" style="border:0;background:#3a1515;color:#ff8080;border-radius:8px;padding:5px 10px;font-size:0.72rem;font-weight:700;cursor:pointer;white-space:nowrap">🗑 Eliminar</button></div>`:''}
+              ${(()=>{
+                if(role!=='administrador'||bucket.length!==1||!bucket[0]._id)return'';
+                const d0=bucket[0];
+                const docDate=d0.date?new Date(d0.date+'T00:00:00'):null;
+                const hoursOld=docDate?(Date.now()-docDate.getTime())/3600000:999;
+                const canEdit=hoursOld<48;
+                return`<div style="display:flex;gap:5px">${canEdit?`<button onclick="event.stopPropagation();editDoc('${d0._id}')" style="border:0;background:#1a3a1a;color:#80e8a0;border-radius:8px;padding:5px 10px;font-size:0.72rem;font-weight:700;cursor:pointer;white-space:nowrap">✏ Editar</button>`:''}<button onclick="event.stopPropagation();deleteMovimiento('${d0._id}')" style="border:0;background:#3a1515;color:#ff8080;border-radius:8px;padding:5px 10px;font-size:0.72rem;font-weight:700;cursor:pointer;white-space:nowrap">🗑 Eliminar</button></div>`;
+              })()}
             </div>
           </div>
           ${detailHtml}
