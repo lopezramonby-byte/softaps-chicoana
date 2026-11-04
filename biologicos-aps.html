@@ -1400,7 +1400,25 @@ window.render=function(){
     const ALL_TYPES=['Todos','Entrada','Salida','Retorno','Ajuste'];
     if(!window.movType)window.movType='Todos';
     const typeMap={'Entrada':['Recepción OCASA','Nuevo Entrante'],'Salida':['Nuevo Saliente'],'Retorno':['Retorno'],'Ajuste':['Comprobación']};
-    let visible=docs.filter(d=>(movementFilter==='Todos'||d.category===movementFilter));
+    // Para remitos OCASA mixtos (bio + descartables), incluir todos sus docs antes de agrupar
+    // y filtrar por categoría a nivel de grupo, no de doc individual
+    const ocasaRefs=new Set(
+      docs.filter(d=>d.type==='Recepción OCASA'&&d.place).map(d=>{const m=d.place.match(/OCASA\s*·\s*(.+)$/);return m?m[1].trim():null;}).filter(Boolean)
+    );
+    let visible=docs.filter(d=>{
+      if(movementFilter==='Todos')return true;
+      if(d.category===movementFilter||(d.category===undefined&&movementFilter==='Biológicos'))return true;
+      // Incluir todos los docs de un remito OCASA si alguno es de la categoría filtrada
+      if(d.type==='Recepción OCASA'&&d.place){
+        const m=d.place.match(/OCASA\s*·\s*(.+)$/);
+        if(m){
+          const ref=m[1].trim();
+          const siblings=docs.filter(x=>x.type==='Recepción OCASA'&&x.place&&x.place.includes(ref));
+          if(siblings.some(x=>x.category===movementFilter))return true;
+        }
+      }
+      return false;
+    });
     if(window.movType!=='Todos'){const allowed=typeMap[window.movType]||[];visible=visible.filter(d=>allowed.includes(d.type));}
     // ── Agrupar por fecha ──
     const groups=new Map();
