@@ -948,6 +948,74 @@ window.saveMove=async function(){
 let ocasaRows=[];
 let ocasaHeader=null; // null = sin confirmar; objeto = cabecera confirmada
 
+// Escáner de código de barras para número de remito OCASA
+window.scanRemito=async function(){
+  const field=$('rref');
+  if(!field)return;
+  // Verificar soporte nativo (Chrome Android / Edge)
+  if(!('BarcodeDetector' in window)){
+    // Fallback: input de archivo de cámara
+    const inp=document.createElement('input');
+    inp.type='file';inp.accept='image/*';inp.capture='environment';
+    inp.onchange=async function(){
+      if(!inp.files||!inp.files[0])return;
+      const img=new Image();
+      img.src=URL.createObjectURL(inp.files[0]);
+      img.onload=async function(){
+        try{
+          const bd=new window.BarcodeDetector({formats:['code_128','code_39','ean_13','ean_8','qr_code']});
+          const results=await bd.detect(img);
+          if(results.length){field.value=results[0].rawValue;field.dispatchEvent(new Event('input'));}
+          else alert('No se detectó código. Intentá de nuevo con mejor luz.');
+        }catch(e){alert('El dispositivo no soporta lectura automática. Ingresá el número manualmente.');}
+      };
+    };
+    inp.click();
+    return;
+  }
+  // BarcodeDetector disponible — usar stream de cámara
+  let stream=null;
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+    const video=document.createElement('video');
+    video.srcObject=stream;video.setAttribute('playsinline','');
+    const overlay=document.createElement('div');
+    overlay.style.cssText='position:fixed;inset:0;background:#000d;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px';
+    const title=document.createElement('div');
+    title.textContent='Apuntá al código de barras del remito';
+    title.style.cssText='color:#fff;font-size:1rem;font-weight:600;padding:0 20px;text-align:center';
+    const vwrap=document.createElement('div');
+    vwrap.style.cssText='width:90vw;max-width:400px;border:2px solid #4db8ff;border-radius:12px;overflow:hidden';
+    vwrap.appendChild(video);
+    const btn=document.createElement('button');
+    btn.textContent='Cancelar';
+    btn.style.cssText='background:#333;color:#fff;border:1px solid #666;border-radius:8px;padding:10px 24px;font-size:1rem;cursor:pointer';
+    overlay.appendChild(title);overlay.appendChild(vwrap);overlay.appendChild(btn);
+    document.body.appendChild(overlay);
+    await video.play();
+    const bd=new window.BarcodeDetector({formats:['code_128','code_39','ean_13','ean_8','qr_code','itf']});
+    let found=false;
+    const cancel=function(){if(stream)stream.getTracks().forEach(t=>t.stop());overlay.remove();};
+    btn.onclick=cancel;
+    const scan=async function(){
+      if(found||!overlay.isConnected)return;
+      try{
+        const results=await bd.detect(video);
+        if(results.length){
+          found=true;
+          field.value=results[0].rawValue;
+          cancel();
+          field.focus();
+        } else {requestAnimationFrame(scan);}
+      }catch{requestAnimationFrame(scan);}
+    };
+    requestAnimationFrame(scan);
+  }catch(e){
+    if(stream)stream.getTracks().forEach(t=>t.stop());
+    alert('No se pudo acceder a la cámara. Verificá los permisos del navegador.');
+  }
+};
+
 // Confirmar cabecera del remito (paso 1)
 window.ocasaConfirmHeader=function(){
   const date=($('rdate')?.value||'');
@@ -1103,7 +1171,6 @@ window.render=function(){
 <button class="home-tile t-lime" onclick="go('Retorno')"><span class="tile-icon">📥</span><span class="tile-label">Retorno</span></button>
 <button class="home-tile t-orange" onclick="go('Nuevo Saliente')"><span class="tile-icon">📤</span><span class="tile-label">Nuevo Saliente</span></button>
 <button class="home-tile t-grey" onclick="go('Solicitud mensual')"><span class="tile-icon">📋</span><span class="tile-label">Pedido mensual</span></button>
-<button class="home-tile t-grey" onclick="go('Escanear código')"><span class="tile-icon">▥</span><span class="tile-label">Escanear código</span></button>
 </div><div class="home-smalltiles"><button class="home-small" onclick="logoutDemo()" title="Cerrar sesión">👤</button><button class="home-small" onclick="go('Biológicos')" title="Biológicos">📦</button><button class="home-small" onclick="go('Configuración')" title="Configuración">⚙</button><button class="home-small" onclick="go('Ayuda')" title="Soporte">☏</button></div><div class="home-note">APS Chicoana · ${sessionAccount?.name||''} · ${normalizeRole(role==='administrador'?'Administrador':role==='consulta'?'Consulta':'Usuario')}</div></div>`}
 
   if(page==='Informes'){
@@ -1227,7 +1294,6 @@ window.render=function(){
   if(page==='Solicitud mensual'){h=monthlyPage()}
   if(page==='Gestión de biológicos'){h=bioManagement()}
   if(page==='Descartables'){h=`<div class="panel"><div class="topline"><h1>Descartables</h1>${role==='administrador'?'<button class="action" onclick="showDisposableForm()">+ Cargar insumo</button>':''}</div><p class="muted">Stock central de insumos.</p><div class="tablewrap"><table><thead><tr><th>Insumo</th><th>Stock</th><th>Unidad</th></tr></thead><tbody>${disposables.map(d=>`<tr><td>${esc(d.name)}</td><td><b>${d.qty}</b></td><td>${esc(d.unit)}</td></tr>`).join('')}</tbody></table></div><div class="quick-actions"><button onclick="go('Nuevo Saliente');chooseCategory('Descartables')">📤 Registrar salida</button><button onclick="go('Retorno');chooseCategory('Descartables')">📥 Registrar retorno</button></div></div>${role==='administrador'?`<div class="panel hidden" id="disposableform"><h2>Agregar insumo o reponer existencias</h2><div class="grid"><div class="field"><label>Insumo</label><input id="dname" placeholder="Ej. Jeringa 0,5 ml"></div><div class="field"><label>Cantidad a ingresar</label><input id="dqty" type="number" min="1" value="1"></div></div><div class="actions"><button class="action" onclick="saveDisposable()">Guardar ingreso</button></div></div>`:''}`}
-  if(page==='Escanear código'){h=`<div class="panel"><h2>Escanear código</h2><p class="muted">Función prevista para la aplicación Android. Este archivo HTML no realiza lecturas con la cámara.</p></div>`}
   if(page==='Ayuda'){h=`<div class="panel"><h2>Ayuda</h2><p class="muted">APS Chicoana · Área Operativa XXXIII · Zona Oeste. Sistema gestionado por Ramón López.</p></div>`}
 
   if(page==='Control diario'){
@@ -1247,7 +1313,7 @@ window.render=function(){
 <div class="admin-guide">Comprobá número de remito y documentación antes de continuar.</div>
 <div class="grid" style="margin-top:16px">
   <div class="field"><label>Fecha de recepción</label><input type="date" id="rdate" value="${new Date().toLocaleDateString('en-CA')}"></div>
-  <div class="field"><label>N° de remito OCASA</label><input id="rref" placeholder="Número de remito"></div>
+  <div class="field"><label>N° de remito OCASA</label><div style="display:flex;gap:8px;align-items:center"><input id="rref" placeholder="Número de remito" style="flex:1"><button type="button" onclick="scanRemito()" title="Escanear código de barras" style="background:#1a3a5c;border:1px solid #4db8ff;color:#4db8ff;border-radius:10px;padding:8px 12px;cursor:pointer;font-size:1rem;white-space:nowrap;flex-shrink:0">📷 Escanear</button></div></div>
   <div class="field"><label>Responsable de recepción</label><input id="rperson" placeholder="Nombre y apellido"></div>
   <div class="field"><label>Observaciones (opcional)</label><input id="rnotes" placeholder="Condición de entrega, frío, etc."></div>
 </div>
