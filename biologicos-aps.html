@@ -1042,20 +1042,20 @@ window.ocasaTipoChange=function(){
   const esBio=tipo==='Biológico';
   if($('rwrap_bio'))$('rwrap_bio').style.display=esBio?'':'none';
   if($('rwrap_des'))$('rwrap_des').style.display=esBio?'none':'';
-  if($('rwrap_lote'))$('rwrap_lote').style.display=esBio?'':'none';
-  if($('rwrap_exp'))$('rwrap_exp').style.display=esBio?'':'none';
+  if($('rwrap_lote'))$('rwrap_lote').style.display='';
+  if($('rwrap_exp'))$('rwrap_exp').style.display='';
   if($('rlabel_qty'))$('rlabel_qty').textContent=esBio?'Cantidad recibida (dosis)':'Cantidad recibida (unidades)';
 };
 window.ocasaAddRow=function(){
   const tipo=$('rtipo')?.value||'Biológico';
   const esBio=tipo==='Biológico';
   const nombre=esBio?($('rname')?.value||'').trim():($('rdes')?.value||'').trim();
-  const lote=esBio?($('rlot')?.value||'').trim():'—';
-  const exp=esBio?($('rexp')?.value||''):'—';
+  const lote=($('rlot')?.value||'').trim()||'—';
+  const exp=($('rexp')?.value||'')||'—';
   const qty=Number($('rqty')?.value);
   if(!nombre)return alert(esBio?'Seleccioná un biológico.':'Seleccioná un insumo descartable.');
-  if(esBio&&!lote)return alert('Ingresá el número de lote.');
-  if(esBio&&!exp)return alert('Ingresá la fecha de vencimiento.');
+  if(lote==='—')return alert('Ingresá el número de lote.');
+  if(exp==='—')return alert('Ingresá la fecha de vencimiento.');
   if(!Number.isInteger(qty)||qty<1)return alert('Ingresá una cantidad válida (mínimo 1).');
   if(esBio&&!bioCatalog.some(b=>b.name===nombre&&b.active!==false))return alert('Seleccioná un biológico activo del catálogo.');
   if(!esBio&&!desCatalog.some(d=>d.name===nombre&&d.active!==false))return alert('Seleccioná un insumo activo del catálogo de descartables.');
@@ -1363,8 +1363,8 @@ window.render=function(){
     </select></div>
     <div class="field" id="rwrap_bio"${esBio?'':' style="display:none"'}><label>Biológico</label><select id="rname"><option value="">Seleccionar</option>${catalogOptions()}</select><small>Si falta uno, crealo en Gestión de biológicos.</small></div>
     <div class="field" id="rwrap_des"${!esBio?'':' style="display:none"'}><label>Descartable</label><select id="rdes"><option value="">Seleccionar</option>${desCatalogOptions()}</select><small>Si falta uno, crealo en Gestión de biológicos → Descartables.</small></div>
-    <div class="field" id="rwrap_lote"${esBio?'':' style="display:none"'}><label>Lote</label><input id="rlot" placeholder="Número de lote exacto"></div>
-    <div class="field" id="rwrap_exp"${esBio?'':' style="display:none"'}><label>Vencimiento</label><input type="date" id="rexp"></div>
+    <div class="field" id="rwrap_lote"><label>Lote</label><input id="rlot" placeholder="Número de lote exacto"></div>
+    <div class="field" id="rwrap_exp"><label>Vencimiento</label><input type="date" id="rexp"></div>
     <div class="field"><label id="rlabel_qty">Cantidad recibida (${esBio?'dosis':'unidades'})</label><input type="number" id="rqty" min="1" value="1"></div>
   </div>`;
   })()}
