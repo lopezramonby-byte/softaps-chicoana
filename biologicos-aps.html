@@ -1027,6 +1027,7 @@ window.ocasaConfirmHeader=function(){
   if(!person)return alert('Ingresá el nombre del responsable de recepción.');
   ocasaHeader={date,ref,person,notes};
   render();
+  setTimeout(()=>window.ocasaTipoChange&&window.ocasaTipoChange(),0);
 };
 window.ocasaEditHeader=function(){
   ocasaHeader=null;
@@ -1379,6 +1380,8 @@ window.render=function(){
     ${ocasaRows.length?`<button class="action" onclick="confirmOcasaRemito()" style="background:#249d72">✓ Confirmar remito completo (${ocasaRows.length} artículo${ocasaRows.length>1?'s':''})</button>`:'<p class="muted">Usá el formulario de arriba para agregar artículos.</p>'}
   </div>
 </div>`;
+    // Inicializar visibilidad de campos tras render
+    setTimeout(()=>window.ocasaTipoChange&&window.ocasaTipoChange(),0);
     }
   }
   if(page==='Biológicos'){h=`<div class="panel"><div class="topline"><h1>Biológicos</h1>${role==='administrador'?'<button class="action" onclick="go(&quot;Gestión de biológicos&quot;)">⚙ Gestionar</button>':''}</div><p class="muted">Existencias centrales por lote y vencimiento. Solo el administrador puede gestionar el catálogo.</p><div class="filters"><input id="search" placeholder="Buscar biológico o lote" oninput="scheduleStockSearch()"></div><div class="tablewrap" id="itemtable"></div><div class="quick-actions"><button onclick="go('Nuevo Saliente');chooseCategory('Biológicos')">📤 Registrar salida</button><button onclick="go('Retorno');chooseCategory('Biológicos')">📥 Registrar retorno</button></div></div>`}
