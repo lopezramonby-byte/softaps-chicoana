@@ -1473,9 +1473,25 @@ window.render=function(){
     };
 
     // ── Agrupar documentos por type+place+date+person (para historial legacy) ──
+    const getOcasaRef=function(d){
+      // Extrae el número de remito OCASA del campo place, ej: "Nivel central / OCASA · 1253977502"
+      if((d.type==='Recepción OCASA')&&d.place){
+        const m=d.place.match(/OCASA\s*·\s*(.+)$/);
+        if(m)return m[1].trim();
+      }
+      return null;
+    };
     const groupDayDocs=function(dayDocs){
       const buckets=new Map();
       dayDocs.forEach(d=>{
+        // Recepción OCASA: agrupar TODOS los docs del mismo remito (bio + descartables)
+        const ocasaRef=getOcasaRef(d);
+        if(ocasaRef){
+          const key=`ocasa||${ocasaRef}`;
+          if(!buckets.has(key))buckets.set(key,[]);
+          buckets.get(key).push(d);
+          return;
+        }
         // Documentos nuevos (ya tienen items[]) van solos
         if(d.items&&d.items.length){buckets.set(d._id||d.number,[d]);return;}
         // Documentos legacy: agrupar por tipo+efector+responsable
@@ -1498,23 +1514,27 @@ window.render=function(){
         // ID estable del grupo para expandir
         const groupId=bucket.length===1?(first._id||first.number):`grp||${first.type}||${first.place||''}||${first.person||''}||${date}`;
         const expanded=window._movExpanded.has(groupId);
-        const cat=first.category||'Biológicos';
-        const unitLabel=cat==='Descartables'?'uds.':'dosis';
 
-        // Construir lista de ítems para el detalle
+        // Construir lista de ítems para el detalle — soporta grupos mixtos (bio + descartables)
         let itemLines=[];
         if(first.items&&first.items.length>1){
           // Nuevo formato — items[] en el doc
-          itemLines=first.items.map(it=>({name:it.name,lot:it.lot||'',qty:it.qty}));
+          itemLines=first.items.map(it=>({name:it.name,lot:it.lot||'',qty:it.qty,cat:first.category||'Biológicos'}));
         } else if(bucket.length>1){
-          // Legacy — cada doc es un ítem
-          itemLines=bucket.map(d=>({name:d.name||'—',lot:'',qty:d.qty}));
+          // Legacy o grupo OCASA mixto — cada doc es un ítem
+          itemLines=bucket.map(d=>({name:d.name||'—',lot:d.lot||'',qty:d.qty,cat:d.category||'Biológicos'}));
         }
 
         const totalQty=bucket.reduce((a,d)=>a+d.qty,0);
         // Números de comprobante para mostrar
         const numeros=bucket.map(d=>d.number).filter(Boolean);
-        const numerosStr=numeros.length===1?numeros[0]:numeros.length>1?numeros[0]+' +'+( numeros.length-1):'—';
+        const numerosStr=numeros.length===1?numeros[0]:numeros.length>1?numeros[0]+' +'+(numeros.length-1):'—';
+
+        // Resumen de categorías para el subtítulo
+        const nBioItems=itemLines.filter(x=>x.cat==='Biológicos').length||bucket.filter(d=>d.category==='Biológicos').length;
+        const nDesItems=itemLines.filter(x=>x.cat==='Descartables').length||bucket.filter(d=>d.category==='Descartables').length;
+        const resumenCat=[nBioItems?`${nBioItems} biológico${nBioItems>1?'s':''}`:''
+                         ,nDesItems?`${nDesItems} descartable${nDesItems>1?'s':''}`:'' ].filter(Boolean).join(' · ');
 
         // Nombre del efector — extraer la parte después de "— " si existe
         const efectorName=(()=>{
@@ -1524,10 +1544,12 @@ window.render=function(){
         const efectorShort=efectorName.length>35?efectorName.slice(0,33)+'…':efectorName;
 
         const detailHtml=isMulti&&expanded?`<div style="margin:2px 0 6px 60px;padding:8px 12px;background:#1a1a1a;border-radius:10px;border:1px solid #2a2a2a">
-          ${itemLines.map(it=>`<div style="display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid #252525;font-size:0.83rem">
+          ${itemLines.map(it=>{
+            const ul=it.cat==='Descartables'?'uds.':'dosis';
+            return`<div style="display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid #252525;font-size:0.83rem">
             <span style="color:#ccc;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(it.name)}${it.lot?` <span style="color:#555">· lote ${esc(it.lot)}</span>`:''}</span>
-            <span style="color:${st.color};font-weight:700;margin-left:12px;white-space:nowrap">${it.qty} ${unitLabel}</span>
-          </div>`).join('')}
+            <span style="color:${st.color};font-weight:700;margin-left:12px;white-space:nowrap">${it.qty} ${ul}</span>
+          </div>`;}).join('')}
         </div>`:'';
 
         return`<div>
@@ -1538,13 +1560,13 @@ window.render=function(){
                 <span style="font-weight:800;font-size:1rem;letter-spacing:-0.01em;line-height:1.2">${esc(efectorShort)}</span>
                 ${isMulti?`<span style="font-size:0.68rem;color:#666;font-weight:600">${expanded?'▲':'▼'}</span>`:''}
               </div>
-              <div style="font-size:0.68rem;color:#aaa;margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em">${esc(first.type)}${isMulti?' · '+itemLines.length+' biológicos':''}</div>
+              <div style="font-size:0.68rem;color:#aaa;margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em">${esc(first.type)}${isMulti&&resumenCat?' · '+resumenCat:''}</div>
               <div style="font-size:0.68rem;color:#888;margin-top:2px">${esc(numerosStr)} · ${esc(first.person||'—')}</div>
             </div>
             <div style="text-align:right;flex-shrink:0;padding-left:4px;display:flex;flex-direction:column;align-items:flex-end;gap:6px">
               <div>
                 <div style="font-size:1.5rem;font-weight:800;color:${st.color};line-height:1">${totalQty}</div>
-                <div style="font-size:0.62rem;color:#555;margin-top:3px;text-transform:uppercase;letter-spacing:0.05em">${unitLabel}</div>
+                <div style="font-size:0.62rem;color:#555;margin-top:3px;text-transform:uppercase;letter-spacing:0.05em">uds./dosis</div>
               </div>
               ${role==='administrador'&&bucket.length===1&&bucket[0]._id?`<button onclick="event.stopPropagation();deleteMovimiento('${bucket[0]._id}')" style="border:0;background:#3a1515;color:#ff8080;border-radius:8px;padding:5px 10px;font-size:0.72rem;font-weight:700;cursor:pointer;white-space:nowrap">🗑 Eliminar</button>`:''}
             </div>
