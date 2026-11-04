@@ -1127,7 +1127,8 @@ window.confirmOcasaRemito=async function(){
       else{disposables.push({name:r.nombre,qty:r.qty,unit:'unidades'});d=disposables.at(-1);}
       await persistDisposables();
       const number='DES-'+String(nextDoc++).padStart(4,'0');
-      const newDoc={number,date,category:'Descartables',type:'Recepción OCASA',name:r.nombre,itemRef:null,qty:r.qty,place:'Nivel central / OCASA · '+ref,person,comment:notes,status:'Registrado',userEmail:sessionAccount?.email||'',userName:sessionAccount?.name||''};
+      const lotLabel=r.lote&&r.lote!=='—'?` / ${r.lote}`:'';
+      const newDoc={number,date,category:'Descartables',type:'Recepción OCASA',name:r.nombre+lotLabel,lot:r.lote!=='—'?r.lote:'',exp:r.exp!=='—'?r.exp:'',itemRef:null,qty:r.qty,place:'Nivel central / OCASA · '+ref,person,comment:notes,status:'Registrado',userEmail:sessionAccount?.email||'',userName:sessionAccount?.name||''};
       docs.unshift(newDoc);await persistDoc(newDoc);
     }
   }
