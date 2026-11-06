@@ -151,35 +151,33 @@ try{applyTheme(localStorage.getItem('aps-biologicos-theme')||'dark')}catch(e){ap
 // ── Carga inicial desde Firestore ────────────────────────────
 async function cargarTodo(){
   try{
-    // Usuarios
-    const uSnap=await getDocs(collection(db,COL_USERS));
+    // Todas las consultas en paralelo — de ~2-3 s secuencial a ~300-500 ms
+    const [uSnap,iSnap,mSnap,dSnap,cSnap,disSnap,desCatSnap,cfgSnap,cntSnap,rSnap]=await Promise.all([
+      getDocs(collection(db,COL_USERS)),
+      getDocs(collection(db,COL_ITEMS)),
+      getDocs(query(collection(db,COL_DOCS),orderBy('createdAt','desc'))),
+      getDocs(collection(db,COL_DEST)),
+      getDocs(collection(db,COL_CATALOG)),
+      getDocs(collection(db,COL_DISPOS)),
+      getDocs(collection(db,COL_DESCAT)),
+      getDoc(doc(db,COL_CFG,'destino-kinds')),
+      getDoc(doc(db,COL_CFG,'next-doc')),
+      getDocs(collection(db,COL_REQ)),
+    ]);
+
     users=uSnap.docs.map(d=>({id:d.id,...d.data()}));
-
-    // Items (lotes biológicos) — sin datos demo; el stock real se carga desde Recepción OCASA
-    const iSnap=await getDocs(collection(db,COL_ITEMS));
     items=iSnap.docs.map(d=>({_id:d.id,...d.data()}));
-
-    // Movimientos
-    const mSnap=await getDocs(query(collection(db,COL_DOCS),orderBy('createdAt','desc')));
     docs=mSnap.docs.map(d=>({_id:d.id,...d.data()}));
-
-    // Destinos personalizados
-    const dSnap=await getDocs(collection(db,COL_DEST));
     customDestinations=dSnap.docs.map(d=>({id:d.id,...d.data()}));
-
-    // Catálogo biológicos
-    const cSnap=await getDocs(collection(db,COL_CATALOG));
     bioCatalog=cSnap.docs.map(d=>({_id:d.id,...d.data()}));
     if(!bioCatalog.length)bioCatalog=[...new Set(items.map(x=>x.name))].map(name=>({name,active:true}));
-
-    // Descartables (stock)
-    const disSnap=await getDocs(collection(db,COL_DISPOS));
     disposables=disSnap.docs.map(d=>({_id:d.id,...d.data()}));
-
-    // Catálogo de descartables (referencia, sin stock)
-    const desCatSnap=await getDocs(collection(db,COL_DESCAT));
     desCatalog=desCatSnap.docs.map(d=>({_id:d.id,...d.data()}));
-    // Si el catálogo está vacío, lo pre-poblamos con los descartables ya en stock
+    if(cfgSnap.exists())kinds=cfgSnap.data().kinds||[...defaultKinds];
+    if(cntSnap.exists())nextDoc=cntSnap.data().value||1;
+    rSnap.docs.forEach(d=>{monthlyRequests[d.id]={id:d.id,...d.data()}});
+
+    // Si el catálogo de descartables está vacío, pre-poblarlo (raro, solo primera vez)
     if(!desCatalog.length&&disposables.length){
       for(const d of disposables){
         const ref=doc(collection(db,COL_DESCAT));
@@ -187,18 +185,6 @@ async function cargarTodo(){
         await setDoc(ref,{name:d.name,active:true});
       }
     }
-
-    // Tipos de destino
-    const cfgSnap=await getDoc(doc(db,COL_CFG,'destino-kinds'));
-    if(cfgSnap.exists())kinds=cfgSnap.data().kinds||[...defaultKinds];
-
-    // Contador docs
-    const cntSnap=await getDoc(doc(db,COL_CFG,'next-doc'));
-    if(cntSnap.exists())nextDoc=cntSnap.data().value||1;
-
-    // Pedidos mensuales
-    const rSnap=await getDocs(collection(db,COL_REQ));
-    rSnap.docs.forEach(d=>{monthlyRequests[d.id]={id:d.id,...d.data()}});
 
     fbReady=true;
     $('fb-loading').style.display='none';
