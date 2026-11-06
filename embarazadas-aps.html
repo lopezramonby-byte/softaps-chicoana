@@ -516,6 +516,17 @@ function edadAnios(fnac){
 // ════════════════════════════════════════════════
 // SAVE / EXPORT / IMPORT
 // ════════════════════════════════════════════════
+
+// Guarda un único documento (alta, edición individual)
+function saveSingle(emb){
+  try{ localStorage.setItem('emb-data', JSON.stringify(embarazadas)); }catch(e){}
+  setEstado('💾 Guardando...');
+  db.collection(COL).doc(emb.id).set(emb)
+    .then(()=>{ setEstado('✅ Guardado en la nube — ' + new Date().toLocaleTimeString('es-AR')); })
+    .catch(err=>{ setEstado('❌ Error al guardar: ' + err.message); console.error(err); });
+}
+
+// Reescribe toda la colección (importación masiva)
 function saveAll(){
   // Respaldo local siempre
   try{ localStorage.setItem('emb-data', JSON.stringify(embarazadas)); }catch(e){}
@@ -685,7 +696,7 @@ function guardarEmbarazada(){
     actualizadoEn:new Date().toISOString()
   };
   embarazadas.push(emb);
-  saveAll();
+  saveSingle(emb);
   // Limpiar
   ['n-nombre','n-dni','n-domicilio','n-fnac','n-fcap','n-fum','n-fpp','n-gestas','n-os',
    'n-hepb1','n-hepb2','n-hepb3','n-vsr','n-1t-mel','n-1t-cap','n-1t-eco',
@@ -944,7 +955,7 @@ function guardarEdicion(){
   e.abo=$('e-abo').value||e.abo||'';e.ile=$('e-ile').value||e.ile||'';e.ive=$('e-ive').value||e.ive||'';
   e.obs=$('e-obs').value.trim();
   e.actualizadoEn=new Date().toISOString(); // marca de tiempo de última edición
-  saveAll();
+  saveSingle(e);
   cerrarModal();
   // Re-renderizar todo para reflejar cambios
   renderListado();
@@ -956,8 +967,9 @@ function eliminarEmbarazada(){
   if(!confirm('¿Eliminar este registro definitivamente?'))return;
   const idAEliminar=editId;
   embarazadas=embarazadas.filter(x=>x.id!==idAEliminar);
-  db.collection(COL).doc(idAEliminar).delete().catch(err=>console.error(err));
-  saveAll();
+  db.collection(COL).doc(idAEliminar).delete()
+    .then(()=>{ try{ localStorage.setItem('emb-data', JSON.stringify(embarazadas)); }catch(e){} setEstado('✅ Registro eliminado — ' + new Date().toLocaleTimeString('es-AR')); })
+    .catch(err=>{ setEstado('❌ Error al eliminar: ' + err.message); console.error(err); });
   cerrarModal();
   renderListado();
   renderInicio();
@@ -1154,7 +1166,19 @@ function renderEgresos(){
     </div>`).join('');
 }
 
-function renderTodo(){renderInicio();renderListado();renderSectores();}
+function renderTodo(){
+  // Renderizar solo el tab visible para evitar trabajo innecesario
+  const tabs=['inicio','listado','sectores','vsr','partos','egresos'];
+  const activo=tabs.find(id=>{const el=$('tab-'+id);return el&&el.classList.contains('active');})||'inicio';
+  if(activo==='inicio')renderInicio();
+  else if(activo==='listado')renderListado();
+  else if(activo==='sectores')renderSectores();
+  else if(activo==='vsr')renderVSR();
+  else if(activo==='partos')renderPartos();
+  else if(activo==='egresos')renderEgresos();
+  // Siempre actualizar inicio en segundo plano si no es el tab activo (estadísticas)
+  else renderInicio();
+}
 
 // ════════════════════════════════════════════════
 // INIT
